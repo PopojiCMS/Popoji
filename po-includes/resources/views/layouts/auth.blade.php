@@ -55,6 +55,5 @@
 	<script src="{{ asset('po-admin/assets/js/dashforge.js') }}"></script>
 
 	<script src="{{ asset('po-admin/lib/js-cookie/js.cookie.js') }}"></script>
-	<script src="{{ asset('po-admin/assets/js/dashforge.settings.js') }}"></script>
 </body>
 </html>

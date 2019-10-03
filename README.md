@@ -2,7 +2,7 @@
 Free Engine Management System - Indonesia
 Contact : info@popojicms.org
 
-## Cara instalasi Popoji
+## Cara Instalasi Popoji
 
 1. Extract file popoji.v.x.x.x.zip di directory web Anda.
 2. Buatlah database baru yang nantinya sebagai tempat instalasi tabel-tabel.
@@ -34,8 +34,8 @@ Untuk di hosting, lakukan perubahan user permission untuk folder po-upload menja
 ## Login backend Popoji
 * Masuk ke alamat http://nama.web.anda/login
 * Masukkan data login sebagai berikut :
-    Username : seperti yg telah diinputkan pada saat proses instalasi.
-    Password : seperti yg telah diinputkan pada saat proses instalasi.
+** Username : seperti yg telah diinputkan pada saat proses instalasi.
+** Password : seperti yg telah diinputkan pada saat proses instalasi.
 
 
 # Terima Kasih Kepada
