@@ -14,8 +14,12 @@
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
 	<link href="{{ asset('po-admin/lib/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
-
-	<link rel="stylesheet" href="{{ asset('po-admin/assets/css/dashforge.css') }}">
+	<link href="{{ asset('po-admin/lib/datatables.net-dt/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('po-admin/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('po-admin/lib/select2/css/select2.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('po-admin/lib/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+	<link href="{{ asset('po-admin/assets/css/dashforge.css') }}" rel="stylesheet">
 	
 	@stack('styles')
 	
@@ -52,9 +56,9 @@
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="package"></i> <span>Components</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="command"></i> <span>Clark</span></a></li>
 				<li class="nav-label mg-t-25">User</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="users"></i> <span>Users</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="life-buoy"></i> <span>Roles</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="shield"></i> <span>Permissions</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/users/table') }}" class="nav-link"><i data-feather="users"></i> <span>Users</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/roles/table') }}" class="nav-link"><i data-feather="life-buoy"></i> <span>Roles</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/permissions/table') }}" class="nav-link"><i data-feather="shield"></i> <span>Permissions</span></a></li>
 			</ul>
 		</div>
     </aside>
@@ -95,17 +99,53 @@
 			</div>
 		</div>
 		
-		@yield('content')
+		<div class="content-body">
+			<div class="container">
+				@if (Session::has('flash_message'))
+				<div class="alert alert-primary alert-dismissible alert-main" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Info: </strong> {{ Session::get('flash_message') }}
+				</div>
+				@endif
+				
+				
+				@yield('content')
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal alertalldel" id="alertalldel" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-body m-3 text-center">
+					<div class="swal2-icon swal2-warning" style="display:flex;"><span class="swal2-icon-text">!</span></div>
+					<h3>Are you sure?</h3>
+					<p class="mb-0">You will not be able to recover this entry.</p>
+				</div>
+				<div class="modal-footer modal-action-footer text-center mb-3">
+					<div class="mx-auto" style="width:200px;">
+						<button type="button" class="btn btn-danger btn-loading-overlay" id="confirmdel" autofocus>Yes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script src="{{ asset('po-admin/lib/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/feather-icons/feather.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-
+	<script src="{{ asset('po-admin/lib/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('po-admin/lib/datatables.net-dt/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ asset('po-admin/lib/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('po-admin/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js') }}"></script>
+	<script src="{{ asset('po-admin/lib/select2/js/select2.min.js') }}"></script>
+	<script src="{{ asset('po-admin/lib/sweetalert/sweetalert2.min.js') }}"></script>
+	<script src="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.js') }}"></script>
 	<script src="{{ asset('po-admin/assets/js/dashforge.aside.js') }}"></script>
 	<script src="{{ asset('po-admin/assets/js/dashforge.js') }}"></script>
-
+	<script src="{{ asset('po-admin/assets/js/popoji-main.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/js-cookie/js.cookie.js') }}"></script>
 	
 	@stack('scripts')

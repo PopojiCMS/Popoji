@@ -19,4 +19,14 @@ class BackendController extends Controller
     {
 		return view('backend.dashboard');
     }
+	
+	/**
+     * Display forbidden pages.
+     *
+     * @return void
+     */
+    public function forbidden()
+    {
+		return view('backend.forbiden');
+	}
 }

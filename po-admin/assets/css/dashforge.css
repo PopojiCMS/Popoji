@@ -41078,3 +41078,26 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
 
 .wd-280 {
   width: 280px; }
+
+table.dataTable tfoot th, table.dataTable tfoot td {
+    border-top: 1px solid rgba(72, 94, 144, 0.16);
+}
+
+.swal2-actions button {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.alertalldel .modal-footer button {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.alertalldel .modal-footer {
+	padding: 0px;
+	border-top: 0px solid rgba(72, 94, 144, 0.16);
+}
+
+.ht-150-i {
+	height: 150px !important;
+}

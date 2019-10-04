@@ -19,4 +19,15 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard', 'Backend\BackendController@index');
+	Route::get('forbidden', 'Backend\BackendController@forbidden');
+	
+	Route::get('dashboard/users/index', 'Backend\UsersController@index');
+	Route::get('dashboard/users/table', 'Backend\UsersController@getIndex');
+	Route::get('dashboard/users/data', 'Backend\UsersController@anyData');
+	Route::get('dashboard/users/get-user','Backend\UsersController@getUser');
+	Route::get('dashboard/users/get-user-not-me','Backend\UsersController@getUserNotMe');
+	Route::post('dashboard/users/deleteall', 'Backend\UsersController@deleteAll');
+	Route::resource('dashboard/users', 'Backend\UsersController');
+	
+	
 });
