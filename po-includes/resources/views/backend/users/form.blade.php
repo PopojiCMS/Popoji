@@ -10,28 +10,28 @@
 	</div>
 </div>
 <div class="form-row">
-	<div class="form-group col-md-6">
+	<div class="form-group col-md-4">
 		{!! Form::label('email', 'Email *', ['class' => 'control-label']) !!}
 		{!! Form::email('email', null, ['class' => $errors->has('email') ? 'form-control is-invalid' : 'form-control', 'required' => 'required']) !!}
 		{!! $errors->first('email', '<p class="help-block">:message</p>') !!}
 	</div>
-	<div class="form-group col-md-6">
+	<div class="form-group col-md-4">
 		{!! Form::label('telp', 'Telephone', ['class' => 'control-label']) !!}
-		{!! Form::text('telp', null, ['class' => $errors->has('telp') ? 'form-control is-invalid' : 'form-control', 'required' => 'required']) !!}
+		{!! Form::text('telp', null, ['class' => $errors->has('telp') ? 'form-control is-invalid' : 'form-control']) !!}
 		{!! $errors->first('telp', '<p class="help-block">:message</p>') !!}
 	</div>
-</div>
-<div class="form-group">
-	{!! Form::label('password', 'Password *', ['class' => 'control-label']) !!}
-	@php
-		$passwordOptions = ['class' => $errors->has('password') ? 'form-control is-invalid' : 'form-control'];
-		if ($formMode === 'create') {
-			$passwordOptions = array_merge($passwordOptions, ['required' => 'required']);
-		}
-	@endphp
-	{!! Form::password('password', $passwordOptions) !!}
-	{!! $errors->first('password', '<p class="help-block">:message</p>') !!}
-	<small><i>{{ (isset($user) ? 'Please leave empty if password don\'t change' : '') }}</i></small>
+	<div class="form-group col-md-4">
+		{!! Form::label('password', 'Password *', ['class' => 'control-label']) !!}
+		@php
+			$passwordOptions = ['class' => $errors->has('password') ? 'form-control is-invalid' : 'form-control'];
+			if ($formMode === 'create') {
+				$passwordOptions = array_merge($passwordOptions, ['required' => 'required']);
+			}
+		@endphp
+		{!! Form::password('password', $passwordOptions) !!}
+		{!! $errors->first('password', '<p class="help-block">:message</p>') !!}
+		<small><i>{{ (isset($user) ? 'Please leave empty if password don\'t change' : '') }}</i></small>
+	</div>
 </div>
 <div class="form-group">
 	{!! Form::label('bio', 'Bio', ['class' => 'control-label']) !!}
@@ -43,7 +43,7 @@
 	<div class="form-group">
 		{!! Form::label('picture', 'Picture', ['class' => 'control-label']) !!}
 		<div class="input-group">
-			{!! Form::text('picture', null, ['class' => $errors->has('picture') ? 'form-control is-invalid' : 'form-control', 'id' => 'input-filemanager', 'required' => 'required']) !!}
+			{!! Form::text('picture', null, ['class' => $errors->has('picture') ? 'form-control is-invalid' : 'form-control', 'id' => 'input-filemanager']) !!}
 			<span class="input-group-append">
 				<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=input-filemanager&relative_url=1&&akey=i7GLt0sqUVc0uWdlxT4t8TftzX5Ebi8gm8uqa6IGE6w') }}" id="filemanager" class="btn btn-secondary"><i class="fa fa-file"></i> Browse</a>
 
@@ -59,7 +59,7 @@
 			{!! Form::label('block', 'Block *', ['class' => 'control-label']) !!}
 			<select class="select2 form-control" id="block" name="block">
 				@if (isset($user))
-					<option value="{{ $user->block }}">Terpilih {{ $user->block == 'Y' ? 'Block' : 'Unblock' }}</option>
+					<option value="{{ $user->block }}">Selected {{ $user->block == 'Y' ? 'Block' : 'Unblock' }}</option>
 				@endif
 				<option value="Y">Block</option>
 				<option value="N">Unblock</option>

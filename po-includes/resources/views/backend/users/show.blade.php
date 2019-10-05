@@ -7,7 +7,8 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-style1 mg-b-10">
 					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">User</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">User</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">Users</a></li>
 					<li class="breadcrumb-item active" aria-current="page">View Users</li>
 				</ol>
 			</nav>

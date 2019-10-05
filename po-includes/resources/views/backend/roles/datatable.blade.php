@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Users')
+@section('title', 'Roles')
 
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-20">
@@ -8,29 +8,27 @@
 				<ol class="breadcrumb breadcrumb-style1 mg-b-10">
 					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
 					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">User</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">Users</a></li>
-					<li class="breadcrumb-item active" aria-current="page">List Users</li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/roles/table') }}">Roles</a></li>
+					<li class="breadcrumb-item active" aria-current="page">List Roles</li>
 				</ol>
 			</nav>
-			<h4 class="mg-b-0 tx-spacing--1">List Users</h4>
+			<h4 class="mg-b-0 tx-spacing--1">List Roles</h4>
 		</div>
 		
-		<div><a href="{{ url('dashboard/users/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> Add</a></div>
+		<div><a href="{{ url('dashboard/roles/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> Add</a></div>
 	</div>
 	
 	<div class="card">
 		<div class="card-body pd-b-0">
-			{!! Form::open(['url' => 'dashboard/users/deleteall', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+			{!! Form::open(['url' => 'dashboard/roles/deleteall', 'method' => 'post', 'class' => 'form-horizontal']) !!}
 				<input type="hidden" name="totaldata" id="totaldata" value="0" />
-				<table class="table table-striped" id="users-table">
+				<table class="table table-striped" id="roles-table">
 					<thead>
 						<tr>
 							<th style="text-align:center;" width="15"></th>
 							<th style="text-align:center;" width="25">ID</th>
 							<th>Name</th>
-							<th>Username</th>
-							<th>Email</th>
-							<th>Active</th>
+							<th>Guard</th>
 							<th style="text-align:center;" width="140">Actions</th>
 							<th></th>
 						</tr>
@@ -40,10 +38,10 @@
 							<td style="width:10px;" style="text-align:center;">
 								<input type="checkbox" id="titleCheck" data-toggle="tooltip" title="Check All" />
 							</td>
-							<td colspan="6">
-								<button class="btn btn-xs btn-danger" type="button" data-toggle="modal" data-target="#alertalldel"><i class="fa fa-trash"></i> Delete Selected</button>
+							<td colspan="4">
+								<button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#alertalldel"><i class="fa fa-trash"></i> Delete Selected</button>
 							</td>
-							<td>&nbsp;</td>
+							<td></td>
 						</tr>
 					</tfoot>
 				</table>
@@ -57,7 +55,7 @@
 	$(function() {
 		'use strict'
 		
-		var table = $('#users-table').DataTable({
+		var table = $('#roles-table').DataTable({
 			processing: true,
 			serverSide: true,
 			responsive: {
@@ -66,7 +64,7 @@
 					target: -1
 				}
 			},
-			ajax: '{{ url("dashboard/users/data") }}',
+			ajax: '{{ url("dashboard/roles/data") }}',
 			autoWidth: false,
 			order: [[1, 'desc']],
 			columnDefs: [{
@@ -79,11 +77,9 @@
 			}],
 			columns: [
 				{ data: 'check', name: 'check', orderable: false, searchable: false },
-				{ data: 'id', name: 'users.id' },
-				{ data: 'name', name: 'users.name' },
-				{ data: 'username', name: 'users.username' },
-				{ data: 'email', name: 'users.email' },
-				{ data: 'block', name: 'users.block' },
+				{ data: 'id', name: 'roles.id' },
+				{ data: 'name', name: 'roles.name' },
+				{ data: 'guard_name', name: 'roles.guard_name' },
 				{ data: 'action', name: 'action', orderable: false, searchable: false },
 				{ data: 'control', name: 'control', orderable: false, searchable: false },
 			],
@@ -95,12 +91,12 @@
 						if (checkedStatus == this.checked) {
 							$(this).closest('table tbody tr').removeClass('selected');
 							$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-							$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
+							$('#totaldata').val($('form input[type=checkbox]:checked').length);
 						}
 						if (this.checked) {
 							$(this).closest('table tbody tr').addClass('selected');
 							$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-							$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
+							$('#totaldata').val($('form input[type=checkbox]:checked').length);
 						}
 					});
 				});	
@@ -110,12 +106,12 @@
 					if (checkedStatus == this.checked) {
 						$(this).closest('table tbody tr').removeClass('selected');
 						$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-						$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
+						$('#totaldata').val($('form input[type=checkbox]:checked').length);
 					}
 					if (this.checked) {
 						$(this).closest('table tbody tr').addClass('selected');
 						$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-						$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
+						$('#totaldata').val($('form input[type=checkbox]:checked').length);
 					}
 				});
 				$('table tbody tr td div:first-child input[type=checkbox]').on('change', function () {

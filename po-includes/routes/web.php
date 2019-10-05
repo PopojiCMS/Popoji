@@ -29,5 +29,15 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('dashboard/users/deleteall', 'Backend\UsersController@deleteAll');
 	Route::resource('dashboard/users', 'Backend\UsersController');
 	
+	Route::get('dashboard/roles/index','Backend\RolesController@index');
+	Route::get('dashboard/roles/table','Backend\RolesController@getIndex');
+	Route::get('dashboard/roles/data','Backend\RolesController@anyData');
+	Route::post('dashboard/roles/deleteall', 'Backend\RolesController@deleteAll');
+	Route::resource('dashboard/roles', 'Backend\RolesController');
 	
+	Route::get('dashboard/permissions/index','Backend\PermissionsController@index');
+	Route::get('dashboard/permissions/table','Backend\PermissionsController@getIndex');
+	Route::get('dashboard/permissions/data','Backend\PermissionsController@anyData');
+	Route::post('dashboard/permissions/deleteall', 'Backend\PermissionsController@deleteAll');
+	Route::resource('dashboard/permissions', 'Backend\PermissionsController');
 });

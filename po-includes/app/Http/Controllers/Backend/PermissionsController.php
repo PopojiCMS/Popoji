@@ -23,7 +23,7 @@ class PermissionsController extends Controller
 		if(Auth::user()->can('read-permissions')) {
 			return view('backend.permissions.datatable');
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 	
@@ -37,7 +37,7 @@ class PermissionsController extends Controller
 		if(Auth::user()->can('read-permissions')) {
 			return view('backend.permissions.datatable');
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
 	}
 	
@@ -58,15 +58,15 @@ class PermissionsController extends Controller
 				return $check;
 			})
             ->addColumn('action', function ($permission) {
-				$btn = '<div style="text-align:center;">';
-				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-secondary btn-sm" title="View" data-toggle="tooltip"><span class="fa fa-eye" aria-hidden="true"/></a> ';
-				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'/edit').'" class="btn btn-primary btn-sm" title="Edit" data-toggle="tooltip"><span class="fa fa-edit" aria-hidden="true"/></a> ';
-				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-danger btn-sm" data-delete="" title="Delete" data-toggle="tooltip"><span class="fa fa-trash" aria-hidden="true"></span></a>';
-				$btn .= '</div>';
+				$btn = '<div style="text-align:center;"><div class="btn-group">';
+				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="View" data-toggle="tooltip" data-placement="left"><span class="fa fa-eye"></i></a> ';
+				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><span class="fa fa-edit"></i></a> ';
+				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="Delete" data-toggle="tooltip" data-placement="left"><span class="fa fa-trash"></i></a>';
+				$btn .= '</div></div>';
 				return $btn;
             })
 			->addColumn('control', function ($permission) {
-				$check = '<div style="text-align:center;"><a href="javascript:void(0);" class="btn btn-secondary btn-sm"><span class="fa fa-plus" /></a></div>';
+				$check = '<div style="text-align:center;"><a href="javascript:void(0);" class="btn btn-secondary btn-xs btn-icon"><span class="fa fa-plus"></i></a></div>';
 				return $check;
 			})
 			->escapeColumns([])
@@ -83,7 +83,7 @@ class PermissionsController extends Controller
 		if(Auth::user()->can('create-permissions')) {
 			return view('backend.permissions.create');
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 
@@ -105,7 +105,7 @@ class PermissionsController extends Controller
 
 			return redirect('dashboard/permissions')->with('flash_message', 'Permission added!');
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 
@@ -124,7 +124,7 @@ class PermissionsController extends Controller
 
 			return view('backend.permissions.show', compact('permission'));
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 
@@ -143,7 +143,7 @@ class PermissionsController extends Controller
 
 			return view('backend.permissions.edit', compact('permission'));
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 
@@ -166,7 +166,7 @@ class PermissionsController extends Controller
 
 			return redirect('dashboard/permissions')->with('flash_message', 'Permission updated!');
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 
@@ -185,7 +185,7 @@ class PermissionsController extends Controller
 
 			return redirect('dashboard/permissions')->with('flash_message', 'Permission deleted!');
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 	
@@ -210,7 +210,7 @@ class PermissionsController extends Controller
 				return redirect('dashboard/permissions')->with('flash_message', 'Permission error deleted!');
 			}
 		} else {
-			return redirect('dashboard');
+			return redirect('forbidden');
 		}
     }
 }
