@@ -8,10 +8,10 @@
     <meta name="generator" content="{{ config('app.version') }}" />
     <meta name="author" content="POPOJI" />
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-
+	
 	<title>@yield('title') - {{ config('app.name') }}</title>
-
-	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('po-content/uploads/'.getSetting('favicon')) }}">
 	<link href="{{ asset('po-admin/lib/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/datatables.net-dt/css/jquery.dataTables.min.css') }}" rel="stylesheet">
@@ -51,7 +51,7 @@
 				<li class="nav-label mg-t-25">Appearance</li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="aperture"></i> <span>Themes</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="list"></i> <span>Menu Manager</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard/settings/table') }}" class="nav-link"><i data-feather="settings"></i> <span>Settings</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/settings') }}" class="nav-link"><i data-feather="settings"></i> <span>Settings</span></a></li>
 				<li class="nav-label mg-t-25">Component</li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="package"></i> <span>Components</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="command"></i> <span>Clark</span></a></li>

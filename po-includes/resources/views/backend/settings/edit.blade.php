@@ -7,15 +7,15 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-style1 mg-b-10">
 					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">User</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/settings/table') }}">Settings</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/themes/table') }}">Appearance</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/settings') }}">Settings</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Edit Settings</li>
 				</ol>
 			</nav>
 			<h4 class="mg-b-0 tx-spacing--1">Edit Settings</h4>
 		</div>
 		
-		<div><a href="{{ url('dashboard/settings/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="arrow-left" class="wd-10 mg-r-5"></i> Back</a></div>
+		<div><a href="{{ url('dashboard/settings') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="arrow-left" class="wd-10 mg-r-5"></i> Back</a></div>
 	</div>
 	
 	<div class="card">

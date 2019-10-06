@@ -13,3 +13,15 @@ if (!function_exists('getSetting')) {
 		}
 	}
 }
+
+if (!function_exists('getSettingGroup')) {
+    function getSettingGroup($groups)
+    {
+		$result = Setting::where('groups', $groups)->orderBy('id', 'asc')->get();
+		if ($result) {
+			return $result;
+		} else {
+			return [];
+		}
+	}
+}

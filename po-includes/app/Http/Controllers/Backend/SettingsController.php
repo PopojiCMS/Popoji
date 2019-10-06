@@ -21,7 +21,9 @@ class SettingsController extends Controller
     public function index(Request $request)
     {
 		if(Auth::user()->can('read-settings')) {
-			return view('backend.settings.datatable');
+			$groups = Setting::selectRaw("min(id), groups")->groupBy('groups')->orderBy('min(id)', 'asc')->get();
+			
+			return view('backend.settings.index', compact('groups'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -60,8 +62,8 @@ class SettingsController extends Controller
 			})
             ->addColumn('action', function ($setting) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="View" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a> ';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a> ';
+				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="View" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="Delete" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
 				return $btn;

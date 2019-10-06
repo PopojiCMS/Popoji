@@ -11,7 +11,7 @@
 
 	<title>@yield('title') - {{ config('app.name') }}</title>
 
-	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('po-content/uploads/'.getSetting('favicon')) }}">
 	<link href="{{ asset('po-admin/lib/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
 
