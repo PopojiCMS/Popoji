@@ -40,25 +40,25 @@
         </div>
         <div class="aside-body">
 			<ul class="nav nav-aside">
-				<li class="nav-label">Dashboard</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="tv"></i> <span>Dashboard</span></a></li>
-				<li class="nav-label mg-t-25">Content</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="book-open"></i> <span>Posts</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="folder-plus"></i> <span>Categories</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="bookmark"></i> <span>Tags</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="message-square"></i> <span>Comments</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="file-text"></i> <span>Pages</span></a></li>
-				<li class="nav-label mg-t-25">Appearance</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="aperture"></i> <span>Themes</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="list"></i> <span>Menu Manager</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard/settings') }}" class="nav-link"><i data-feather="settings"></i> <span>Settings</span></a></li>
-				<li class="nav-label mg-t-25">Component</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="package"></i> <span>Components</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="command"></i> <span>Clark</span></a></li>
-				<li class="nav-label mg-t-25">User</li>
-				<li class="nav-item"><a href="{{ url('/dashboard/users/table') }}" class="nav-link"><i data-feather="users"></i> <span>Users</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard/roles/table') }}" class="nav-link"><i data-feather="life-buoy"></i> <span>Roles</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard/permissions/table') }}" class="nav-link"><i data-feather="shield"></i> <span>Permissions</span></a></li>
+				<li class="nav-label">{{ __('general.dashboard') }}</li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="tv"></i> <span>{{ __('general.dashboard') }}</span></a></li>
+				<li class="nav-label mg-t-25">{{ __('general.content') }}</li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="book-open"></i> <span>{{ __('general.posts') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="folder-plus"></i> <span>{{ __('general.categories') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="bookmark"></i> <span>{{ __('general.tags') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="message-square"></i> <span>{{ __('general.comments') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="file-text"></i> <span>{{ __('general.pages') }}</span></a></li>
+				<li class="nav-label mg-t-25">{{ __('general.appearance') }}</li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="aperture"></i> <span>{{ __('general.themes') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="list"></i> <span>{{ __('general.menu_manager') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/settings') }}" class="nav-link"><i data-feather="settings"></i> <span>{{ __('general.settings') }}</span></a></li>
+				<li class="nav-label mg-t-25">{{ __('general.component') }}</li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="package"></i> <span>{{ __('general.components') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="command"></i> <span>{{ __('general.clark') }}</span></a></li>
+				<li class="nav-label mg-t-25">{{ __('general.user') }}</li>
+				<li class="nav-item"><a href="{{ url('/dashboard/users/table') }}" class="nav-link"><i data-feather="users"></i> <span>{{ __('general.users') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/roles/table') }}" class="nav-link"><i data-feather="life-buoy"></i> <span>{{ __('general.roles') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/permissions/table') }}" class="nav-link"><i data-feather="shield"></i> <span>{{ __('general.permissions') }}</span></a></li>
 			</ul>
 		</div>
     </aside>
@@ -67,12 +67,12 @@
 		<div class="content-header">
 			<div class="content-search">
 				<i data-feather="search"></i>
-				<input type="search" class="form-control" placeholder="Search...">
+				<input type="search" class="form-control" placeholder="{{ __('general.search') }}...">
 			</div>
 			
 			<div class="row">
 				<nav class="nav mt-2 mr-4 d-none d-sm-block">
-					<a href="{{ url('/') }}" class="nav-link" target="_blank" data-toggle="tooltip" data-placement="left" title="View Front Page"><i data-feather="home"></i></a>
+					<a href="{{ url('/') }}" class="nav-link" target="_blank" data-toggle="tooltip" data-placement="left" title="{{ __('general.view_front_page') }}"><i data-feather="home"></i></a>
 				</nav>
 				
 				<div class="navbar-right pr-3">
@@ -92,14 +92,14 @@
 						<div class="dropdown-menu dropdown-menu-right tx-13">
 							<h6 class="tx-semibold mg-b-5">{{ Auth::user()->name }}</h6>
 							<p class="mg-b-25 tx-12 tx-color-03">{{ Auth::user()->email }}</p>
-							<a href="{{ url('/dashboard/users/'.Hashids::encode(Auth::user()->id).'/edit') }}" class="dropdown-item"><i data-feather="edit-3"></i> Edit Profile</a>
+							<a href="{{ url('/dashboard/users/'.Hashids::encode(Auth::user()->id).'/edit') }}" class="dropdown-item"><i data-feather="edit-3"></i> {{ __('general.edit_profile') }}</a>
 							@if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
-								<a href="{{ url('/dashboard/settings/table') }}" class="dropdown-item"><i data-feather="settings"></i> Settings</a>
+								<a href="{{ url('/dashboard/settings/table') }}" class="dropdown-item"><i data-feather="settings"></i> {{ __('general.settings') }}</a>
 							@endif
 							<div class="dropdown-divider"></div>
-							<a href="http://www.popojicms.org/contact" class="dropdown-item" target="_blank"><i data-feather="help-circle"></i> Help Center</a>
-							<a href="https://www.facebook.com/popojicms/?ref=bookmarks" class="dropdown-item" target="_blank"><i data-feather="life-buoy"></i> Forum</a>
-							<a href="javascript:void(0);" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-out"></i> Sign Out</a>
+							<a href="http://www.popojicms.org/contact" class="dropdown-item" target="_blank"><i data-feather="help-circle"></i> {{ __('general.help') }}</a>
+							<a href="https://www.facebook.com/popojicms/?ref=bookmarks" class="dropdown-item" target="_blank"><i data-feather="life-buoy"></i> {{ __('general.forum') }}</a>
+							<a href="javascript:void(0);" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-out"></i> {{ __('general.sign_out') }}</a>
 							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 								@csrf
 							</form>
@@ -118,7 +118,6 @@
 				</div>
 				@endif
 				
-				
 				@yield('content')
 			</div>
 		</div>
@@ -129,13 +128,13 @@
 			<div class="modal-content">
 				<div class="modal-body m-3 text-center">
 					<div class="swal2-icon swal2-warning" style="display:flex;"><span class="swal2-icon-text">!</span></div>
-					<h3>Are you sure?</h3>
-					<p class="mb-0">You will not be able to recover this entry.</p>
+					<h3>{{ __('general.delete_1') }}</h3>
+					<p class="mb-0">{{ __('general.delete_2') }}</p>
 				</div>
 				<div class="modal-footer modal-action-footer text-center mb-3">
 					<div class="mx-auto" style="width:200px;">
-						<button type="button" class="btn btn-danger btn-loading-overlay" id="confirmdel" autofocus>Yes</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-danger btn-loading-overlay" id="confirmdel" autofocus>{{ __('general.yes') }}</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('general.cancel') }}</button>
 					</div>
 				</div>
 			</div>
