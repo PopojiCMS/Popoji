@@ -20,29 +20,44 @@
 	
 	<div class="card">
 		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<tbody>
-						<tr>
-							<th style="width:180px;">Username</th><td>{{ $user->username }}</td>
-						</tr>
-						<tr>
-							<th>Name</th><td>{{ $user->name }}</td>
-						</tr>
-						<tr>
-							<th>Email</th><td>{{ $user->email }}</td>
-						</tr>
-						<tr>
-							<th>Telephone</th><td>{{ $user->telp }}</td>
-						</tr>
-						<tr>
-							<th>Bio</th><td>{{ $user->bio }}</td>
-						</tr>
-						<tr>
-							<th>Block</th><td>{{ $user->active == 'Y' ? 'Block' : 'Unblock' }}</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="row">
+				<div class="col-md-9 mb-2">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<th style="width:180px;">Username</th><td>{{ $user->username }}</td>
+								</tr>
+								<tr>
+									<th>Name</th><td>{{ $user->name }}</td>
+								</tr>
+								<tr>
+									<th>Email</th><td>{{ $user->email }}</td>
+								</tr>
+								<tr>
+									<th>Telephone</th><td>{{ $user->telp }}</td>
+								</tr>
+								<tr>
+									<th>Bio</th><td>{{ $user->bio }}</td>
+								</tr>
+								<tr>
+									<th>Block</th><td>{{ $user->active == 'Y' ? 'Block' : 'Unblock' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-3">
+					@if (Auth::user()->picture == '')
+					<img src="{{ asset('po-admin/assets/img/avatar.jpg') }}" class="img-fluid rounded-circle" alt="">
+					@else
+						@if (Auth::user()->hasRole('member'))
+							<img src="{{ asset('po-content/uploads/users/user-' . Auth::user()->id . '/' . Auth::user()->picture) }}" class="img-fluid rounded-circle" alt="">
+						@else
+							<img src="{{ asset('po-content/uploads/' . Auth::user()->picture) }}" class="img-fluid rounded-circle" alt="">
+						@endif
+					@endif
+				</div>
 			</div>
 		</div>
 	</div>

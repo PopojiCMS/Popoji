@@ -40,4 +40,10 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/permissions/data','Backend\PermissionsController@anyData');
 	Route::post('dashboard/permissions/deleteall', 'Backend\PermissionsController@deleteAll');
 	Route::resource('dashboard/permissions', 'Backend\PermissionsController');
+	
+	Route::get('dashboard/settings/index','Backend\SettingsController@getIndex');
+	Route::get('dashboard/settings/table','Backend\SettingsController@getIndex');
+	Route::get('dashboard/settings/data','Backend\SettingsController@anyData');
+	Route::post('dashboard/settings/deleteall', 'Backend\SettingsController@deleteAll');
+	Route::resource('dashboard/settings', 'Backend\SettingsController');
 });

@@ -60,6 +60,7 @@
 		var table = $('#users-table').DataTable({
 			processing: true,
 			serverSide: true,
+			stateSave: true,
 			responsive: {
 				details: {
 					type: 'column',

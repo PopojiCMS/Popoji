@@ -51,7 +51,7 @@
 				<li class="nav-label mg-t-25">Appearance</li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="aperture"></i> <span>Themes</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="list"></i> <span>Menu Manager</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="settings"></i> <span>Settings</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/settings/table') }}" class="nav-link"><i data-feather="settings"></i> <span>Settings</span></a></li>
 				<li class="nav-label mg-t-25">Component</li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="package"></i> <span>Components</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="command"></i> <span>Clark</span></a></li>
@@ -78,7 +78,15 @@
 				<div class="navbar-right pr-3">
 					<div class="dropdown dropdown-profile">
 						<a href="#" class="dropdown-link" data-toggle="dropdown" data-display="static">
-							<div class="avatar avatar-sm"><img src="{{ asset('po-admin/assets/img/img1.png') }}" class="rounded-circle" alt=""></div>
+							@if (Auth::user()->picture == '')
+							<div class="avatar avatar-sm"><img src="{{ asset('po-admin/assets/img/avatar.jpg') }}" class="rounded-circle" alt=""></div>
+							@else
+								@if (Auth::user()->hasRole('member'))
+									<div class="avatar avatar-sm"><img src="{{ asset('po-content/uploads/users/user-' . Auth::user()->id . '/medium/medium_' . Auth::user()->picture) }}" class="rounded-circle" alt=""></div>
+								@else
+									<div class="avatar avatar-sm"><img src="{{ asset('po-content/uploads/medium/medium_' . Auth::user()->picture) }}" class="rounded-circle" alt=""></div>
+								@endif
+							@endif
 						</a>
 						
 						<div class="dropdown-menu dropdown-menu-right tx-13">

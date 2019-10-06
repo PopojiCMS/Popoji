@@ -60,6 +60,7 @@
 		var table = $('#permissions-table').DataTable({
 			processing: true,
 			serverSide: true,
+			stateSave: true,
 			responsive: {
 				details: {
 					type: 'column',
@@ -93,12 +94,12 @@
 						if (checkedStatus == this.checked) {
 							$(this).closest('table tbody tr').removeClass('selected');
 							$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-							$('#totaldata').val($('form input[type=checkbox]:checked').length);
+							$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
 						}
 						if (this.checked) {
 							$(this).closest('table tbody tr').addClass('selected');
 							$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-							$('#totaldata').val($('form input[type=checkbox]:checked').length);
+							$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
 						}
 					});
 				});	
@@ -108,12 +109,12 @@
 					if (checkedStatus == this.checked) {
 						$(this).closest('table tbody tr').removeClass('selected');
 						$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-						$('#totaldata').val($('form input[type=checkbox]:checked').length);
+						$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
 					}
 					if (this.checked) {
 						$(this).closest('table tbody tr').addClass('selected');
 						$(this).closest('table tbody tr').find('input:hidden').attr('disabled', !this.checked);
-						$('#totaldata').val($('form input[type=checkbox]:checked').length);
+						$('#totaldata').val($('table tbody input[type=checkbox]:checked').length);
 					}
 				});
 				$('table tbody tr td div:first-child input[type=checkbox]').change(function() {
