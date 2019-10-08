@@ -62,9 +62,9 @@ class SettingsController extends Controller
 			})
             ->addColumn('action', function ($setting) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="View" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="Delete" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
+				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
+				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
 				return $btn;
             })
@@ -114,7 +114,7 @@ class SettingsController extends Controller
 
 			Setting::create($requestData);
 
-			return redirect('dashboard/settings')->with('flash_message', 'Setting added!');
+			return redirect('dashboard/settings')->with('flash_message', __('setting.store_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -183,7 +183,7 @@ class SettingsController extends Controller
 			$setting = Setting::findOrFail($ids[0]);
 			$setting->update($requestData);
 
-			return redirect('dashboard/settings')->with('flash_message', 'Setting updated!');
+			return redirect('dashboard/settings')->with('flash_message', __('setting.update_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -202,7 +202,7 @@ class SettingsController extends Controller
 			$ids = Hashids::decode($id);
 			Setting::destroy($ids[0]);
 
-			return redirect('dashboard/settings')->with('flash_message', 'Setting deleted!');
+			return redirect('dashboard/settings')->with('flash_message', __('setting.destroy_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -224,9 +224,9 @@ class SettingsController extends Controller
 					$idd = Hashids::decode($id);
 					Setting::destroy($idd[0]);
 				}
-				return redirect('dashboard/settings')->with('flash_message', 'Setting deleted!');
+				return redirect('dashboard/settings')->with('flash_message', __('setting.destroy_notif'));
 			} else {
-				return redirect('dashboard/settings')->with('flash_message', 'Setting error deleted!');
+				return redirect('dashboard/settings')->with('flash_message', __('setting.destroy_error_notif'));
 			}
 		} else {
 			return redirect('forbidden');

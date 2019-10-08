@@ -1,45 +1,45 @@
 @extends('layouts.app')
-@section('title', 'Roles')
+@section('title', __('role.datatable_title'))
 
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-20">
 		<div>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-style1 mg-b-10">
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">User</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/roles/table') }}">Roles</a></li>
-					<li class="breadcrumb-item active" aria-current="page">List Roles</li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">{{ __('general.dashboard') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">{{ __('general.user') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/roles/table') }}">{{ __('general.roles') }}</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ __('role.datatable_list') }}</li>
 				</ol>
 			</nav>
-			<h4 class="mg-b-0 tx-spacing--1">List Roles</h4>
+			<h4 class="mg-b-0 tx-spacing--1">{{ __('role.datatable_list') }}</h4>
 		</div>
 		
-		<div><a href="{{ url('dashboard/roles/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> Add</a></div>
+		<div><a href="{{ url('dashboard/roles/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> {{ __('general.add') }}</a></div>
 	</div>
 	
 	<div class="card">
-		<div class="card-body pd-b-0">
+		<div class="card-body">
 			{!! Form::open(['url' => 'dashboard/roles/deleteall', 'method' => 'post', 'class' => 'form-horizontal']) !!}
 				<input type="hidden" name="totaldata" id="totaldata" value="0" />
 				<table class="table table-striped" id="roles-table">
 					<thead>
 						<tr>
 							<th style="text-align:center;" width="15"></th>
-							<th style="text-align:center;" width="25">ID</th>
-							<th>Name</th>
-							<th>Guard</th>
-							<th style="text-align:center;" width="140">Actions</th>
+							<th style="text-align:center;" width="25">{{ __('general.id') }}</th>
+							<th>{{ __('role.name') }}</th>
+							<th>{{ __('role.guard') }}</th>
+							<th style="text-align:center;" width="140">{{ __('general.actions') }}</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
 							<td style="width:10px;" style="text-align:center;">
-								<input type="checkbox" id="titleCheck" data-toggle="tooltip" title="Check All" />
+								<input type="checkbox" id="titleCheck" data-toggle="tooltip" title="{{ __('general.check_all') }}" />
 							</td>
 							<td colspan="4">
-								<button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#alertalldel"><i class="fa fa-trash"></i> Delete Selected</button>
+								<button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#alertalldel"><i class="fa fa-trash"></i> {{ __('general.delete_selected') }}</button>
 							</td>
 							<td></td>
 						</tr>

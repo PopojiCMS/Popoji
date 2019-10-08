@@ -13,6 +13,21 @@ return [
     |
     */
 
-    'example' => 'Example text.',
+    'datatable_title' => 'Settings',
+	'datatable_list' => 'List Settings',
+	'create_title' => 'Add Settings',
+	'edit_title' => 'Edit Settings',
+	'show_title' => 'View Settings',
+	'store_notif' => 'Setting added!',
+    'update_notif' => 'Setting updated!',
+	'destroy_notif' => 'Setting deleted!',
+	'destroy_error_notif' => 'Setting error deleted!',
+	'table' => 'Table',
+	'group' => 'Group',
+	'options' => 'Options',
+	'options_info' => 'This is key for indetify value of setting',
+	'value' => 'Value',
+	'create_by' => 'Create By',
+	'usage' => 'Usage',
 
 ];

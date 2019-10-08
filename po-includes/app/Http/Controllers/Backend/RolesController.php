@@ -61,9 +61,9 @@ class RolesController extends Controller
 			})
             ->addColumn('action', function ($role) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/roles/'.Hashids::encode($role->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="View" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a> ';
-				$btn .= '<a href="'.url('dashboard/roles/'.Hashids::encode($role->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a> ';
-				$btn .= '<a href="'.url('dashboard/roles/'.Hashids::encode($role->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="Delete" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
+				$btn .= '<a href="'.url('dashboard/roles/'.Hashids::encode($role->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a> ';
+				$btn .= '<a href="'.url('dashboard/roles/'.Hashids::encode($role->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a> ';
+				$btn .= '<a href="'.url('dashboard/roles/'.Hashids::encode($role->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
 				return $btn;
             })
@@ -102,7 +102,7 @@ class RolesController extends Controller
 			$this->validate($request, ['name' => 'required|string|max:50']);
 			$role = Role::firstOrCreate(['name' => $request->name]);
 
-			return redirect('dashboard/roles')->with('flash_message', 'Role added!');
+			return redirect('dashboard/roles')->with('flash_message', __('role.store_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -181,7 +181,7 @@ class RolesController extends Controller
 				$role->syncPermissions($request->permission);
 			}
 
-			return redirect('dashboard/roles')->with('flash_message', 'Role updated!');
+			return redirect('dashboard/roles')->with('flash_message', __('role.update_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -200,7 +200,7 @@ class RolesController extends Controller
 			$ids = Hashids::decode($id);
 			Role::destroy($ids[0]);
 
-			return redirect('dashboard/roles')->with('flash_message', 'Role deleted!');
+			return redirect('dashboard/roles')->with('flash_message', __('role.destroy_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -222,9 +222,9 @@ class RolesController extends Controller
 					$idd = Hashids::decode($id);
 					Role::destroy($idd[0]);
 				}
-				return redirect('dashboard/roles')->with('flash_message', 'Role deleted!');
+				return redirect('dashboard/roles')->with('flash_message', __('role.destroy_notif'));
 			} else {
-				return redirect('dashboard/roles')->with('flash_message', 'Role error deleted!');
+				return redirect('dashboard/roles')->with('flash_message', __('role.destroy_error_notif'));
 			}
 		} else {
 			return redirect('forbidden');

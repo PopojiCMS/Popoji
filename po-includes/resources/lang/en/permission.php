@@ -13,6 +13,17 @@ return [
     |
     */
 
-    'example' => 'Example text.',
+    'datatable_title' => 'Permissions',
+	'datatable_list' => 'List Permissions',
+	'create_title' => 'Add Permissions',
+	'edit_title' => 'Edit Permissions',
+	'show_title' => 'View Permissions',
+	'store_notif' => 'Permission added!',
+    'update_notif' => 'Permission updated!',
+	'destroy_notif' => 'Permission deleted!',
+	'destroy_error_notif' => 'Permission error deleted!',
+	'name' => 'Name',
+	'name_info' => 'Enter 1 module name and then system can create 4 permissions CRUD for you!',
+	'guard' => 'Guard',
 
 ];

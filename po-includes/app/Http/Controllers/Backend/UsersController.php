@@ -146,7 +146,7 @@ class UsersController extends Controller
 					File::makeDirectory(public_path('po-content/uploads/medium/users/user-' . $user->id), 0777, true, true);
 				}
 				
-				return redirect('dashboard/users')->with('flash_message', 'User added!');
+				return redirect('dashboard/users')->with('flash_message', __('user.store_notif'));
 			} else {
 				$username = str_replace(' ', '', strtolower($request->name)) . mt_rand(15, 50);
 				
@@ -273,7 +273,7 @@ class UsersController extends Controller
 				if (Auth::user()->hasRole('member')) {
 					return redirect('dashboard/users/' . Hashids::encode(Auth::user()->id) . '/edit')->with('flash_message', 'User updated!');
 				} else {
-					return redirect('dashboard/users')->with('flash_message', 'User updated!');
+					return redirect('dashboard/users')->with('flash_message', __('user.update_notif'));
 				}
 			} else {
 				if ($request->input('password') == '' || $request->input('password') == null) {

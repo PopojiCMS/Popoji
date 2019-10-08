@@ -19,7 +19,7 @@
 	</div>
 	
 	<div class="card">
-		<div class="card-body pd-b-0">
+		<div class="card-body">
 			{!! Form::open(['url' => 'dashboard/users/deleteall', 'method' => 'post', 'class' => 'form-horizontal']) !!}
 				<input type="hidden" name="totaldata" id="totaldata" value="0" />
 				<table class="table table-striped" id="users-table">

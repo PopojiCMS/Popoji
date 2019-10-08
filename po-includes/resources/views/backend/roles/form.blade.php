@@ -1,12 +1,12 @@
 <div class="form-group">
-    {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
+    {!! Form::label('name', __('role.name'), ['class' => 'control-label']) !!}
     {!! Form::text('name', null, ['class' => $errors->has('name') ? 'form-control is-invalid' : 'form-control', 'required' => 'required']) !!}
     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 </div>
 @if(isset($role))
 	<div class="row" id="checkAllBox">
 		<div class="col-md-12 text-center">
-			<p><input type="checkbox" id="checkAll" /> <b>Select All</b></p>
+			<p><label><input type="checkbox" id="checkAll" /> <b>{{ __('general.check_all') }}</b></label></p>
 		</div>
 		<div class="col-md-3" style="margin-bottom:10px;">
 			@php $no = 1; @endphp

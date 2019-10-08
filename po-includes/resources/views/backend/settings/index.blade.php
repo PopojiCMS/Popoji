@@ -1,21 +1,21 @@
 @extends('layouts.app')
-@section('title', 'Settings')
+@section('title', __('setting.datatable_title'))
 
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-20">
 		<div>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-style1 mg-b-10">
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/themes/table') }}">Appearance</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/settings/table') }}">Settings</a></li>
-					<li class="breadcrumb-item active" aria-current="page">List Settings</li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">{{ __('general.dashboard') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/themes/table') }}">{{ __('general.appearance') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/settings/table') }}">{{ __('general.settings') }}</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ __('setting.datatable_list') }}</li>
 				</ol>
 			</nav>
-			<h4 class="mg-b-0 tx-spacing--1">List Settings</h4>
+			<h4 class="mg-b-0 tx-spacing--1">{{ __('setting.datatable_list') }}</h4>
 		</div>
 		
-		<div><a href="{{ url('dashboard/settings/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="grid" class="wd-10 mg-r-5"></i> Table</a></div>
+		<div><a href="{{ url('dashboard/settings/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="grid" class="wd-10 mg-r-5"></i> {{ __('setting.table') }}</a></div>
 	</div>
 	
 	<ul class="nav nav-tabs nav-justified" id="settingTab" role="tablist">
@@ -35,7 +35,7 @@
 								<tr>
 									<th width="200">{{ $option->options }}</th>
 									<td>{{ $option->value }}</td>
-									<td width="30"><a href="{{ url('dashboard/settings/'.Hashids::encode($option->id).'/edit') }}" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a></td>
+									<td width="30"><a href="{{ url('dashboard/settings/'.Hashids::encode($option->id).'/edit') }}" class="btn btn-primary btn-xs btn-icon" title="{{ __('general.edit') }}" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a></td>
 								</tr>
 							@endforeach
 						</tbody>

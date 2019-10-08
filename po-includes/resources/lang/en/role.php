@@ -13,6 +13,16 @@ return [
     |
     */
 
-    'example' => 'Example text.',
+    'datatable_title' => 'Roles',
+	'datatable_list' => 'List Roles',
+	'create_title' => 'Add Roles',
+	'edit_title' => 'Edit Roles',
+	'show_title' => 'View Roles',
+	'store_notif' => 'Role added!',
+    'update_notif' => 'Role updated!',
+	'destroy_notif' => 'Role deleted!',
+	'destroy_error_notif' => 'Role error deleted!',
+	'name' => 'Name',
+	'guard' => 'Guard',
 
 ];

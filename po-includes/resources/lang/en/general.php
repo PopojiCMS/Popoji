@@ -50,6 +50,7 @@ return [
 	'delete' => 'Delete',
 	'close' => 'Close',
 	'back' => 'Back',
+	'back_to_home' => 'Back to Home',
 	'browse' => 'Browse',
 	'id' => 'ID',
 	'actions' => 'Actions',

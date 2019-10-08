@@ -59,9 +59,9 @@ class PermissionsController extends Controller
 			})
             ->addColumn('action', function ($permission) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="View" data-toggle="tooltip" data-placement="left"><span class="fa fa-eye"></i></a> ';
-				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><span class="fa fa-edit"></i></a> ';
-				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="Delete" data-toggle="tooltip" data-placement="left"><span class="fa fa-trash"></i></a>';
+				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><span class="fa fa-eye"></i></a> ';
+				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><span class="fa fa-edit"></i></a> ';
+				$btn .= '<a href="'.url('dashboard/permissions/'.Hashids::encode($permission->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><span class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
 				return $btn;
             })
@@ -103,7 +103,7 @@ class PermissionsController extends Controller
 			$update = Permission::firstOrCreate(['name' => 'update-'.$request->name]);
 			$delete = Permission::firstOrCreate(['name' => 'delete-'.$request->name]);
 
-			return redirect('dashboard/permissions')->with('flash_message', 'Permission added!');
+			return redirect('dashboard/permissions')->with('flash_message', __('permission.store_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -164,7 +164,7 @@ class PermissionsController extends Controller
 			$permission = Permission::findOrFail($ids[0]);
 			$permission->update($request->all());
 
-			return redirect('dashboard/permissions')->with('flash_message', 'Permission updated!');
+			return redirect('dashboard/permissions')->with('flash_message', __('permission.update_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -183,7 +183,7 @@ class PermissionsController extends Controller
 			$ids = Hashids::decode($id);
 			Permission::destroy($ids[0]);
 
-			return redirect('dashboard/permissions')->with('flash_message', 'Permission deleted!');
+			return redirect('dashboard/permissions')->with('flash_message', __('permission.destroy_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -205,9 +205,9 @@ class PermissionsController extends Controller
 					$idd = Hashids::decode($id);
 					Permission::destroy($idd[0]);
 				}
-				return redirect('dashboard/permissions')->with('flash_message', 'Permission deleted!');
+				return redirect('dashboard/permissions')->with('flash_message', __('permission.destroy_notif'));
 			} else {
-				return redirect('dashboard/permissions')->with('flash_message', 'Permission error deleted!');
+				return redirect('dashboard/permissions')->with('flash_message', __('permission.destroy_error_notif'));
 			}
 		} else {
 			return redirect('forbidden');
