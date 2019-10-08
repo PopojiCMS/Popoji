@@ -8,13 +8,13 @@
     <meta name="generator" content="{{ config('app.version') }}" />
     <meta name="author" content="POPOJI" />
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-
+	
 	<title>@yield('title') - {{ config('app.name') }}</title>
-
+	
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('po-content/uploads/'.getSetting('favicon')) }}">
 	<link href="{{ asset('po-admin/lib/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
-
+	
 	<link rel="stylesheet" href="{{ asset('po-admin/assets/css/dashforge.css') }}">
 	<link rel="stylesheet" href="{{ asset('po-admin/assets/css/dashforge.auth.css') }}">
 </head>
@@ -25,9 +25,9 @@
 		</div>
 		
 		<div class="navbar-right">
-			<a href="https://www.facebook.com/popojicms/?ref=bookmarks" class="btn btn-social"><i class="fab fa-facebook"></i></a>
+			<a href="{{ getSetting('facebook') }}" class="btn btn-social"><i class="fab fa-facebook"></i></a>
+			<a href="{{ getSetting('twitter') }}" class="btn btn-social"><i class="fab fa-twitter"></i></a>
 			<a href="https://www.github.com/PopojiCMS/Popoji" class="btn btn-social"><i class="fab fa-github"></i></a>
-			<a href="https://www.twitter.com/popojicms" class="btn btn-social"><i class="fab fa-twitter"></i></a>
 		</div>
 	</header>
 	
@@ -35,25 +35,25 @@
 	
 	<footer class="footer">
 		<div>
-			<span>&copy; 2013-<?=date('Y');?> Popoji V.3.0.0</span>
-			<span>Theme Created by <a href="http://www.themepixels.me" rel="nofollow">ThemePixels</a></span>
+			<span>&copy; 2013-<?=date('Y');?> Popoji V.{{ config('app.version') }}</span>
+			<span>{{ __('auth.created') }} <a href="http://www.themepixels.me" rel="nofollow">ThemePixels</a></span>
 		</div>
 		<div>
 			<nav class="nav">
-				<a href="https://www.opensource.org/licenses/MIT" class="nav-link">License</a>
-				<a href="http://www.popojicms.org/pages/changelog" class="nav-link">Change Log</a>
-				<a href="http://www.popojicms.org/contact" class="nav-link">Get Help</a>
+				<a href="https://www.opensource.org/licenses/MIT" class="nav-link">{{ __('auth.license') }}</a>
+				<a href="http://www.popojicms.org/pages/changelog" class="nav-link">{{ __('auth.changelog') }}</a>
+				<a href="http://www.popojicms.org/contact" class="nav-link">{{ __('auth.help') }}</a>
 			</nav>
 		</div>
 	</footer>
-
+	
 	<script src="{{ asset('po-admin/lib/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/feather-icons/feather.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-
+	
 	<script src="{{ asset('po-admin/assets/js/dashforge.js') }}"></script>
-
+	
 	<script src="{{ asset('po-admin/lib/js-cookie/js.cookie.js') }}"></script>
 </body>
 </html>

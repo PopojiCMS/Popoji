@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', 'Sign In Panel')
+@section('title', __('auth.login_title'))
 
 @section('content')
 	<div class="content content-fixed content-auth">
@@ -10,20 +10,20 @@
 						<img src="{{ asset('po-admin/assets/img/img15.png') }}" class="img-fluid" alt="">
 					</div>
 					<div class="pos-absolute b-0 l-0 tx-12 tx-center">
-						Workspace design vector is created by <a href="https://www.freepik.com/pikisuperstar" target="_blank" rel="nofollow">pikisuperstar (freepik.com)</a>
+						{{ __('auth.design_vector') }} <a href="https://www.freepik.com/pikisuperstar" target="_blank" rel="nofollow">pikisuperstar (freepik.com)</a>
 					</div>
 				</div>
 				
 				<div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
 					<div class="wd-100p">
-						<h3 class="tx-color-01 mg-b-5">Sign In</h3>
-						<p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
+						<h3 class="tx-color-01 mg-b-5">{{ __('auth.signin') }}</h3>
+						<p class="tx-color-03 tx-16 mg-b-40">{{ __('auth.signin_intro') }}</p>
 						<form method="POST" action="{{ route('login') }}">
 							@csrf
 							<input type="hidden" name="remember" value="">
 							<div class="form-group">
-								<label>Email address</label>
-								<input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="yourname@yourmail.com">
+								<label>{{ __('auth.email') }}</label>
+								<input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="{{ __('auth.email_text') }}">
 								@error('email')
 									<span class="invalid-feedback" role="alert">
 										<strong>{{ $message }}</strong>
@@ -32,22 +32,22 @@
 							</div>
 							<div class="form-group">
 								<div class="d-flex justify-content-between mg-b-5">
-									<label class="mg-b-0-f">Password</label>
+									<label class="mg-b-0-f">{{ __('auth.password') }}</label>
 									@if (Route::has('password.request'))
-									<a href="{{ route('password.request') }}" class="tx-13">Forgot password?</a>
+									<a href="{{ route('password.request') }}" class="tx-13">{{ __('auth.forgot_question') }}</a>
 									@endif
 								</div>
-								<input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
+								<input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="{{ __('auth.password_text') }}">
 								@error('password')
 									<span class="invalid-feedback" role="alert">
 										<strong>{{ $message }}</strong>
 									</span>
 								@enderror
 							</div>
-							<button class="btn btn-brand-02 btn-block" type="submit">Sign In</button>
+							<button class="btn btn-brand-02 btn-block" type="submit">{{ __('auth.signin') }}</button>
 						</form>
-						<div class="divider-text">or</div>
-						<div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="{{ route('register') }}">Create an Account</a></div>
+						<div class="divider-text">{{ __('auth.or') }}</div>
+						<div class="tx-13 mg-t-20 tx-center">{{ __('auth.dont_have') }} <a href="{{ route('register') }}">{{ __('auth.create_account') }}</a></div>
 					</div>
 				</div>
 			</div>

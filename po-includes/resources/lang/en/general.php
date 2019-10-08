@@ -39,6 +39,8 @@ return [
 	'sign_out' => 'Sign Out',
 	'delete_1' => 'Are you sure?',
 	'delete_2' => 'You will not be able to recover this entry.',
+	'create' => 'Create',
+	'update' => 'Update',
 	'yes' => 'Yes',
 	'no' => 'No',
 	'cancel' => 'Cancel',
@@ -47,5 +49,12 @@ return [
 	'edit' => 'Edit',
 	'delete' => 'Delete',
 	'close' => 'Close',
+	'back' => 'Back',
+	'browse' => 'Browse',
+	'id' => 'ID',
+	'actions' => 'Actions',
+	'check_all' => 'Check All',
+	'delete_selected' => 'Delete Selected',
+	'selected' => 'Selected',
 
 ];

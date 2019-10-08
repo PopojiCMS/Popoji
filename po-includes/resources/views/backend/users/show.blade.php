@@ -1,21 +1,21 @@
 @extends('layouts.app')
-@section('title', 'View Users')
+@section('title', __('user.show_title'))
 
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-20">
 		<div>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-style1 mg-b-10">
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">User</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">Users</a></li>
-					<li class="breadcrumb-item active" aria-current="page">View Users</li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">{{ __('general.dashboard') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">{{ __('general.user') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/users/table') }}">{{ __('general.users') }}</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ __('user.show_title') }}</li>
 				</ol>
 			</nav>
-			<h4 class="mg-b-0 tx-spacing--1">View Users</h4>
+			<h4 class="mg-b-0 tx-spacing--1">{{ __('user.show_title') }}</h4>
 		</div>
 		
-		<div><a href="{{ url('dashboard/users/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="arrow-left" class="wd-10 mg-r-5"></i> Back</a></div>
+		<div><a href="{{ url('dashboard/users/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="arrow-left" class="wd-10 mg-r-5"></i> {{ __('general.back') }}</a></div>
 	</div>
 	
 	<div class="card">
@@ -26,22 +26,22 @@
 						<table class="table table-striped">
 							<tbody>
 								<tr>
-									<th style="width:180px;">Username</th><td>{{ $user->username }}</td>
+									<th style="width:180px;">{{ __('user.username') }}</th><td>{{ $user->username }}</td>
 								</tr>
 								<tr>
-									<th>Name</th><td>{{ $user->name }}</td>
+									<th>{{ __('user.name') }}</th><td>{{ $user->name }}</td>
 								</tr>
 								<tr>
-									<th>Email</th><td>{{ $user->email }}</td>
+									<th>{{ __('user.email') }}</th><td>{{ $user->email }}</td>
 								</tr>
 								<tr>
-									<th>Telephone</th><td>{{ $user->telp }}</td>
+									<th>{{ __('user.telephone') }}</th><td>{{ $user->telp }}</td>
 								</tr>
 								<tr>
-									<th>Bio</th><td>{{ $user->bio }}</td>
+									<th>{{ __('user.bio') }}</th><td>{{ $user->bio }}</td>
 								</tr>
 								<tr>
-									<th>Block</th><td>{{ $user->active == 'Y' ? 'Block' : 'Unblock' }}</td>
+									<th>{{ __('user.block') }}</th><td>{{ $user->active == 'Y' ? __('user.block') : __('user.unblock') }}</td>
 								</tr>
 							</tbody>
 						</table>

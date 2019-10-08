@@ -73,10 +73,10 @@ class UsersController extends Controller
 			})
             ->addColumn('action', function ($user) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="View" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
-				$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="Edit" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
+				$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				if ($user->id != '1') {
-					$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="Delete" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
+					$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				}
 				$btn .= '</div></div>';
 				return $btn;
@@ -171,7 +171,7 @@ class UsersController extends Controller
 					File::makeDirectory(public_path('po-content/uploads/medium/users/user-' . $user->id), 0777, true, true);
 				}
 				
-				return redirect('dashboard/users')->with('flash_message', 'User added!');
+				return redirect('dashboard/users')->with('flash_message', __('user.store_notif'));
 			}
 		} else {
 			return redirect('forbidden');
@@ -285,7 +285,7 @@ class UsersController extends Controller
 					$user->update($data);
 				}
 
-				return redirect('dashboard/users')->with('flash_message', 'User updated!');
+				return redirect('dashboard/users')->with('flash_message', __('user.update_notif'));
 			}
 		} else {
 			return redirect('forbidden');
@@ -305,7 +305,7 @@ class UsersController extends Controller
 			$ids = Hashids::decode($id);
 			User::destroy($ids[0]);
 
-			return redirect('dashboard/users')->with('flash_message', 'User deleted!');
+			return redirect('dashboard/users')->with('flash_message', __('user.destroy_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -327,9 +327,9 @@ class UsersController extends Controller
 					$idd = Hashids::decode($id);
 					User::destroy($idd[0]);
 				}
-				return redirect('dashboard/users')->with('flash_message', 'User deleted!');
+				return redirect('dashboard/users')->with('flash_message', __('user.destroy_notif'));
 			} else {
-				return redirect('dashboard/users')->with('flash_message', 'User error deleted!');
+				return redirect('dashboard/users')->with('flash_message', __('user.destroy_error_notif'));
 			}
 		} else {
 			return redirect('forbidden');
