@@ -19,9 +19,10 @@
 	<link href="{{ asset('po-admin/lib/select2/css/select2.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
-	<link href="{{ asset('po-admin/assets/css/dashforge.css') }}" rel="stylesheet">
 	
 	@stack('styles')
+	
+	<link href="{{ asset('po-admin/assets/css/dashforge.css') }}" rel="stylesheet">
 	
 	<script>
 		window.Laravel = <?php echo json_encode([
@@ -45,7 +46,7 @@
 				<li class="nav-label mg-t-25">{{ __('general.content') }}</li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="book-open"></i> <span>{{ __('general.posts') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="folder-plus"></i> <span>{{ __('general.categories') }}</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="bookmark"></i> <span>{{ __('general.tags') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/tags/table') }}" class="nav-link"><i data-feather="bookmark"></i> <span>{{ __('general.tags') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="message-square"></i> <span>{{ __('general.comments') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="file-text"></i> <span>{{ __('general.pages') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.appearance') }}</li>
@@ -153,10 +154,11 @@
 	<script src="{{ asset('po-admin/lib/sweetalert/sweetalert2.min.js') }}"></script>
 	<script src="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.js') }}"></script>
 	<script src="{{ asset('po-admin/assets/js/dashforge.aside.js') }}"></script>
-	<script src="{{ asset('po-admin/assets/js/dashforge.js') }}"></script>
-	<script src="{{ asset('po-admin/assets/js/popoji-main.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/js-cookie/js.cookie.js') }}"></script>
 	
 	@stack('scripts')
+	
+	<script src="{{ asset('po-admin/assets/js/dashforge.js') }}"></script>
+	<script src="{{ asset('po-admin/assets/js/popoji-main.js') }}"></script>
 </body>
 </html>

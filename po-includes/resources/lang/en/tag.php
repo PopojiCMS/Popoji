@@ -13,6 +13,18 @@ return [
     |
     */
 
-    'example' => 'Example text.',
+    'datatable_title' => 'Tags',
+	'datatable_list' => 'List Tags',
+	'create_title' => 'Add Tags',
+	'edit_title' => 'Edit Tags',
+	'show_title' => 'View Tags',
+	'store_notif' => 'Tag added!',
+    'update_notif' => 'Tag updated!',
+	'destroy_notif' => 'Tag deleted!',
+	'destroy_error_notif' => 'Tag error deleted!',
+	'title' => 'Title',
+	'title_info' => 'Can input more than one tag (,)',
+	'seotitle' => 'SEO Title',
+	'count' => 'Count',
 
 ];

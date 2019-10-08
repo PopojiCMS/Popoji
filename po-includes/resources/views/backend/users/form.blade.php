@@ -59,7 +59,7 @@
 			{!! Form::label('block', __('user.block').' *', ['class' => 'control-label']) !!}
 			<select class="select2 form-control" id="block" name="block">
 				@if (isset($user))
-					<option value="{{ $user->block }}">__('general.selected') {{ $user->block == 'Y' ? __('user.block') : __('user.unblock') }}</option>
+					<option value="{{ $user->block }}">{{ __('general.selected') }} {{ $user->block == 'Y' ? __('user.block') : __('user.unblock') }}</option>
 				@endif
 				<option value="Y">{{ __('user.block') }}</option>
 				<option value="N">{{ __('user.unblock') }}</option>

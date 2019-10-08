@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-use App\Setting;
+use App\Tag;
 
 use Yajra\Datatables\Datatables;
 use Vinkla\Hashids\Facades\Hashids;
 
-class SettingsController extends Controller
+class TagsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +21,8 @@ class SettingsController extends Controller
      */
     public function index(Request $request)
     {
-		if(Auth::user()->can('read-settings')) {
-			$groups = Setting::selectRaw("min(id), groups")->groupBy('groups')->orderBy('min(id)', 'asc')->get();
-			
-			return view('backend.settings.index', compact('groups'));
+		if(Auth::user()->can('read-tags')) {
+			return view('backend.tags.datatable');
 		} else {
 			return redirect('forbidden');
 		}
@@ -36,8 +35,8 @@ class SettingsController extends Controller
 	 */
     public function getIndex()
 	{
-		if(Auth::user()->can('read-settings')) {
-			return view('backend.settings.datatable');
+		if(Auth::user()->can('read-tags')) {
+			return view('backend.tags.datatable');
 		} else {
 			return redirect('forbidden');
 		}
@@ -50,25 +49,25 @@ class SettingsController extends Controller
 	 */
 	public function anyData()
 	{
-		$settings = Setting::leftJoin('users', 'users.id', '=', 'settings.created_by')
-			->select('settings.*', 'users.id as uid', 'users.name as uname');
-		return Datatables::of($settings)
-			->addColumn('check', function ($setting) {
+		$tags = Tag::leftJoin('users', 'users.id', '=', 'tags.created_by')
+			->select('tags.*', 'users.id as uid', 'users.name as uname');
+		return Datatables::of($tags)
+			->addColumn('check', function ($tag) {
 				$check = '<div style="text-align:center;">
 					<input type="checkbox" id="titleCheckdel" />
-					<input type="hidden" class="deldata" name="id[]" value="'.Hashids::encode($setting->id).'" disabled />
+					<input type="hidden" class="deldata" name="id[]" value="'.Hashids::encode($tag->id).'" disabled />
 				</div>';
 				return $check;
 			})
-            ->addColumn('action', function ($setting) {
+            ->addColumn('action', function ($tag) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
-				$btn .= '<a href="'.url('dashboard/settings/'.Hashids::encode($setting->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
+				$btn .= '<a href="'.url('dashboard/tags/'.Hashids::encode($tag->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				// $btn .= '<a href="'.url('dashboard/tags/'.Hashids::encode($tag->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
+				$btn .= '<a href="'.url('dashboard/tags/'.Hashids::encode($tag->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
 				return $btn;
             })
-			->addColumn('control', function ($setting) {
+			->addColumn('control', function ($tag) {
 				$check = '<div style="text-align:center;"><a href="javascript:void(0);" class="btn btn-secondary btn-xs btn-icon" data-placement="left"><i class="fa fa-plus"></i></a></div>';
 				return $check;
 			})
@@ -83,8 +82,8 @@ class SettingsController extends Controller
      */
     public function create()
     {
-		if(Auth::user()->can('create-settings')) {
-			return view('backend.settings.create');
+		if(Auth::user()->can('create-tags')) {
+			return view('backend.tags.create');
 		} else {
 			return redirect('forbidden');
 		}
@@ -99,22 +98,23 @@ class SettingsController extends Controller
      */
     public function store(Request $request)
     {
-		if(Auth::user()->can('create-settings')) {
+		if(Auth::user()->can('create-tags')) {
 			$this->validate($request,[
-				'groups' => 'required',
-				'options' => 'required|string|unique:settings',
-				'value' => 'required'
+				'title' => 'required'
 			]);
-
-			$request->request->add([
-				'created_by' => Auth::User()->id,
-				'updated_by' => Auth::User()->id
-			]);
-			$requestData = $request->all();
-
-			Setting::create($requestData);
-
-			return redirect('dashboard/settings')->with('flash_message', __('setting.store_notif'));
+			
+			$expl = explode(',', $request->title);
+			$total = count($expl);
+			for($i=0; $i<$total; $i++){
+				Tag::create([
+					'title' => $expl[$i],
+					'seotitle' => Str::slug($expl[$i], '-'),
+					'created_by' => Auth::User()->id,
+					'updated_by' => Auth::User()->id
+				]);
+			}
+			
+			return redirect('dashboard/tags')->with('flash_message', __('tag.store_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -129,11 +129,11 @@ class SettingsController extends Controller
      */
     public function show($id)
     {
-		if(Auth::user()->can('read-settings')) {
+		if(Auth::user()->can('read-tags')) {
 			$ids = Hashids::decode($id);
-			$setting = Setting::findOrFail($ids[0]);
+			$tag = Tag::findOrFail($ids[0]);
 
-			return view('backend.settings.show', compact('setting'));
+			return view('backend.tags.show', compact('tag'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -148,11 +148,11 @@ class SettingsController extends Controller
      */
     public function edit($id)
     {
-		if(Auth::user()->can('update-settings')) {
+		if(Auth::user()->can('update-tags')) {
 			$ids = Hashids::decode($id);
-			$setting = Setting::findOrFail($ids[0]);
+			$tag = Tag::findOrFail($ids[0]);
 
-			return view('backend.settings.edit', compact('setting'));
+			return view('backend.tags.edit', compact('tag'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -168,22 +168,20 @@ class SettingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-		if(Auth::user()->can('update-settings')) {
+		if(Auth::user()->can('update-tags')) {
 			$ids = Hashids::decode($id);
 			$this->validate($request,[
-				'groups' => 'required',
-				'options' => 'required|string|unique:settings,options,' . $ids[0],
-				'value' => 'required'
+				'title' => 'required'
 			]);
 			$request->request->add([
 				'updated_by' => Auth::User()->id
 			]);
 			$requestData = $request->all();
 
-			$setting = Setting::findOrFail($ids[0]);
-			$setting->update($requestData);
+			$tag = Tag::findOrFail($ids[0]);
+			$tag->update($requestData);
 
-			return redirect('dashboard/settings')->with('flash_message', __('setting.update_notif'));
+			return redirect('dashboard/tags')->with('flash_message', __('tag.update_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -198,11 +196,11 @@ class SettingsController extends Controller
      */
     public function destroy($id)
     {
-		if(Auth::user()->can('delete-settings')) {
+		if(Auth::user()->can('delete-tags')) {
 			$ids = Hashids::decode($id);
-			Setting::destroy($ids[0]);
+			Tag::destroy($ids[0]);
 
-			return redirect('dashboard/settings')->with('flash_message', __('setting.destroy_notif'));
+			return redirect('dashboard/tags')->with('flash_message', __('tag.destroy_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -217,16 +215,16 @@ class SettingsController extends Controller
      */
     public function deleteAll(Request $request)
     {
-		if(Auth::user()->can('delete-settings')) {
+		if(Auth::user()->can('delete-tags')) {
 			if ($request->has('id')) {
 				$ids = $request->id;
 				foreach($ids as $id){
 					$idd = Hashids::decode($id);
-					Setting::destroy($idd[0]);
+					Tag::destroy($idd[0]);
 				}
-				return redirect('dashboard/settings')->with('flash_message', __('setting.destroy_notif'));
+				return redirect('dashboard/tags')->with('flash_message', __('tag.destroy_notif'));
 			} else {
-				return redirect('dashboard/settings')->with('flash_message', __('setting.destroy_error_notif'));
+				return redirect('dashboard/tags')->with('flash_message', __('tag.destroy_error_notif'));
 			}
 		} else {
 			return redirect('forbidden');
