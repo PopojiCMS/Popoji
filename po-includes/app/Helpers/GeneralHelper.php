@@ -25,3 +25,16 @@ if (!function_exists('getSettingGroup')) {
 		}
 	}
 }
+
+if (!function_exists('categoryTreeOption')) {
+    function categoryTreeOption(array $elements, $parentId = 0, $indent = '')
+    {
+		foreach ($elements as $key => $element) {
+			if ($element['parent'] == $parentId) {
+				echo '<option value="'.$element['id'].'">'.$indent.' '.$element['title'].'</option>';
+				
+				$children = categoryTreeOption($elements, $element['id'], $indent.'-');
+			}
+		}
+	}
+}

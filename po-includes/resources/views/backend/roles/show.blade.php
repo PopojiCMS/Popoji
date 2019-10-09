@@ -24,7 +24,7 @@
 				<table class="table table-striped">
 					<tbody>
 						<tr>
-							<th>{{ __('role.name') }}</th><td>{{ $role->name }}</td>
+							<th style="width:180px;">{{ __('role.name') }}</th><td>{{ $role->name }}</td>
 						</tr>
 						<tr>
 							<th>{{ __('role.guard') }}</th><td>{{ $role->guard_name }}</td>

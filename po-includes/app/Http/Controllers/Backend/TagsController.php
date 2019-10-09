@@ -106,12 +106,15 @@ class TagsController extends Controller
 			$expl = explode(',', $request->title);
 			$total = count($expl);
 			for($i=0; $i<$total; $i++){
-				Tag::create([
-					'title' => $expl[$i],
-					'seotitle' => Str::slug($expl[$i], '-'),
-					'created_by' => Auth::User()->id,
-					'updated_by' => Auth::User()->id
-				]);
+				$checkTag = Tag::where('seotitle', '=', Str::slug($expl[$i], '-'))->count();
+				if ($checkTag == 0) {
+					Tag::create([
+						'title' => $expl[$i],
+						'seotitle' => Str::slug($expl[$i], '-'),
+						'created_by' => Auth::User()->id,
+						'updated_by' => Auth::User()->id
+					]);
+				}
 			}
 			
 			return redirect('dashboard/tags')->with('flash_message', __('tag.store_notif'));

@@ -45,7 +45,7 @@ $(document).ready(function() {
 		$('#seotitle').val($('#seotitle').val().replace(/\s+/g, '-'));
 	});
 	
-	$('.select2').select2({ minimumResultsForSearch: Infinity });
+	$('.form-group .select2').select2({ minimumResultsForSearch: Infinity });
 });
 
 $(function() {

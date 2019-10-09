@@ -47,6 +47,12 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('dashboard/settings/deleteall', 'Backend\SettingsController@deleteAll');
 	Route::resource('dashboard/settings', 'Backend\SettingsController');
 	
+	Route::get('dashboard/categories/index','Backend\CategoryController@index');
+	Route::get('dashboard/categories/table','Backend\CategoryController@getIndex');
+	Route::get('dashboard/categories/data','Backend\CategoryController@anyData');
+	Route::post('dashboard/categories/deleteall', 'Backend\CategoryController@deleteAll');
+	Route::resource('dashboard/categories', 'Backend\CategoryController');
+	
 	Route::get('dashboard/tags/index','Backend\TagsController@index');
 	Route::get('dashboard/tags/table','Backend\TagsController@getIndex');
 	Route::get('dashboard/tags/data','Backend\TagsController@anyData');

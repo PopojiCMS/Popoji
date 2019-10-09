@@ -13,6 +13,21 @@ return [
     |
     */
 
-    'example' => 'Example text.',
+    'datatable_title' => 'Categories',
+	'datatable_list' => 'List Categories',
+	'create_title' => 'Add Categories',
+	'edit_title' => 'Edit Categories',
+	'show_title' => 'View Categories',
+	'store_notif' => 'Category added!',
+    'update_notif' => 'Category updated!',
+	'destroy_notif' => 'Category deleted!',
+	'destroy_error_notif' => 'Category error deleted!',
+	'parent' => 'Parent',
+	'title' => 'Title',
+	'seotitle' => 'SEO Title',
+	'picture' => 'Picture',
+	'active' => 'Active',
+	'see_image' => 'See Image',
+	'no_parent' => 'No Parent',
 
 ];

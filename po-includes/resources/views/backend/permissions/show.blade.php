@@ -24,7 +24,7 @@
 				<table class="table table-striped">
 					<tbody>
 						<tr>
-							<th>{{ __('permission.name') }}</th><td>{{ $permission->name }}</td>
+							<th style="width:180px;">{{ __('permission.name') }}</th><td>{{ $permission->name }}</td>
 						</tr>
 						<tr>
 							<th>{{ __('permission.guard') }}</th><td>{{ $permission->guard_name }}</td>

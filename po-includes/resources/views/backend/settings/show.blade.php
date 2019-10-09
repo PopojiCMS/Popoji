@@ -24,7 +24,7 @@
 				<table class="table table-striped">
 					<tbody>
 						<tr>
-							<th>{{ __('setting.group') }}</th><td>{{ $setting->groups }}</td>
+							<th style="width:180px;">{{ __('setting.group') }}</th><td>{{ $setting->groups }}</td>
 						</tr>
 						<tr>
 							<th>{{ __('setting.options') }}</th><td>{{ $setting->options }}</td>

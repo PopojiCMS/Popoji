@@ -24,7 +24,7 @@
 				<table class="table table-striped">
 					<tbody>
 						<tr>
-							<th>{{ __('tag.title') }}</th><td>{{ $tag->title }}</td>
+							<th style="width:180px;">{{ __('tag.title') }}</th><td>{{ $tag->title }}</td>
 						</tr>
 						<tr>
 							<th>{{ __('tag.seotitle') }}</th><td>{{ $tag->seotitle }}</td>
