@@ -50,7 +50,7 @@
 				<li class="nav-item"><a href="{{ url('/dashboard/comments/table') }}" class="nav-link"><i data-feather="message-square"></i> <span>{{ __('general.comments') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="file-text"></i> <span>{{ __('general.pages') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.appearance') }}</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="aperture"></i> <span>{{ __('general.themes') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/themes/table') }}" class="nav-link"><i data-feather="aperture"></i> <span>{{ __('general.themes') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="list"></i> <span>{{ __('general.menu_manager') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/settings') }}" class="nav-link"><i data-feather="settings"></i> <span>{{ __('general.settings') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.component') }}</li>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('comment.datatable_title'))
+@section('title', __('theme.datatable_title'))
 
 @section('content')
 	<div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-20">
@@ -7,29 +7,29 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-style1 mg-b-10">
 					<li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">{{ __('general.dashboard') }}</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/posts/table') }}">{{ __('general.content') }}</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/dashboard/comments/table') }}">{{ __('general.comments') }}</a></li>
-					<li class="breadcrumb-item active" aria-current="page">{{ __('comment.datatable_list') }}</li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/themes/table') }}">{{ __('general.appearance') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/dashboard/themes/table') }}">{{ __('general.themes') }}</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ __('theme.datatable_list') }}</li>
 				</ol>
 			</nav>
-			<h4 class="mg-b-0 tx-spacing--1">{{ __('comment.datatable_list') }}</h4>
+			<h4 class="mg-b-0 tx-spacing--1">{{ __('theme.datatable_list') }}</h4>
 		</div>
 		
-		<!-- <div><a href="{{ url('dashboard/comments/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> {{ __('general.add') }}</a></div> !-->
+		<div><a href="{{ url('dashboard/themes/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> {{ __('general.add') }}</a></div>
 	</div>
 	
 	<div class="card">
 		<div class="card-body">
-			{!! Form::open(['url' => 'dashboard/comments/deleteall', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+			{!! Form::open(['url' => 'dashboard/themes/deleteall', 'method' => 'post', 'class' => 'form-horizontal']) !!}
 				<input type="hidden" name="totaldata" id="totaldata" value="0" />
-				<table class="table table-striped" id="comments-table">
+				<table class="table table-striped" id="themes-table">
 					<thead>
 						<tr>
 							<th style="text-align:center;" width="15"></th>
 							<th style="text-align:center;" width="25">{{ __('general.id') }}</th>
-							<th>{{ __('general.comments') }}</th>
-							<th>{{ __('comment.datetime') }}</th>
-							<th>{{ __('comment.active') }}</th>
+							<th>{{ __('theme.title') }}</th>
+							<th>{{ __('theme.author') }}</th>
+							<th>{{ __('theme.active') }}</th>
 							<th style="text-align:center;" width="140">{{ __('general.actions') }}</th>
 							<th></th>
 						</tr>
@@ -56,7 +56,7 @@
 	$(function() {
 		'use strict'
 		
-		var table = $('#comments-table').DataTable({
+		var table = $('#themes-table').DataTable({
 			processing: true,
 			serverSide: true,
 			stateSave: true,
@@ -66,7 +66,7 @@
 					target: -1
 				}
 			},
-			ajax: '{{ url("dashboard/comments/data") }}',
+			ajax: '{{ url("dashboard/themes/data") }}',
 			autoWidth: false,
 			order: [[1, 'desc']],
 			columnDefs: [{
@@ -79,10 +79,10 @@
 			}],
 			columns: [
 				{ data: 'check', name: 'check', orderable: false, searchable: false },
-				{ data: 'id', name: 'comments.id' },
-				{ data: 'name', name: 'comments.name' },
-				{ data: 'created_at', name: 'comments.created_at' },
-				{ data: 'active', name: 'comments.active' },
+				{ data: 'id', name: 'themes.id' },
+				{ data: 'title', name: 'themes.title' },
+				{ data: 'author', name: 'themes.author' },
+				{ data: 'active', name: 'themes.active' },
 				{ data: 'action', name: 'action', orderable: false, searchable: false },
 				{ data: 'control', name: 'control', orderable: false, searchable: false },
 			],
