@@ -58,4 +58,10 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/tags/data','Backend\TagsController@anyData');
 	Route::post('dashboard/tags/deleteall', 'Backend\TagsController@deleteAll');
 	Route::resource('dashboard/tags', 'Backend\TagsController');
+	
+	Route::get('dashboard/comments/index','Backend\CommentController@index');
+	Route::get('dashboard/comments/table','Backend\CommentController@getIndex');
+	Route::get('dashboard/comments/data','Backend\CommentController@anyData');
+	Route::post('dashboard/comments/deleteall', 'Backend\CommentController@deleteAll');
+	Route::resource('dashboard/comments', 'Backend\CommentController');
 });

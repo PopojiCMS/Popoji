@@ -47,7 +47,7 @@
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="book-open"></i> <span>{{ __('general.posts') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/categories/table') }}" class="nav-link"><i data-feather="folder-plus"></i> <span>{{ __('general.categories') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/tags/table') }}" class="nav-link"><i data-feather="bookmark"></i> <span>{{ __('general.tags') }}</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="message-square"></i> <span>{{ __('general.comments') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/comments/table') }}" class="nav-link"><i data-feather="message-square"></i> <span>{{ __('general.comments') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="file-text"></i> <span>{{ __('general.pages') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.appearance') }}</li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="aperture"></i> <span>{{ __('general.themes') }}</span></a></li>

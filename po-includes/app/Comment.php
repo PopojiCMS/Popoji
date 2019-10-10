@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Category extends Model
+class Comment extends Model
 {
 	use LogsActivity;
 	
@@ -21,7 +21,7 @@ class Category extends Model
      *
      * @var string
      */
-    protected $table = 'categories';
+    protected $table = 'comments';
 
     /**
      * The database primary key value.
@@ -36,7 +36,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-		'parent', 'title', 'seotitle', 'picture', 'active', 'created_by', 'updated_by'
+		'parent', 'post_id', 'name', 'email', 'content', 'active', 'status', 'created_by', 'updated_by'
 	];
 	
 	public function createdBy()
@@ -50,15 +50,16 @@ class Category extends Model
 	}
 	
 	public function mainParent() {
-		return $this->hasOne('App\Category', 'id', 'parent');
+		return $this->hasOne('App\Comment', 'id', 'parent');
 	}
-
+	
 	public function children() {
-		return $this->hasMany('App\Category', 'parent', 'id');
+		return $this->hasMany('App\Comment', 'parent', 'id');
 	}
-
-	public static function tree() {
-		return static::with(implode('.', array_fill(0, 100, 'children')))->get();
+	
+	public function post()
+	{
+		return $this->belongsTo('App\Post', 'updated_by');
 	}
 	
 	protected static $logAttributes = ['*'];

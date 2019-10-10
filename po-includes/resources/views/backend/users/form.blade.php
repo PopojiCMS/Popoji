@@ -35,7 +35,7 @@
 </div>
 <div class="form-group">
 	{!! Form::label('bio', __('user.bio'), ['class' => 'control-label']) !!}
-	{!! Form::textarea('bio', null, ['class' => $errors->has('bio') ? 'form-control is-invalid ht-150' : 'form-control ht-150-i']) !!}
+	{!! Form::textarea('bio', null, ['class' => $errors->has('bio') ? 'form-control is-invalid ht-150-i' : 'form-control ht-150-i']) !!}
 	{!! $errors->first('bio', '<p class="help-block">:message</p>') !!}
 </div>
 @if (isset($user))
