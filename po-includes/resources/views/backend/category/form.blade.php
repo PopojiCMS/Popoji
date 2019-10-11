@@ -35,9 +35,9 @@
 <div class="form-group">
 	{!! Form::label('active', __('category.active').' *', ['class' => 'control-label']) !!}
 	<select class="select2 form-control" id="active" name="active">
-		<option value="{{ $category->active }}">{{ __('general.selected') }} {{ $category->active }}</option>
-		<option value="Y">Y</option>
-		<option value="N">N</option>
+		<option value="{{ $category->active }}">{{ __('general.selected') }} {{ $category->active == 'Y' ? __('category.active') : __('category.deactive') }}</option>
+		<option value="Y">{{ __('category.active') }}</option>
+		<option value="N">{{ __('category.deactive') }}</option>
 	</select>
 	{!! $errors->first('block', '<p class="help-block">:message</p>') !!}
 </div>

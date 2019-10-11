@@ -41,7 +41,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th>{{ __('category.active') }}</th><td>{{ $category->active }}</td>
+							<th>{{ __('category.active') }}</th><td>{{ $category->active == 'Y' ? __('category.active') : __('category.deactive') }}</td>
 						</tr>
 					</tbody>
 				</table>

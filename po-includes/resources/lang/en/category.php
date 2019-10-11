@@ -27,6 +27,7 @@ return [
 	'seotitle' => 'SEO Title',
 	'picture' => 'Picture',
 	'active' => 'Active',
+	'deactive' => 'Deactive',
 	'see_image' => 'See Image',
 	'no_parent' => 'No Parent',
 

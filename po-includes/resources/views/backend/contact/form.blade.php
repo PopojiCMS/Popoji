@@ -16,7 +16,7 @@
 	</div>
 </div>
 <div class="form-group">
-	{!! Form::label('message', __('comment.message').' *', ['class' => 'control-label']) !!}
+	{!! Form::label('message', __('contact.message').' *', ['class' => 'control-label']) !!}
 	{!! Form::textarea('message', null, ['class' => $errors->has('message') ? 'form-control is-invalid ht-150-i' : 'form-control ht-150-i', 'required' => 'required']) !!}
 	{!! $errors->first('message', '<p class="help-block">:message</p>') !!}
 </div>

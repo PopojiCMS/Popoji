@@ -77,6 +77,19 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('dashboard/components/deleteall', 'Backend\ComponentController@deleteAll');
 	Route::resource('dashboard/components', 'Backend\ComponentController');
 	
+	Route::get('dashboard/gallerys/index','Backend\GalleryController@index');
+	Route::get('dashboard/gallerys/table','Backend\GalleryController@getIndex');
+	Route::get('dashboard/gallerys/data','Backend\GalleryController@anyData');
+	Route::post('dashboard/gallerys/deleteall', 'Backend\GalleryController@deleteAll');
+	Route::resource('dashboard/gallerys', 'Backend\GalleryController');
+	
+	Route::get('dashboard/albums/index','Backend\AlbumController@index');
+	Route::get('dashboard/albums/table','Backend\AlbumController@getIndex');
+	Route::get('dashboard/albums/data','Backend\AlbumController@anyData');
+	Route::get('dashboard/albums/get-album','Backend\AlbumController@getAlbum');
+	Route::post('dashboard/albums/deleteall', 'Backend\AlbumController@deleteAll');
+	Route::resource('dashboard/albums', 'Backend\AlbumController');
+	
 	Route::get('dashboard/contacts/index','Backend\ContactController@index');
 	Route::get('dashboard/contacts/table','Backend\ContactController@getIndex');
 	Route::get('dashboard/contacts/data','Backend\ContactController@anyData');

@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-use App\Comment;
+use App\Album;
 
 use Yajra\Datatables\Datatables;
 use Vinkla\Hashids\Facades\Hashids;
 
-class CommentController extends Controller
+class AlbumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +21,8 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-		if(Auth::user()->can('read-comments')) {
-			return view('backend.comment.datatable');
+		if(Auth::user()->can('read-gallerys')) {
+			return view('backend.album.datatable');
 		} else {
 			return redirect('forbidden');
 		}
@@ -34,8 +35,8 @@ class CommentController extends Controller
 	 */
     public function getIndex()
 	{
-		if(Auth::user()->can('read-comments')) {
-			return view('backend.comment.datatable');
+		if(Auth::user()->can('read-gallerys')) {
+			return view('backend.album.datatable');
 		} else {
 			return redirect('forbidden');
 		}
@@ -48,34 +49,31 @@ class CommentController extends Controller
 	 */
 	public function anyData()
 	{
-		$comments = Comment::leftJoin('users', 'users.id', '=', 'comments.created_by')
-			->select('comments.*', 'users.id as uid', 'users.name as uname');
-		return Datatables::of($comments)
-			->addColumn('check', function ($comment) {
+		$albums = Album::leftJoin('users', 'users.id', '=', 'albums.created_by')
+			->select('albums.*', 'users.id as uid', 'users.name as uname');
+		return Datatables::of($albums)
+			->addColumn('check', function ($album) {
 				$check = '<div style="text-align:center;">
 					<input type="checkbox" id="titleCheckdel" />
-					<input type="hidden" class="deldata" name="id[]" value="'.Hashids::encode($comment->id).'" disabled />
+					<input type="hidden" class="deldata" name="id[]" value="'.Hashids::encode($album->id).'" disabled />
 				</div>';
 				return $check;
 			})
-			->addColumn('name', function ($comment) {
-				return $comment->name.'<br />'.$comment->email.'<br />'.__('comment.post').' : <a href="'.url('/detailpost/'.$comment->post->seotitle).'" target="_blank">'.url('/comment/'.$comment->post->title).'</a>';
+			->addColumn('title', function ($album) {
+				return $album->title.'<br /><a href="'.url('/album/'.$album->seotitle).'" target="_blank">'.url('/album/'.$album->seotitle).'</a>';
 			})
-			->addColumn('active', function ($comment) {
-				return $comment->active == 'Y' ? __('comment.active') : __('comment.deactive');
+			->addColumn('active', function ($album) {
+				return $album->active == 'Y' ? __('album.active') : __('album.deactive');
 			})
-			->addColumn('created_at', function ($comment) {
-				return date('d M y H:i', strtotime($comment->created_at));
-			})
-            ->addColumn('action', function ($comment) {
+            ->addColumn('action', function ($album) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/comments/'.Hashids::encode($comment->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
-				$btn .= '<a href="'.url('dashboard/comments/'.Hashids::encode($comment->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
-				$btn .= '<a href="'.url('dashboard/comments/'.Hashids::encode($comment->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
+				$btn .= '<a href="'.url('dashboard/albums/'.Hashids::encode($album->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/albums/'.Hashids::encode($album->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
+				$btn .= '<a href="'.url('dashboard/albums/'.Hashids::encode($album->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
 				return $btn;
             })
-			->addColumn('control', function ($comment) {
+			->addColumn('control', function ($album) {
 				$check = '<div style="text-align:center;"><a href="javascript:void(0);" class="btn btn-secondary btn-xs btn-icon" data-placement="left"><i class="fa fa-plus"></i></a></div>';
 				return $check;
 			})
@@ -90,8 +88,8 @@ class CommentController extends Controller
      */
     public function create()
     {
-		if(Auth::user()->can('create-comments')) {
-			return view('backend.comment.create');
+		if(Auth::user()->can('create-gallerys')) {
+			return view('backend.album.create');
 		} else {
 			return redirect('forbidden');
 		}
@@ -106,13 +104,10 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-		if(Auth::user()->can('create-comments')) {
+		if(Auth::user()->can('create-gallerys')) {
 			$this->validate($request,[
-				'parent' => 'required',
-				'post_id' => 'required',
-				'name' => 'required',
-				'email' => 'required',
-				'content' => 'required'
+				'title' => 'required',
+				'seotitle' => 'required|string|unique:albums'
 			]);
 
 			$request->request->add([
@@ -121,9 +116,9 @@ class CommentController extends Controller
 			]);
 			$requestData = $request->all();
 
-			Comment::create($requestData);
+			Album::create($requestData);
 			
-			return redirect('dashboard/comments')->with('flash_message', __('comment.store_notif'));
+			return redirect('dashboard/albums')->with('flash_message', __('album.store_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -138,11 +133,11 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-		if(Auth::user()->can('read-comments')) {
+		if(Auth::user()->can('read-gallerys')) {
 			$ids = Hashids::decode($id);
-			$comment = Comment::findOrFail($ids[0]);
+			$album = Album::findOrFail($ids[0]);
 
-			return view('backend.comment.show', compact('comment'));
+			return view('backend.album.show', compact('album'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -157,11 +152,11 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-		if(Auth::user()->can('update-comments')) {
+		if(Auth::user()->can('update-gallerys')) {
 			$ids = Hashids::decode($id);
-			$comment = Comment::findOrFail($ids[0]);
+			$album = Album::findOrFail($ids[0]);
 
-			return view('backend.comment.edit'. compact('comment'));
+			return view('backend.album.edit', compact('album'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -177,24 +172,22 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-		if(Auth::user()->can('update-comments')) {
+		if(Auth::user()->can('update-gallerys')) {
 			$ids = Hashids::decode($id);
 			$this->validate($request,[
-				'parent' => 'required',
-				'post_id' => 'required',
-				'name' => 'required',
-				'email' => 'required',
-				'content' => 'required'
+				'title' => 'required',
+				'seotitle' => 'required|string|unique:albums,seotitle,' . $ids[0],
+				'active' => 'required'
 			]);
 			$request->request->add([
 				'updated_by' => Auth::User()->id
 			]);
 			$requestData = $request->all();
 
-			$comment = Comment::findOrFail($ids[0]);
-			$comment->update($requestData);
+			$album = Album::findOrFail($ids[0]);
+			$album->update($requestData);
 
-			return redirect('dashboard/comments')->with('flash_message', __('comment.update_notif'));
+			return redirect('dashboard/albums')->with('flash_message', __('album.update_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -209,11 +202,11 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-		if(Auth::user()->can('delete-comments')) {
+		if(Auth::user()->can('delete-gallerys')) {
 			$ids = Hashids::decode($id);
-			Comment::destroy($ids[0]);
+			Album::destroy($ids[0]);
 
-			return redirect('dashboard/comments')->with('flash_message', __('comment.destroy_notif'));
+			return redirect('dashboard/albums')->with('flash_message', __('album.destroy_notif'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -228,19 +221,42 @@ class CommentController extends Controller
      */
     public function deleteAll(Request $request)
     {
-		if(Auth::user()->can('delete-comments')) {
+		if(Auth::user()->can('delete-gallerys')) {
 			if ($request->has('id')) {
 				$ids = $request->id;
 				foreach($ids as $id){
 					$idd = Hashids::decode($id);
-					Comment::destroy($idd[0]);
+					Album::destroy($idd[0]);
 				}
-				return redirect('dashboard/comments')->with('flash_message', __('comment.destroy_notif'));
+				return redirect('dashboard/albums')->with('flash_message', __('album.destroy_notif'));
 			} else {
-				return redirect('dashboard/comments')->with('flash_message', __('comment.destroy_error_notif'));
+				return redirect('dashboard/albums')->with('flash_message', __('album.destroy_error_notif'));
 			}
 		} else {
 			return redirect('forbidden');
 		}
     }
+	
+	public function getAlbum(Request $request)
+	{
+		if(Auth::user()->can('read-gallerys')) {
+			$term = trim($request->q);
+
+			if (empty($term)) {
+				$albums = Album::select('id', 'title')->where('active', '=', 'Y')->limit(10)->get();
+			} else {
+				$albums = Album::select('id', 'title')->where([['title', 'LIKE', '%'.$term.'%'],['active', '=', 'Y']])->get();
+			}
+
+			$falbums = [];
+
+			foreach ($albums as $album) {
+				$falbums[] = ['id' => $album->id, 'text' => $album->title];
+			}
+
+			return \Response::json($falbums);
+		} else {
+			return redirect('forbidden');
+		}
+	}
 }

@@ -29,6 +29,7 @@ return [
 	'email' => 'Email',
 	'content' => 'Content',
 	'active' => 'Active',
+	'deactive' => 'Deactive',
 	'status' => 'Status',
 	'publish' => 'Publish',
 	'unpublish' => 'Unpublish',

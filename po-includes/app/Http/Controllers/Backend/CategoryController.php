@@ -65,6 +65,9 @@ class CategoryController extends Controller
 			->addColumn('title', function ($category) {
 				return $category->title.'<br /><a href="'.url('/category/'.$category->seotitle).'" target="_blank">'.url('/category/'.$category->seotitle).'</a>';
 			})
+			->addColumn('active', function ($category) {
+				return $category->active == 'Y' ? __('category.active') : __('category.deactive');
+			})
             ->addColumn('action', function ($category) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
 				$btn .= '<a href="'.url('dashboard/categories/'.Hashids::encode($category->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
