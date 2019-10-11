@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
 			$table->string('telp')->nullable();
 			$table->text('bio')->nullable();
-			$table->string('block')->default('Y');
+			$table->enum('block', ['Y', 'N'])->default('Y');
 			$table->string('picture')->nullable();
             $table->rememberToken();
 			$table->integer('created_by')->default('1');

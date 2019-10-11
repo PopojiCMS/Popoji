@@ -70,4 +70,16 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/themes/data','Backend\ThemeController@anyData');
 	Route::post('dashboard/themes/deleteall', 'Backend\ThemeController@deleteAll');
 	Route::resource('dashboard/themes', 'Backend\ThemeController');
+	
+	Route::get('dashboard/components/index','Backend\ComponentController@index');
+	Route::get('dashboard/components/table','Backend\ComponentController@getIndex');
+	Route::get('dashboard/components/data','Backend\ComponentController@anyData');
+	Route::post('dashboard/components/deleteall', 'Backend\ComponentController@deleteAll');
+	Route::resource('dashboard/components', 'Backend\ComponentController');
+	
+	Route::get('dashboard/contacts/index','Backend\ContactController@index');
+	Route::get('dashboard/contacts/table','Backend\ContactController@getIndex');
+	Route::get('dashboard/contacts/data','Backend\ContactController@anyData');
+	Route::post('dashboard/contacts/deleteall', 'Backend\ContactController@deleteAll');
+	Route::resource('dashboard/contacts', 'Backend\ContactController');
 });

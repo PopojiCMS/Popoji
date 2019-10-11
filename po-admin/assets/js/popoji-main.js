@@ -52,20 +52,15 @@ $(function() {
 	var activeUrl = window.location.href;
 	var activePage = activeUrl.split('/');
 	
-	$('.menu-w ul.main-menu li a').each(function(){
+	$('.aside-body .nav-aside li a').each(function(){
 		var currentPage = $(this).attr('href');
 		var currentActivePage = currentPage.split('/');
 		if (activePage[activePage.length-3] == currentActivePage[currentActivePage.length-3]) {
 			if (currentActivePage[currentActivePage.length-2] == 'undefined') {
-				$(this).parent().addClass('selected');
+				$(this).parent().addClass('active').addClass('show');
 			} else {
 				if (activePage[activePage.length-2] + '-' + activePage[activePage.length-1] == currentActivePage[currentActivePage.length-2] + '-' + currentActivePage[currentActivePage.length-1]) {
-					$(this).parent().addClass('selected');
-					$(this).parent().parent().parent().parent().parent().addClass('selected');
-				}
-				
-				if (activePage[activePage.length-2] == currentActivePage[currentActivePage.length-2]) {
-					$(this).parent().parent().parent().parent().parent().addClass('selected');
+					$(this).parent().addClass('active').addClass('show');
 				}
 			}
 		}

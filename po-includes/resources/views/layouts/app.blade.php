@@ -44,18 +44,25 @@
 				<li class="nav-label">{{ __('general.dashboard') }}</li>
 				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="tv"></i> <span>{{ __('general.dashboard') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.content') }}</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="book-open"></i> <span>{{ __('general.posts') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/post/table') }}" class="nav-link"><i data-feather="book-open"></i> <span>{{ __('general.posts') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/categories/table') }}" class="nav-link"><i data-feather="folder-plus"></i> <span>{{ __('general.categories') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/tags/table') }}" class="nav-link"><i data-feather="bookmark"></i> <span>{{ __('general.tags') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/comments/table') }}" class="nav-link"><i data-feather="message-square"></i> <span>{{ __('general.comments') }}</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="file-text"></i> <span>{{ __('general.pages') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/pages/table') }}" class="nav-link"><i data-feather="file-text"></i> <span>{{ __('general.pages') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.appearance') }}</li>
 				<li class="nav-item"><a href="{{ url('/dashboard/themes/table') }}" class="nav-link"><i data-feather="aperture"></i> <span>{{ __('general.themes') }}</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="list"></i> <span>{{ __('general.menu_manager') }}</span></a></li>
+				<li class="nav-item"><a href="{{ url('/dashboard/menu-manager') }}" class="nav-link"><i data-feather="list"></i> <span>{{ __('general.menu_manager') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/settings') }}" class="nav-link"><i data-feather="settings"></i> <span>{{ __('general.settings') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.component') }}</li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="package"></i> <span>{{ __('general.components') }}</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link"><i data-feather="command"></i> <span>{{ __('general.clark') }}</span></a></li>
+				<li class="nav-item with-sub">
+					<a href="{{ url('/dashboard/components/table') }}" class="nav-link"><i data-feather="package"></i> <span>{{ __('general.components') }}</span></a>
+					<ul>
+						<li><a href="{{ url('/dashboard/components/table') }}">{{ __('general.components') }}</a></li>
+						<li><a href="{{ url('/dashboard/gallerys/table') }}">{{ __('general.gallerys') }}</a></li>
+						<li><a href="{{ url('/dashboard/contacts/table') }}">{{ __('general.contacts') }}</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a href="{{ url('/dashboard/clark') }}" class="nav-link"><i data-feather="command"></i> <span>{{ __('general.clark') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.user') }}</li>
 				<li class="nav-item"><a href="{{ url('/dashboard/users/table') }}" class="nav-link"><i data-feather="users"></i> <span>{{ __('general.users') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/roles/table') }}" class="nav-link"><i data-feather="life-buoy"></i> <span>{{ __('general.roles') }}</span></a></li>

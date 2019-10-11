@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
 			$table->string('title')->nullable();
 			$table->string('seotitle')->nullable();
 			$table->string('picture')->nullable();
-			$table->string('active')->default('Y');
+			$table->enum('active', ['Y', 'N'])->default('Y');
 			$table->integer('created_by')->default('1');
 			$table->integer('updated_by')->default('1');
             $table->timestamps();

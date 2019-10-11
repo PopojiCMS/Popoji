@@ -18,7 +18,7 @@ class CreateThemesTable extends Migration
 			$table->string('title')->nullable();
 			$table->string('author')->nullable();
 			$table->string('folder')->nullable();
-			$table->string('active')->default('N');
+			$table->enum('active', ['Y', 'N'])->default('N');
 			$table->integer('created_by')->default('1');
 			$table->integer('updated_by')->default('1');
             $table->timestamps();

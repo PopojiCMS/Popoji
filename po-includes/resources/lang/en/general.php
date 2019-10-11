@@ -26,6 +26,8 @@ return [
 	'settings' => 'Settings',
 	'component' => 'Component',
 	'components' => 'Components',
+	'gallerys' => 'Gallery',
+	'contacts' => 'Contacts',
 	'clark' => 'Clark',
 	'user' => 'User',
 	'users' => 'Users',

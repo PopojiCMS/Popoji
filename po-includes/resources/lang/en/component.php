@@ -13,6 +13,22 @@ return [
     |
     */
 
-    'example' => 'Example text.',
+    'datatable_title' => 'Components',
+	'datatable_list' => 'List Components',
+	'create_title' => 'Add Components',
+	'edit_title' => 'Edit Components',
+	'show_title' => 'View Components',
+	'store_notif' => 'Component added!',
+    'update_notif' => 'Component updated!',
+	'destroy_notif' => 'Component deleted!',
+	'destroy_error_notif' => 'Component error deleted!',
+	'title' => 'Title',
+	'author' => 'Author',
+	'folder' => 'Folder',
+	'type' => 'Type',
+	'type_component' => 'Component',
+	'type_widget' => 'Widget',
+	'active' => 'Active',
+	'deactive' => 'Deactive',
 
 ];
