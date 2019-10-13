@@ -65,6 +65,12 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('dashboard/comments/deleteall', 'Backend\CommentController@deleteAll');
 	Route::resource('dashboard/comments', 'Backend\CommentController');
 	
+	Route::get('dashboard/pages/index','Backend\PagesController@index');
+	Route::get('dashboard/pages/table','Backend\PagesController@getIndex');
+	Route::get('dashboard/pages/data','Backend\PagesController@anyData');
+	Route::post('dashboard/pages/deleteall', 'Backend\PagesController@deleteAll');
+	Route::resource('dashboard/pages', 'Backend\PagesController');
+	
 	Route::get('dashboard/themes/index','Backend\ThemeController@index');
 	Route::get('dashboard/themes/table','Backend\ThemeController@getIndex');
 	Route::get('dashboard/themes/data','Backend\ThemeController@anyData');

@@ -60,5 +60,6 @@ return [
 	'check_all' => 'Check All',
 	'delete_selected' => 'Delete Selected',
 	'selected' => 'Selected',
+	'filemanager' => 'File Manager',
 
 ];
