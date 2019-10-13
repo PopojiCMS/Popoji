@@ -19,7 +19,7 @@
 <div class="form-group">
 	<div class="form-group col-md-6">
 		{!! Form::label('active', __('comment.active').' *', ['class' => 'control-label']) !!}
-		<select class="select2 form-control" id="active" name="active">
+		<select class="select-style form-control" id="active" name="active">
 			<option value="{{ $comment->active }}">{{ __('general.selected') }} {{ $comment->active == 'Y' ? __('comment.publish') : __('comment.unpublish') }}</option>
 			<option value="Y">{{ __('comment.publish') }}</option>
 			<option value="N">{{ __('comment.unpublish') }}</option>
@@ -28,7 +28,7 @@
 	</div>
 	<div class="form-group col-md-6">
 		{!! Form::label('status', __('comment.status').' *', ['class' => 'control-label']) !!}
-		<select class="select2 form-control" id="status" name="status">
+		<select class="select-style form-control" id="status" name="status">
 			<option value="{{ $comment->status }}">{{ __('general.selected') }} {{ $comment->status == 'Y' ? __('comment.read') : __('comment.unread') }}</option>
 			<option value="Y">{{ __('comment.read') }}</option>
 			<option value="N">{{ __('comment.unread') }}</option>

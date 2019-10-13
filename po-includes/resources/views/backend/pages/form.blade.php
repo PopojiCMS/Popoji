@@ -16,9 +16,9 @@
 	{!! $errors->first('content', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group">
-	{!! Form::label('picture', __('pages.picture').' *', ['class' => 'control-label']) !!}
+	{!! Form::label('picture', __('pages.picture'), ['class' => 'control-label']) !!}
 	<div class="input-group">
-		{!! Form::text('picture', null, ['class' => $errors->has('picture') ? 'form-control is-invalid' : 'form-control', 'id' => 'input-filemanager', 'required' => 'required']) !!}
+		{!! Form::text('picture', null, ['class' => $errors->has('picture') ? 'form-control is-invalid' : 'form-control', 'id' => 'input-filemanager']) !!}
 		<span class="input-group-append">
 			<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=input-filemanager&relative_url=1&&akey=i7GLt0sqUVc0uWdlxT4t8TftzX5Ebi8gm8uqa6IGE6w') }}" id="filemanager" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
 		</span>
@@ -27,7 +27,7 @@
 @if($formMode == 'edit')
 <div class="form-group">
 	{!! Form::label('active', __('pages.active').' *', ['class' => 'control-label']) !!}
-	<select class="select2 form-control" id="active" name="active">
+	<select class="select-style form-control" id="active" name="active">
 		<option value="{{ $pages->active }}">{{ __('general.selected') }} {{ $pages->active == 'Y' ? __('pages.active') : __('pages.deactive') }}</option>
 		<option value="Y">{{ __('pages.active') }}</option>
 		<option value="N">{{ __('pages.deactive') }}</option>

@@ -34,7 +34,7 @@
 @if($formMode == 'edit')
 <div class="form-group">
 	{!! Form::label('active', __('category.active').' *', ['class' => 'control-label']) !!}
-	<select class="select2 form-control" id="active" name="active">
+	<select class="select-style form-control" id="active" name="active">
 		<option value="{{ $category->active }}">{{ __('general.selected') }} {{ $category->active == 'Y' ? __('category.active') : __('category.deactive') }}</option>
 		<option value="Y">{{ __('category.active') }}</option>
 		<option value="N">{{ __('category.deactive') }}</option>

@@ -23,7 +23,7 @@
 @if($formMode == 'edit')
 <div class="form-group">
 	{!! Form::label('status', __('contact.status').' *', ['class' => 'control-label']) !!}
-	<select class="select2 form-control" id="status" name="status">
+	<select class="select-style form-control" id="status" name="status">
 		<option value="{{ $contact->status }}">{{ __('general.selected') }} {{ $contact->status == 'Y' ? __('contact.read') : __('contact.unread') }}</option>
 		<option value="Y">{{ __('contact.read') }}</option>
 		<option value="N">{{ __('contact.unread') }}</option>

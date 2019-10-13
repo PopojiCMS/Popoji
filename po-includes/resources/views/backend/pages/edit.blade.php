@@ -41,3 +41,33 @@
 		{!! Form::close() !!}
 	</div>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('po-admin/lib/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+
+<script type="text/javascript">
+	tinymce.init({
+		selector: "#content",
+		height: 300,
+		plugins: [
+			"advlist autolink link image lists charmap print preview hr anchor pagebreak",
+			"searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+			"table contextmenu directionality emoticons paste textcolor",
+			"save code fullscreen autoresize codesample autosave responsivefilemanager"
+		],
+		menubar : false,
+		toolbar1: "undo redo restoredraft | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent table searchreplace",
+		toolbar2: "| fontsizeselect | styleselect | link unlink anchor | image media emoticons | forecolor backcolor | code codesample fullscreen ",
+		image_advtab: true,
+		fontsize_formats: "8px 10px 12px 14px 18px 24px 36px",
+		relative_urls: false,
+		remove_script_host: false,
+		external_filemanager_path: "{{ url('po-content/filemanager') }}/",
+		filemanager_title: "{{ __('general.filemanager') }}",
+		external_plugins: {
+			"filemanager" : "{{ asset('po-content/filemanager/plugin.min.js') }}"
+		},
+		filemanager_access_key: 'i7GLt0sqUVc0uWdlxT4t8TftzX5Ebi8gm8uqa6IGE6w',
+	});
+</script>
+@endpush

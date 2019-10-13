@@ -57,7 +57,7 @@
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			{!! Form::label('block', __('user.block').' *', ['class' => 'control-label']) !!}
-			<select class="select2 form-control" id="block" name="block">
+			<select class="select-style form-control" id="block" name="block">
 				@if (isset($user))
 					<option value="{{ $user->block }}">{{ __('general.selected') }} {{ $user->block == 'Y' ? __('user.block') : __('user.unblock') }}</option>
 				@endif
@@ -68,7 +68,7 @@
 		</div>
 		<div class="form-group col-md-6">
 			{!! Form::label('roles', __('user.role').' *', ['class' => 'control-label']) !!}
-			<select name="roles[]" class="select2 form-control roles" multiple required>
+			<select name="roles[]" class="select-style form-control roles" multiple required>
 				@foreach ($roles as $row)
 					@if (isset($user))
 						<option value="{{ $row->name }}" {{ $user->hasRole($row) ? 'selected':'' }}>{{ $row->name }}</option>

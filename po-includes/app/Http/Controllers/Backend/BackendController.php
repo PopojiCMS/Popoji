@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Tag;
 use App\Comment;
+use App\Pages;
 use App\Contact;
 use App\Component;
 use App\Theme;
@@ -24,17 +25,17 @@ class BackendController extends Controller
     public function index()
     {
 		$post = 0;
-		$pages = 0;
 		$category = Category::where('active', '=', 'Y')->count();
 		$tag = Tag::count();
 		$comment = Comment::where('active', '=', 'Y')->count();
 		$commentunread = Comment::where('status', '=', 'N')->count();
+		$pages = Pages::where('active', '=', 'Y')->count();
 		$contactunread = Contact::where('status', '=', 'N')->count();
 		$component = Component::where('active', '=', 'Y')->count();
 		$theme = Theme::where('active', '=', 'Y')->count();
 		$user = User::where('block', '=', 'N')->count();
 		
-		return view('backend.dashboard', compact('post', 'pages', 'category', 'tag', 'comment', 'commentunread', 'contactunread', 'component', 'theme', 'user'));
+		return view('backend.dashboard', compact('post', 'pages', 'category', 'tag', 'comment', 'commentunread', 'pages', 'contactunread', 'component', 'theme', 'user'));
     }
 	
 	/**

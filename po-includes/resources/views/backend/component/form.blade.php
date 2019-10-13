@@ -16,7 +16,7 @@
 	</div>
 	<div class="form-group col-md-4">
 		{!! Form::label('type', __('component.type').' *', ['class' => 'control-label']) !!}
-		<select class="select2 form-control" id="type" name="type">
+		<select class="select-style form-control" id="type" name="type">
 			@if($formMode == 'edit')
 				<option value="{{ $component->type }}">{{ __('general.selected') }} {{ $component->type == 'component' ? __('component.type_component') : __('component.type_widget') }}</option>
 			@endif
@@ -29,7 +29,7 @@
 @if($formMode == 'edit')
 <div class="form-group">
 	{!! Form::label('active', __('component.active').' *', ['class' => 'control-label']) !!}
-	<select class="select2 form-control" id="active" name="active">
+	<select class="select-style form-control" id="active" name="active">
 		<option value="{{ $component->active }}">{{ __('general.selected') }} {{ $component->active == 'Y' ? __('component.active') : __('component.deactive') }}</option>
 		<option value="Y">{{ __('component.active') }}</option>
 		<option value="N">{{ __('component.deactive') }}</option>
