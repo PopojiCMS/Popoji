@@ -41102,6 +41102,10 @@ table.dataTable tfoot th, table.dataTable tfoot td {
 	height: 150px !important;
 }
 
+.ht-300-i {
+	height: 300px !important;
+}
+
 @media (max-width: 480px) {
 	.nav-justified .nav-item {
 		flex-basis: 100%;
