@@ -42,6 +42,22 @@
 	</div>
 @endsection
 
+@section('modal')
+	<div class="alert-gallery" style="display:none;">
+		<div class="pos-absolute t-10 r-10">
+			<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity:1;">
+				<div class="toast-header">
+					<h6 class="tx-inverse tx-14 mg-b-0 mg-r-auto">{{ __('post.notification') }}</h6>
+					<button type="button" class="ml-2 mb-1 close tx-normal" data-dismiss="toast" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="toast-body bg-gray-100">{{ __('post.error_gallery') }}</div>
+			</div>
+		</div>
+	</div>
+@endsection
+
 @push('styles')
 <link href="{{ asset('po-admin/lib/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet">
 @endpush

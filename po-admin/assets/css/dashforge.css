@@ -41118,4 +41118,13 @@ table.dataTable tfoot th, table.dataTable tfoot td {
 	.nav-tabs .nav-item + .nav-item {
 		margin-left: 0px;
 	}
+	
+	.breadcrumb-style1 {
+		display: none;
+	}
+}
+
+
+table.dataTable.dtr-column > tbody > tr > td.control::before, table.dataTable.dtr-column > tbody > tr > th.control::before {
+	display: none;
 }

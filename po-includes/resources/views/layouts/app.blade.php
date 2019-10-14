@@ -148,6 +148,8 @@
 			</div>
 		</div>
 	</div>
+	
+	@yield('modal')
 
 	<script src="{{ asset('po-admin/lib/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

@@ -20,14 +20,17 @@
 	
 	<div class="card">
 		<div class="card-body">
-			<div class="col-md-10 offset-1">
+			<div class="col-md-10 offset-md-1">
 				<h2>{{ $post->title }}</h2>
 				
 				<ul class="list-inline">
-					<li class="list-inline-item">Category : {{ $post->category->title }}</li>
-					<li class="list-inline-item">Status : {{ $post->active == 'Y' ? __('post.active') : __('post.deactive') }}</li>
-					<li class="list-inline-item">Headline : {{ $post->headline == 'Y' ? __('general.yes') : __('general.no') }}</li>
-					<li class="list-inline-item">Comment : {{ $post->comment == 'Y' ? __('post.active') : __('post.deactive') }}</li>
+					<li class="list-inline-item">{{ __('post.category') }} : {{ $post->category->title }}</li>
+					<li class="list-inline-item">/</li>
+					<li class="list-inline-item">{{ $post->active == 'Y' ? __('post.active') : __('post.deactive') }}</li>
+					<li class="list-inline-item">/</li>
+					<li class="list-inline-item">{{ __('post.headline') }} : {{ $post->headline == 'Y' ? __('general.yes') : __('general.no') }}</li>
+					<li class="list-inline-item">/</li>
+					<li class="list-inline-item">{{ __('post.comment') }} : {{ $post->comment == 'Y' ? __('post.active') : __('post.deactive') }}</li>
 				</ul>
 				
 				@if($post->picture != '')
@@ -35,7 +38,7 @@
 				@endif
 				{!! $post->content !!}
 				
-				<p>Tags : {{ $post->tag }}</p>
+				<p>{{ __('general.tags') }} : {{ str_replace(',', ', ', $post->tag) }}</p>
 			</div>
 		</div>
 	</div>

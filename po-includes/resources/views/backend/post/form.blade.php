@@ -110,7 +110,6 @@
 		<div class="col-md-12 text-center">
 			<div class="divider-text">{{ __('post.add_picture_gallery') }}</div>
 		</div>
-		
 		<div class="col-md-5">
 			<div class="form-group">
 				<label for="picture-title">{{ __('post.title') }} *</label>
@@ -131,12 +130,6 @@
 		<div class="col-md-2">
 			<label>&nbsp;</label>
 			<a href="javascript:void(0);" class="btn btn-info btn-block btn-add-gallery"><i data-feather="plus" class="wd-10 mg-r-5"></i> {{ __('general.add') }}</a>
-		</div>
-		<div class="col-md-12 alert-gallery" style="display:none;">
-			<div class="alert alert-danger alert-dismissible alert-main" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<strong>Info: </strong> {{ __('post.error_gallery') }}
-			</div>
 		</div>
 	</div>
 @endif

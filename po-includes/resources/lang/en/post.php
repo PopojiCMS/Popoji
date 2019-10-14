@@ -39,6 +39,7 @@ return [
 	'picture_gallery' => 'Picture Gallery',
 	'add_picture_gallery' => 'Add Picture Gallery',
 	'seen' => 'Seen',
-	'error_gallery' => 'Error add picture gallery',
+	'error_gallery' => 'Error add picture gallery. Please check again!',
+	'notification' => 'Notification',
 
 ];
