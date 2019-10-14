@@ -13,6 +13,20 @@ ob_start('mb_output_handler');
 date_default_timezone_set('Asia/Jakarta');
 setlocale(LC_CTYPE, 'en_US'); //correct transliteration
 
+function findEnv($key) {
+	$file_lines = file('../../po-includes/.env');
+	foreach($file_lines as $line) {
+		$entry_array = explode("=", $line);
+		if(count($entry_array) > 0) {
+			if ($entry_array[0] == $key) {
+				return trim($entry_array[1]);
+			}
+		}
+	}
+	
+	return null;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Optional security
@@ -187,7 +201,7 @@ $config = array(
     |
     */
 
-    'access_keys' => array('i7GLt0sqUVc0uWdlxT4t8TftzX5Ebi8gm8uqa6IGE6w'),
+    'access_keys' => array(findEnv('FM_KEY')),
 
     //--------------------------------------------------------------------------------------------------------
     // YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS

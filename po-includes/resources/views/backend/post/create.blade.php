@@ -69,7 +69,7 @@
 		external_plugins: {
 			"filemanager" : "{{ asset('po-content/filemanager/plugin.min.js') }}"
 		},
-		filemanager_access_key: 'i7GLt0sqUVc0uWdlxT4t8TftzX5Ebi8gm8uqa6IGE6w',
+		filemanager_access_key: '{{ env("FM_KEY") }}',
 	});
 	
 	$(function() {
