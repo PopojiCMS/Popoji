@@ -13,6 +13,32 @@ return [
     |
     */
 
-    'example' => 'Example text.',
+    'datatable_title' => 'Posts',
+	'datatable_list' => 'List Posts',
+	'create_title' => 'Add Posts',
+	'edit_title' => 'Edit Posts',
+	'show_title' => 'View Posts',
+	'store_notif' => 'Post added!',
+    'update_notif' => 'Post updated!',
+	'destroy_notif' => 'Post deleted!',
+	'destroy_error_notif' => 'Post error deleted!',
+	'category' => 'Category',
+	'title' => 'Title',
+	'seotitle' => 'SEO Title',
+	'content' => 'Content',
+	'picture' => 'Picture',
+	'picture_description' => 'Picture Description',
+	'tag' => 'Tag',
+	'active' => 'Active',
+	'deactive' => 'Deactive',
+	'draft' => 'Draft',
+	'headline' => 'Headline',
+	'comment' => 'Comment',
+	'hits' => 'Hits',
+	'see_image' => 'See Image',
+	'picture_gallery' => 'Picture Gallery',
+	'add_picture_gallery' => 'Add Picture Gallery',
+	'seen' => 'Seen',
+	'error_gallery' => 'Error add picture gallery',
 
 ];

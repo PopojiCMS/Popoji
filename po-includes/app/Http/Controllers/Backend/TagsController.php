@@ -233,4 +233,27 @@ class TagsController extends Controller
 			return redirect('forbidden');
 		}
     }
+	
+	public function getTag(Request $request)
+    {
+		if(Auth::user()->can('read-tags')) {
+			$tags = Tag::select('id', 'title', 'seotitle')->where('title', 'LIKE', '%'.$request->term.'%')->get();
+
+			$result = array(
+				'code' => '2000',
+				'message' => 'Success',
+				'data' => $tags
+			);
+			
+			return \Response::json($result);
+		} else {
+			$result = array(
+				'code' => '4004',
+				'message' => 'Error',
+				'data' => []
+			);
+			
+			return \Response::json($result);
+		}
+    }
 }

@@ -47,6 +47,14 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('dashboard/settings/deleteall', 'Backend\SettingsController@deleteAll');
 	Route::resource('dashboard/settings', 'Backend\SettingsController');
 	
+	Route::get('dashboard/posts/index','Backend\PostController@index');
+	Route::get('dashboard/posts/table','Backend\PostController@getIndex');
+	Route::get('dashboard/posts/data','Backend\PostController@anyData');
+	Route::post('dashboard/posts/deleteall', 'Backend\PostController@deleteAll');
+	Route::post('dashboard/posts/create-gallery', 'Backend\\PostController@createGallery');
+	Route::post('dashboard/posts/delete-gallery', 'Backend\\PostController@deleteGallery');
+	Route::resource('dashboard/posts', 'Backend\PostController');
+	
 	Route::get('dashboard/categories/index','Backend\CategoryController@index');
 	Route::get('dashboard/categories/table','Backend\CategoryController@getIndex');
 	Route::get('dashboard/categories/data','Backend\CategoryController@anyData');
@@ -56,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/tags/index','Backend\TagsController@index');
 	Route::get('dashboard/tags/table','Backend\TagsController@getIndex');
 	Route::get('dashboard/tags/data','Backend\TagsController@anyData');
+	Route::get('dashboard/tags/get-tag','Backend\TagsController@getTag');
 	Route::post('dashboard/tags/deleteall', 'Backend\TagsController@deleteAll');
 	Route::resource('dashboard/tags', 'Backend\TagsController');
 	

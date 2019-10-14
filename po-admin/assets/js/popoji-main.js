@@ -22,6 +22,14 @@ $(document).ready(function() {
 		'autoSize' : false
 	});
 	
+	$("#filemanager-multi").fancybox({
+		'width' : 900,
+		'height' : 500,
+		'type' : 'iframe',
+		'autoScale'	: false,
+		'autoSize' : false
+	});
+	
 	$(".btn-loading-overlay").on("click", function(e) {
 		$('#loading-overlay').appendTo('body').show();
 	});

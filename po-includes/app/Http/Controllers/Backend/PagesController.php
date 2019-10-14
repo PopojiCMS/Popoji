@@ -107,8 +107,7 @@ class PagesController extends Controller
 		if(Auth::user()->can('create-pages')) {
 			$this->validate($request,[
 				'title' => 'required',
-				'seotitle' => 'required|string|unique:pages',
-				'content' => 'required'
+				'seotitle' => 'required|string|unique:pages'
 			]);
 
 			$request->request->add([
@@ -178,7 +177,6 @@ class PagesController extends Controller
 			$this->validate($request,[
 				'title' => 'required',
 				'seotitle' => 'required|string|unique:pages,seotitle,' . $ids[0],
-				'content' => 'required',
 				'active' => 'required'
 			]);
 			$request->request->add([

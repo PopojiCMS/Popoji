@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+use App\Post;
 use App\Category;
 use App\Tag;
 use App\Comment;
@@ -24,7 +25,7 @@ class BackendController extends Controller
      */
     public function index()
     {
-		$post = 0;
+		$post = Post::where('active', '=', 'Y')->count();
 		$category = Category::where('active', '=', 'Y')->count();
 		$tag = Tag::count();
 		$comment = Comment::where('active', '=', 'Y')->count();

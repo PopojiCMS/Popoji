@@ -41098,6 +41098,10 @@ table.dataTable tfoot th, table.dataTable tfoot td {
 	border-top: 0px solid rgba(72, 94, 144, 0.16);
 }
 
+.ht-100-i {
+	height: 100px !important;
+}
+
 .ht-150-i {
 	height: 150px !important;
 }

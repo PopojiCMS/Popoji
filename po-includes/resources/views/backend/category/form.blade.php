@@ -1,7 +1,7 @@
 <div class="form-row">
 	<div class="form-group col-md-6">
 		{!! Form::label('parent', __('category.parent').' *', ['class' => 'control-label']) !!}
-		<select class="select2 form-control" id="parent" name="parent">
+		<select class="select-style form-control" id="parent" name="parent">
 			@if($formMode == 'edit')
 				@if($category->parent == 0)
 					<option value="0">{{ __('general.selected') }} {{ __('category.no_parent') }}</option>
