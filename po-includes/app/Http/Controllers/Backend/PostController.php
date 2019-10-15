@@ -191,8 +191,16 @@ class PostController extends Controller
 			$post = Post::findOrFail($ids[0]);
 			$post_gallerys = PostGallery::where('post_id', '=', $post->id)->get();
 			$categorys = Category::where('active', '=', 'Y')->get()->toArray();
-
-			return view('backend.post.edit', compact('post', 'post_gallerys' ,'categorys'));
+			
+			if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')) {
+				return view('backend.post.edit', compact('post', 'post_gallerys' ,'categorys'));
+			} else {
+				if ($post->created_by == Auth::user()->id) {
+					return view('backend.post.edit', compact('post', 'post_gallerys' ,'categorys'));
+				} else {
+					return redirect('forbidden');
+				}
+			}
 		} else {
 			return redirect('forbidden');
 		}
@@ -254,7 +262,17 @@ class PostController extends Controller
     {
 		if(Auth::user()->can('delete-posts')) {
 			$ids = Hashids::decode($id);
-			Post::destroy($ids[0]);
+			if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')) {
+				Post::destroy($ids[0]);
+			} else {
+				$post = Post::findOrFail($ids[0]);
+				
+				if ($post->created_by == Auth::user()->id) {
+					Post::destroy($ids[0]);
+				} else {
+					return redirect('forbidden');
+				}
+			}
 
 			return redirect('dashboard/posts')->with('flash_message', __('post.destroy_notif'));
 		} else {
@@ -276,7 +294,17 @@ class PostController extends Controller
 				$ids = $request->id;
 				foreach($ids as $id){
 					$idd = Hashids::decode($id);
-					Post::destroy($idd[0]);
+					if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')) {
+						Post::destroy($idd[0]);
+					} else {
+						$post = Post::findOrFail($idd[0]);
+						
+						if ($post->created_by == Auth::user()->id) {
+							Post::destroy($idd[0]);
+						} else {
+							return redirect('forbidden');
+						}
+					}
 				}
 				return redirect('dashboard/posts')->with('flash_message', __('post.destroy_notif'));
 			} else {
