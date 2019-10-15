@@ -71,6 +71,9 @@ class PostController extends Controller
 			->addColumn('active', function ($post) {
 				return $post->active == 'Y' ? __('post.active') : __('post.deactive');
 			})
+			->addColumn('headline', function ($post) {
+				return $post->headline == 'Y' ? __('general.yes') : __('general.no');
+			})
             ->addColumn('action', function ($post) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
 				$btn .= '<a href="'.url('dashboard/posts/'.Hashids::encode($post->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
