@@ -15,7 +15,10 @@
 			<h4 class="mg-b-0 tx-spacing--1">{{ __('setting.datatable_list') }}</h4>
 		</div>
 		
-		<div><a href="{{ url('dashboard/settings/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="grid" class="wd-10 mg-r-5"></i> {{ __('setting.table') }}</a></div>
+		<div>
+			<a href="{{ url('dashboard/settings/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="grid" class="wd-10 mg-r-5"></i> {{ __('setting.table') }}</a>
+			<a href="{{ url('dashboard/subscribes/table') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="tag" class="wd-10 mg-r-5"></i> {{ __('subscribe.datatable_list') }}</a>
+		</div>
 	</div>
 	
 	<ul class="nav nav-tabs nav-justified" id="settingTab" role="tablist">

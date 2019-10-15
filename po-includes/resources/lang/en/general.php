@@ -34,6 +34,7 @@ return [
 	'users' => 'Users',
 	'roles' => 'Roles',
 	'permissions' => 'Permissions',
+	'subscribes' => 'Subscribes',
 	'search' => 'Search',
 	'view_front_page' => 'View Front Page',
 	'edit_profile' => 'Edit Profile',
@@ -61,5 +62,7 @@ return [
 	'delete_selected' => 'Delete Selected',
 	'selected' => 'Selected',
 	'filemanager' => 'File Manager',
+	'notification' => 'Notification',
+	'message' => 'Message',
 
 ];

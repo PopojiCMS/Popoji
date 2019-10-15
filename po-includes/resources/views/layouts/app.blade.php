@@ -121,10 +121,19 @@
 		<div class="content-body">
 			<div class="container">
 				@if (Session::has('flash_message'))
-				<div class="alert alert-primary alert-dismissible alert-main" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Info: </strong> {{ Session::get('flash_message') }}
-				</div>
+					<div class="alert-main">
+						<div class="pos-absolute t-10 r-10">
+							<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity:1;">
+								<div class="toast-header">
+									<h6 class="tx-inverse tx-14 mg-b-0 mg-r-auto">{{ __('general.notification') }}</h6>
+									<button type="button" class="ml-2 mb-1 close tx-normal" data-dismiss="toast" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="toast-body bg-gray-100">{{ __('general.message') }} : {{ Session::get('flash_message') }}</div>
+							</div>
+						</div>
+					</div>
 				@endif
 				
 				@yield('content')

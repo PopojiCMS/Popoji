@@ -47,6 +47,12 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('dashboard/settings/deleteall', 'Backend\SettingsController@deleteAll');
 	Route::resource('dashboard/settings', 'Backend\SettingsController');
 	
+	Route::get('dashboard/subscribes/index','Backend\SubscribeController@getIndex');
+	Route::get('dashboard/subscribes/table','Backend\SubscribeController@getIndex');
+	Route::get('dashboard/subscribes/data','Backend\SubscribeController@anyData');
+	Route::post('dashboard/subscribes/deleteall', 'Backend\SubscribeController@deleteAll');
+	Route::resource('dashboard/subscribes', 'Backend\SubscribeController');
+	
 	Route::get('dashboard/posts/index','Backend\PostController@index');
 	Route::get('dashboard/posts/table','Backend\PostController@getIndex');
 	Route::get('dashboard/posts/data','Backend\PostController@anyData');
