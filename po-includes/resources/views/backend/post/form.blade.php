@@ -72,7 +72,11 @@
 	<div class="input-group">
 		{!! Form::text('picture', null, ['class' => $errors->has('picture') ? 'form-control is-invalid' : 'form-control', 'id' => 'input-filemanager']) !!}
 		<span class="input-group-append">
-			<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=input-filemanager&relative_url=1&&akey='.env('FM_KEY')) }}" id="filemanager" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
+			@if (Auth::user()->hasRole('member'))
+				<a href="{{ url('po-content/filemanager/dialog.php?type=1&fldr=users/user-'.Auth::user()->id.'&field_id=input-filemanager&relative_url=1&&akey='.env('FM_KEY')) }}" id="filemanager" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
+			@else
+				<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=input-filemanager&relative_url=1&&akey='.env('FM_KEY')) }}" id="filemanager" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
+			@endif
 		</span>
 	</div>
 </div>
@@ -122,7 +126,11 @@
 				<div class="input-group">
 					<input type="text" class="form-control" id="picture-url" />
 					<span class="input-group-append">
-						<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=picture-url&relative_url=1&&akey='.env('FM_KEY')) }}" id="filemanager-multi" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
+						@if (Auth::user()->hasRole('member'))
+							<a href="{{ url('po-content/filemanager/dialog.php?type=1&fldr=users/user-'.Auth::user()->id.'&field_id=input-filemanager&relative_url=1&&akey='.env('FM_KEY')) }}" id="filemanager-multi" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
+						@else
+							<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=input-filemanager&relative_url=1&&akey='.env('FM_KEY')) }}" id="filemanager-multi" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
+						@endif
 					</span>
 				</div>
 			</div>

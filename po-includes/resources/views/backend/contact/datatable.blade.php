@@ -15,7 +15,7 @@
 			<h4 class="mg-b-0 tx-spacing--1">{{ __('contact.datatable_list') }}</h4>
 		</div>
 		
-		<div><a href="{{ url('dashboard/contacts/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> {{ __('general.add') }}</a></div>
+		<!-- <div><a href="{{ url('dashboard/contacts/create') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="plus" class="wd-10 mg-r-5"></i> {{ __('general.add') }}</a></div> !-->
 	</div>
 	
 	<div class="card">

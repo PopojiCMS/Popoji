@@ -70,6 +70,9 @@
 			"filemanager" : "{{ asset('po-content/filemanager/plugin.min.js') }}"
 		},
 		filemanager_access_key: '{{ env("FM_KEY") }}',
+		@if (Auth::user()->hasRole('member'))
+			filemanager_subfolder: "users/user-{{ Auth::user()->id }}",
+		@endif
 	});
 	
 	$(function() {

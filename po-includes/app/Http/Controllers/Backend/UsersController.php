@@ -76,7 +76,11 @@ class UsersController extends Controller
 				$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
 				$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				if ($user->id != '1') {
-					$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
+					if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')) {
+						if ($user->id != Auth::user()->id) {
+							$btn .= '<a href="'.url('dashboard/users/'.Hashids::encode($user->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
+						}
+					}
 				}
 				$btn .= '</div></div>';
 				return $btn;
@@ -138,12 +142,12 @@ class UsersController extends Controller
 				
 				$user->assignRole($request->roles);
 				
-				if(!File::isDirectory(public_path('po-content/uploads/users/user-' . $user->id))){
-					File::makeDirectory(public_path('po-content/uploads/users/user-' . $user->id), 0777, true, true);
+				if(!File::isDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/users/user-' . $user->id)))){
+					File::makeDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/users/user-' . $user->id)), 0777, true, true);
 				}
 				
-				if(!File::isDirectory(public_path('po-content/uploads/medium/users/user-' . $user->id))){
-					File::makeDirectory(public_path('po-content/uploads/medium/users/user-' . $user->id), 0777, true, true);
+				if(!File::isDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id)))){
+					File::makeDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id)), 0777, true, true);
 				}
 				
 				return redirect('dashboard/users')->with('flash_message', __('user.store_notif'));
@@ -163,12 +167,12 @@ class UsersController extends Controller
 				
 				$user->assignRole($request->roles);
 				
-				if(!File::isDirectory(public_path('po-content/uploads/users/user-' . $user->id))){
-					File::makeDirectory(public_path('po-content/uploads/users/user-' . $user->id), 0777, true, true);
+				if(!File::isDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/users/user-' . $user->id)))){
+					File::makeDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/users/user-' . $user->id)), 0777, true, true);
 				}
 				
-				if(!File::isDirectory(public_path('po-content/uploads/medium/users/user-' . $user->id))){
-					File::makeDirectory(public_path('po-content/uploads/medium/users/user-' . $user->id), 0777, true, true);
+				if(!File::isDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id)))){
+					File::makeDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id)), 0777, true, true);
 				}
 				
 				return redirect('dashboard/users')->with('flash_message', __('user.store_notif'));
