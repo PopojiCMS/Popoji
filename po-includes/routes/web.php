@@ -86,6 +86,14 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('dashboard/themes/deleteall', 'Backend\ThemeController@deleteAll');
 	Route::resource('dashboard/themes', 'Backend\ThemeController');
 	
+	Route::get('dashboard/menu-manager/index','Backend\MenuController@index');
+	Route::get('dashboard/menu-manager/table','Backend\\MenuController@getIndex');
+	Route::get('dashboard/menu-manager/data','Backend\MenuController@anyData');
+	Route::get('dashboard/menu-manager/menusort','Backend\\MenuController@menusort');
+	Route::post('dashboard/menu-manager/menusort', 'Backend\\MenuController@menusort');
+	Route::post('dashboard/menu-manager/deleteall', 'Backend\MenuController@deleteAll');
+	Route::resource('dashboard/menu-manager', 'Backend\MenuController');
+	
 	Route::get('dashboard/components/index','Backend\ComponentController@index');
 	Route::get('dashboard/components/table','Backend\ComponentController@getIndex');
 	Route::get('dashboard/components/data','Backend\ComponentController@anyData');

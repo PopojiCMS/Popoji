@@ -41124,7 +41124,22 @@ table.dataTable tfoot th, table.dataTable tfoot td {
 	}
 }
 
-
 table.dataTable.dtr-column > tbody > tr > td.control::before, table.dataTable.dtr-column > tbody > tr > th.control::before {
 	display: none;
+}
+
+.dd3-content:hover {
+	color: #333;
+	background: #fafafa;
+	background: -webkit-linear-gradient(top, #fafafa 0%, #eee 100%);
+	background: -moz-linear-gradient(top, #fafafa 0%, #eee 100%);
+	background: linear-gradient(top, #fafafa 0%, #eee 100%);
+}
+
+.dd-item .btn-icon.btn-xs {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+	font-size: 10px;
 }

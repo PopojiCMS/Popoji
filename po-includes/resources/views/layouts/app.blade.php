@@ -18,6 +18,7 @@
     <link href="{{ asset('po-admin/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/select2/css/select2.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-admin/lib/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('po-admin/lib/nestable/jquery.nestable.css') }}" rel="stylesheet">
 	<link href="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
 	
 	@stack('styles')
@@ -161,6 +162,7 @@
     <script src="{{ asset('po-admin/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/select2/js/select2.min.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/sweetalert/sweetalert2.min.js') }}"></script>
+	<script src="{{ asset('po-admin/lib/nestable/jquery.nestable.js') }}"></script>
 	<script src="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.js') }}"></script>
 	<script src="{{ asset('po-admin/assets/js/dashforge.aside.js') }}"></script>
 	<script src="{{ asset('po-admin/lib/js-cookie/js.cookie.js') }}"></script>
