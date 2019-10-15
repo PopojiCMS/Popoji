@@ -41143,3 +41143,7 @@ table.dataTable.dtr-column > tbody > tr > td.control::before, table.dataTable.dt
 	padding-right: 8px;
 	font-size: 10px;
 }
+
+.popular-post {
+	height: 362px;
+}

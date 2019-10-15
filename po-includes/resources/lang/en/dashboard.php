@@ -30,5 +30,7 @@ return [
 	'total_components' => 'Total Components',
 	'total_themes' => 'Total Themes',
 	'total_users' => 'Total Users',
+	'popular_posts' => 'Popular Posts',
+	'items' => 'Items',
 
 ];

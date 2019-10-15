@@ -35,8 +35,9 @@ class BackendController extends Controller
 		$component = Component::where('active', '=', 'Y')->count();
 		$theme = Theme::where('active', '=', 'Y')->count();
 		$user = User::where('block', '=', 'N')->count();
+		$populars = Post::where('active', '=', 'Y')->orderBy('hits', 'desc')->limit(5)->get();
 		
-		return view('backend.dashboard', compact('post', 'pages', 'category', 'tag', 'comment', 'commentunread', 'pages', 'contactunread', 'component', 'theme', 'user'));
+		return view('backend.dashboard', compact('post', 'pages', 'category', 'tag', 'comment', 'commentunread', 'pages', 'contactunread', 'component', 'theme', 'user', 'populars'));
     }
 	
 	/**

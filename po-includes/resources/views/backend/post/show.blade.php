@@ -24,6 +24,8 @@
 				<h2>{{ $post->title }}</h2>
 				
 				<ul class="list-inline">
+					<li class="list-inline-item">{{ date('d F y H:i', strtotime($post->created_at)) }}</li>
+					<li class="list-inline-item">/</li>
 					<li class="list-inline-item">{{ __('post.category') }} : {{ $post->category->title }}</li>
 					<li class="list-inline-item">/</li>
 					<li class="list-inline-item">{{ $post->active == 'Y' ? __('post.active') : __('post.deactive') }}</li>
@@ -35,6 +37,7 @@
 				
 				@if($post->picture != '')
 					<p><img src="{{ asset('po-content/uploads/'.$post->picture) }}" class="img-fluid" /></p>
+					<p class="tx-color-03 tx-13">{{ $post->picture_description }}</p>
 				@endif
 				{!! $post->content !!}
 				
