@@ -37,6 +37,12 @@ class BackendController extends Controller
 		$user = User::where('block', '=', 'N')->count();
 		$populars = Post::where('active', '=', 'Y')->orderBy('hits', 'desc')->limit(5)->get();
 		
+		if (Auth::user()->hasRole('member')) {
+			$_SESSION['RF']['subfolder'] = 'users/user-'.Auth::user()->id;
+		} else {
+			$_SESSION['RF']['subfolder'] = '';
+		}
+		
 		return view('backend.dashboard', compact('post', 'pages', 'category', 'tag', 'comment', 'commentunread', 'pages', 'contactunread', 'component', 'theme', 'user', 'populars'));
     }
 	

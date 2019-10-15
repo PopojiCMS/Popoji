@@ -101,10 +101,10 @@ if ($rfm_subfolder != "" && $rfm_subfolder[strlen($rfm_subfolder) - 1] != "/") {
 
 $ftp = ftp_con($config);
 
-if (($ftp && !$ftp->isDir($config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir)) || (!$ftp && !file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
+/** if (($ftp && !$ftp->isDir($config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir)) || (!$ftp && !file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
     $subdir = '';
     $rfm_subfolder = "";
-}
+} **/
 
 
 $cur_dir		= $config['upload_dir'].$rfm_subfolder.$subdir;
