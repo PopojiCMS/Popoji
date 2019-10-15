@@ -54,9 +54,16 @@ class PostController extends Controller
 	 */
 	public function anyData()
 	{
-		$posts = Post::leftJoin('categories', 'categories.id', '=', 'posts.category_id')
-			->leftJoin('users', 'users.id', '=', 'posts.created_by')
-			->select('posts.*', 'categories.id as cid', 'categories.title as ctitle', 'users.id as uid', 'users.name as uname');
+		if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')) {
+			$posts = Post::leftJoin('categories', 'categories.id', '=', 'posts.category_id')
+				->leftJoin('users', 'users.id', '=', 'posts.created_by')
+				->select('posts.*', 'categories.id as cid', 'categories.title as ctitle', 'users.id as uid', 'users.name as uname');
+		} else {
+			$posts = Post::leftJoin('categories', 'categories.id', '=', 'posts.category_id')
+				->leftJoin('users', 'users.id', '=', 'posts.created_by')
+				->where('posts.created_by', '=', Auth::user()->id)
+				->select('posts.*', 'categories.id as cid', 'categories.title as ctitle', 'users.id as uid', 'users.name as uname');
+		}
 		return Datatables::of($posts)
 			->addColumn('check', function ($post) {
 				$check = '<div style="text-align:center;">
