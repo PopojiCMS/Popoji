@@ -29,5 +29,6 @@ return [
 	'value' => 'Value',
 	'create_by' => 'Create By',
 	'usage' => 'Usage',
+	'generate' => 'Generate',
 
 ];

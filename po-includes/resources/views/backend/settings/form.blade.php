@@ -1,7 +1,7 @@
 <div class="form-row">
 	<div class="form-group col-md-6">
 		{!! Form::label('groups', __('setting.group').' *', ['class' => 'control-label']) !!}
-		<select class="select2 form-control" id="groups" name="groups">
+		<select class="select-style form-control" id="groups" name="groups">
 			@if (isset($setting))
 				<option value="{{ $setting->groups }}">{{ __('general.selected') }} {{ $setting->groups }}</option>
 			@endif

@@ -35,11 +35,19 @@
 					<table class="table table-striped mg-b-0">
 						<tbody>
 							@foreach(getSettingGroup($group->groups) as $option)
-								<tr>
-									<th width="200">{{ $option->options }}</th>
-									<td>{{ $option->value }}</td>
-									<td width="30"><a href="{{ url('dashboard/settings/'.Hashids::encode($option->id).'/edit') }}" class="btn btn-primary btn-xs btn-icon" title="{{ __('general.edit') }}" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a></td>
-								</tr>
+								@if($option->options == 'sitemap')
+									<tr>
+										<th width="200">{{ $option->options }}</th>
+										<td>{{ url('/'.$option->value) }}</td>
+										<td width="120" class="text-center"><a href="{{ url('dashboard/settings/sitemp') }}" class="btn btn-primary btn-xs btn-icon" title="{{ __('setting.generate') }}" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i> {{ __('setting.generate') }}</a></td>
+									</tr>
+								@else
+									<tr>
+										<th width="200">{{ $option->options }}</th>
+										<td>{{ $option->value }}</td>
+										<td width="120" class="text-center"><a href="{{ url('dashboard/settings/'.Hashids::encode($option->id).'/edit') }}" class="btn btn-primary btn-xs btn-icon" title="{{ __('general.edit') }}" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i> {{ __('general.edit') }}</a></td>
+									</tr>
+								@endif
 							@endforeach
 						</tbody>
 					</table>
