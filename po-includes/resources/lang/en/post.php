@@ -41,5 +41,6 @@ return [
 	'seen' => 'Seen',
 	'error_gallery' => 'Error add picture gallery. Please check again!',
 	'notification' => 'Notification',
+	'type' => 'Type',
 
 ];

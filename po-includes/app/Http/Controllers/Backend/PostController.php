@@ -75,6 +75,9 @@ class PostController extends Controller
 			->addColumn('title', function ($post) {
 				return $post->title.' ('.$post->hits.' '.__('post.seen').')<br /><a href="'.url('/detailpost/'.$post->seotitle).'" target="_blank">'.url('/detailpost/'.$post->seotitle).'</a>';
 			})
+			->addColumn('type', function ($post) {
+				return ucfirst($post->type);
+			})
 			->addColumn('active', function ($post) {
 				return $post->active == 'Y' ? __('post.active') : __('post.deactive');
 			})
@@ -127,6 +130,7 @@ class PostController extends Controller
 				'category_id' => 'required',
 				'title' => 'required',
 				'seotitle' => 'required|string|unique:posts',
+				'type' => 'required',
 				'active' => 'required',
 				'headline' => 'required',
 				'comment' => 'required'
@@ -222,6 +226,7 @@ class PostController extends Controller
 				'category_id' => 'required',
 				'title' => 'required',
 				'seotitle' => 'required|string|unique:posts,seotitle,' . $ids[0],
+				'type' => 'required',
 				'active' => 'required',
 				'headline' => 'required',
 				'comment' => 'required'

@@ -103,7 +103,7 @@
 							<p class="mg-b-25 tx-12 tx-color-03">{{ Auth::user()->email }}</p>
 							<a href="{{ url('/dashboard/users/'.Hashids::encode(Auth::user()->id).'/edit') }}" class="dropdown-item"><i data-feather="edit-3"></i> {{ __('general.edit_profile') }}</a>
 							@if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
-								<a href="{{ url('/dashboard/settings/table') }}" class="dropdown-item"><i data-feather="settings"></i> {{ __('general.settings') }}</a>
+								<a href="{{ url('/dashboard/settings') }}" class="dropdown-item"><i data-feather="settings"></i> {{ __('general.settings') }}</a>
 							@endif
 							<div class="dropdown-divider"></div>
 							<a href="http://www.popojicms.org/contact" class="dropdown-item" target="_blank"><i data-feather="help-circle"></i> {{ __('general.help') }}</a>

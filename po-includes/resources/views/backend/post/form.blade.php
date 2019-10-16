@@ -33,7 +33,20 @@
 	</div>
 </div>
 <div class="form-row">
-	<div class="form-group col-md-4">
+	<div class="form-group col-md-3">
+		{!! Form::label('type', __('post.type').' *', ['class' => 'control-label']) !!}
+		<select class="select-style form-control" id="type" name="type">
+			@if($formMode == 'edit')
+				<option value="{{ $post->type }}">{{ __('general.selected') }} {{ ucfirst($post->type) }}</option>
+			@endif
+			<option value="general">General</option>
+			<option value="pagination">Pagination</option>
+			<option value="picture">Picture</option>
+			<option value="video">Video</option>
+		</select>
+		{!! $errors->first('active', '<p class="help-block">:message</p>') !!}
+	</div>
+	<div class="form-group col-md-3">
 		{!! Form::label('active', __('post.active').' *', ['class' => 'control-label']) !!}
 		<select class="select-style form-control" id="active" name="active">
 			@if($formMode == 'edit')
@@ -44,7 +57,7 @@
 		</select>
 		{!! $errors->first('active', '<p class="help-block">:message</p>') !!}
 	</div>
-	<div class="form-group col-md-4">
+	<div class="form-group col-md-3">
 		{!! Form::label('headline', __('post.headline').' *', ['class' => 'control-label']) !!}
 		<select class="select-style form-control" id="headline" name="headline">
 			@if($formMode == 'edit')
@@ -55,7 +68,7 @@
 		</select>
 		{!! $errors->first('headline', '<p class="help-block">:message</p>') !!}
 	</div>
-	<div class="form-group col-md-4">
+	<div class="form-group col-md-3">
 		{!! Form::label('comment', __('post.comment').' *', ['class' => 'control-label']) !!}
 		<select class="select-style form-control" id="comment" name="comment">
 			@if($formMode == 'edit')

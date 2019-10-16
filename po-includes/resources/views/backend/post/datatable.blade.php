@@ -29,6 +29,7 @@
 							<th style="text-align:center;" width="25">{{ __('general.id') }}</th>
 							<th>{{ __('post.category') }}</th>
 							<th>{{ __('post.title') }}</th>
+							<th>{{ __('post.type') }}</th>
 							<th>{{ __('post.headline') }}</th>
 							<th>{{ __('post.active') }}</th>
 							<th style="text-align:center;" width="140">{{ __('general.actions') }}</th>
@@ -40,7 +41,7 @@
 							<td style="width:10px;" style="text-align:center;">
 								<input type="checkbox" id="titleCheck" data-toggle="tooltip" title="{{ __('general.check_all') }}" />
 							</td>
-							<td colspan="6">
+							<td colspan="7">
 								<button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#alertalldel"><i class="fa fa-trash"></i> {{ __('general.delete_selected') }}</button>
 							</td>
 							<td><button class="btn btn-xs btn-danger d-block d-sm-none" type="button" data-toggle="modal" data-target="#alertalldel">{{ __('general.delete') }}</button></td>
@@ -83,6 +84,7 @@
 				{ data: 'id', name: 'posts.id' },
 				{ data: 'ctitle', name: 'categories.title' },
 				{ data: 'title', name: 'posts.title' },
+				{ data: 'type', name: 'posts.type' },
 				{ data: 'headline', name: 'posts.headline' },
 				{ data: 'active', name: 'posts.active' },
 				{ data: 'action', name: 'action', orderable: false, searchable: false },

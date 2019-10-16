@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
 			$table->string('picture')->nullable();
 			$table->string('picture_description')->nullable();
 			$table->string('tag')->nullable();
+			$table->enum('type', ['general', 'pagination', 'picture', 'video'])->default('general');
 			$table->enum('active', ['Y', 'N'])->default('Y');
 			$table->enum('headline', ['Y', 'N'])->default('Y');
 			$table->enum('comment', ['Y', 'N'])->default('Y');
