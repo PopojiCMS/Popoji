@@ -69,6 +69,7 @@ $(function() {
 			} else {
 				if (activePage[activePage.length-2] + '-' + activePage[activePage.length-1] == currentActivePage[currentActivePage.length-2] + '-' + currentActivePage[currentActivePage.length-1]) {
 					$(this).parent().addClass('active').addClass('show');
+					$(this).parent().parent().parent().addClass('active').addClass('show');
 				}
 			}
 		}

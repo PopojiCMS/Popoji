@@ -56,7 +56,7 @@
 				<li class="nav-item"><a href="{{ url('/dashboard/settings') }}" class="nav-link"><i data-feather="settings"></i> <span>{{ __('general.settings') }}</span></a></li>
 				<li class="nav-label mg-t-25">{{ __('general.component') }}</li>
 				<li class="nav-item with-sub">
-					<a href="{{ url('/dashboard/components/table') }}" class="nav-link"><i data-feather="package"></i> <span>{{ __('general.components') }}</span></a>
+					<a href="javascript:void(0);" class="nav-link"><i data-feather="package"></i> <span>{{ __('general.components') }}</span></a>
 					<ul>
 						<li><a href="{{ url('/dashboard/components/table') }}">{{ __('general.components') }}</a></li>
 						<li><a href="{{ url('/dashboard/gallerys/table') }}">{{ __('general.gallerys') }}</a></li>
