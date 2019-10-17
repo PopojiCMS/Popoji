@@ -8,7 +8,7 @@ $(document).ready(function() {
 		$(this).data('form').submit();
 	});
 	
-	$(".alert-main").fadeTo(3000, 500).slideUp(1000, function(){
+	$(".alert-main").fadeTo(3000, 1).slideUp(1000, function(){
 		$(".alert-main").alert('close');
 	});
 	

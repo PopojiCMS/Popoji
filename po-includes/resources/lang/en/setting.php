@@ -30,5 +30,8 @@ return [
 	'create_by' => 'Create By',
 	'usage' => 'Usage',
 	'generate' => 'Generate',
+	'sitemap_generate' => 'Sitemap has been generated',
+	'backup' => 'Backup Now',
+	'backup_generate' => 'Backup has been generated at : po-content/backups/backup',
 
 ];

@@ -5,11 +5,19 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Event;
 
 use App\Setting;
 
 use Yajra\Datatables\Datatables;
 use Vinkla\Hashids\Facades\Hashids;
+use Spatie\Sitemap\SitemapGenerator;
+use Carbon\Carbon;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
+use ZipArchive;
 
 class SettingsController extends Controller
 {
@@ -232,4 +240,41 @@ class SettingsController extends Controller
 			return redirect('forbidden');
 		}
     }
+	
+	public function sitemap(Request $request)
+    {
+		if(Auth::user()->can('read-settings')) {
+			$path = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('sitemap.xml')));
+			
+			SitemapGenerator::create(url('/'))->hasCrawled(function (Url $url) {
+				if(getSetting('sitemap_frequency') == 'daily') {
+					$frequency = Url::CHANGE_FREQUENCY_DAILY;
+				} elseif(getSetting('sitemap_frequency') == 'monthly') {
+					$frequency = Url::CHANGE_FREQUENCY_MONTHLY;
+				} else {
+					$frequency = Url::CHANGE_FREQUENCY_YEARLY;
+				}
+				
+				$url->setPriority(getSetting('sitemap_priority'));
+				$url->setChangeFrequency($frequency);
+				
+				return $url;
+			})->writeToFile($path);
+			
+			return redirect('dashboard/settings')->with('flash_message', __('setting.sitemap_generate'));
+		} else {
+			return redirect('forbidden');
+		}
+	}
+	
+	public function backup(Request $request)
+    {
+		if(Auth::user()->can('read-settings')) {
+			Artisan::call('backup:run', ['--only-db' => true]);
+			
+			return redirect('dashboard/settings')->with('flash_message', __('setting.backup_generate'));
+		} else {
+			return redirect('forbidden');
+		}
+	}
 }

@@ -44,6 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/settings/index','Backend\SettingsController@getIndex');
 	Route::get('dashboard/settings/table','Backend\SettingsController@getIndex');
 	Route::get('dashboard/settings/data','Backend\SettingsController@anyData');
+	Route::get('dashboard/settings/sitemap','Backend\SettingsController@sitemap');
+	Route::get('dashboard/settings/backup','Backend\SettingsController@backup');
 	Route::post('dashboard/settings/deleteall', 'Backend\SettingsController@deleteAll');
 	Route::resource('dashboard/settings', 'Backend\SettingsController');
 	

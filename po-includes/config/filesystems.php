@@ -63,6 +63,11 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
+		
+		'backup' => [
+            'driver' => 'local',
+            'root' => str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/backups'))),
+        ],
 
     ],
 

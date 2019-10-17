@@ -167,12 +167,12 @@ class UsersController extends Controller
 				
 				$user->assignRole($request->roles);
 				
-				if(!File::isDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/users/user-' . $user->id)))){
-					File::makeDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/users/user-' . $user->id)), 0777, true, true);
+				if(!File::isDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/uploads/users/user-' . $user->id))))){
+					File::makeDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/uploads/users/user-' . $user->id))), 0777, true, true);
 				}
 				
-				if(!File::isDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id)))){
-					File::makeDirectory(str_replace('\po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id)), 0777, true, true);
+				if(!File::isDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id))))){
+					File::makeDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/uploads/medium/users/user-' . $user->id))), 0777, true, true);
 				}
 				
 				return redirect('dashboard/users')->with('flash_message', __('user.store_notif'));

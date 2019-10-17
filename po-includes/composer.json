@@ -16,7 +16,9 @@
         "laravelcollective/html": "^6.0",
         "maatwebsite/excel": "^3.1",
         "spatie/laravel-activitylog": "^3.8",
+        "spatie/laravel-backup": "^6.7",
         "spatie/laravel-permission": "^3.0",
+        "spatie/laravel-sitemap": "^5.5",
         "vinkla/hashids": "^7.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

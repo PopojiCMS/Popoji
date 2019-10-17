@@ -39,7 +39,13 @@
 									<tr>
 										<th width="200">{{ $option->options }}</th>
 										<td>{{ url('/'.$option->value) }}</td>
-										<td width="120" class="text-center"><a href="{{ url('dashboard/settings/sitemp') }}" class="btn btn-primary btn-xs btn-icon" title="{{ __('setting.generate') }}" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i> {{ __('setting.generate') }}</a></td>
+										<td width="120" class="text-center"><a href="{{ url('dashboard/settings/sitemap') }}" class="btn btn-primary btn-xs btn-icon" title="{{ __('setting.generate') }}" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i> {{ __('setting.generate') }}</a></td>
+									</tr>
+								@elseif($option->options == 'backup')
+									<tr>
+										<th width="200">{{ $option->options }}</th>
+										<td>po-content/backups/backup</td>
+										<td width="120" class="text-center"><a href="{{ url('dashboard/settings/backup') }}" class="btn btn-primary btn-xs btn-icon" title="{{ __('setting.generate') }}" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i> {{ __('setting.backup') }}</a></td>
 									</tr>
 								@else
 									<tr>

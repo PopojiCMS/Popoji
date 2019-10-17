@@ -41147,3 +41147,7 @@ table.dataTable.dtr-column > tbody > tr > td.control::before, table.dataTable.dt
 .popular-post {
 	height: 362px;
 }
+
+.toast {
+	background-color: #fff;
+}
