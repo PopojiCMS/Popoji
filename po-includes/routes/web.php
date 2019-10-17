@@ -79,6 +79,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/comments/index','Backend\CommentController@index');
 	Route::get('dashboard/comments/table','Backend\CommentController@getIndex');
 	Route::get('dashboard/comments/data','Backend\CommentController@anyData');
+	Route::get('dashboard/comments/reply/{id}','Backend\CommentController@reply');
+	Route::post('dashboard/comments/post-reply', 'Backend\CommentController@postReply');
 	Route::post('dashboard/comments/deleteall', 'Backend\CommentController@deleteAll');
 	Route::resource('dashboard/comments', 'Backend\CommentController');
 	

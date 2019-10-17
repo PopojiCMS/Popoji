@@ -18,6 +18,7 @@ return [
 	'create_title' => 'Add Comments',
 	'edit_title' => 'Edit Comments',
 	'show_title' => 'View Comments',
+	'reply_title' => 'Reply Comments',
 	'store_notif' => 'Comment added!',
     'update_notif' => 'Comment updated!',
 	'destroy_notif' => 'Comment deleted!',
@@ -35,5 +36,6 @@ return [
 	'unpublish' => 'Unpublish',
 	'read' => 'Read',
 	'unread' => 'Unread',
+	'reply' => 'Reply',
 
 ];

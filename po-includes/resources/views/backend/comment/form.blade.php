@@ -1,5 +1,7 @@
 <div class="form-row">
 	<div class="form-group col-md-6">
+		{!! Form::hidden('parent', null) !!}
+		{!! Form::hidden('post_id', null) !!}
 		{!! Form::label('name', __('comment.name').' *', ['class' => 'control-label']) !!}
 		{!! Form::text('name', null, ['class' => $errors->has('name') ? 'form-control is-invalid' : 'form-control', 'required' => 'required']) !!}
 		{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
@@ -16,7 +18,7 @@
 	{!! $errors->first('content', '<p class="help-block">:message</p>') !!}
 </div>
 @if($formMode == 'edit')
-<div class="form-group">
+<div class="form-row">
 	<div class="form-group col-md-6">
 		{!! Form::label('active', __('comment.active').' *', ['class' => 'control-label']) !!}
 		<select class="select-style form-control" id="active" name="active">

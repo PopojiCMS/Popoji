@@ -140,6 +140,10 @@ class ContactController extends Controller
 		if(Auth::user()->can('read-contacts')) {
 			$ids = Hashids::decode($id);
 			$contact = Contact::findOrFail($ids[0]);
+			$contact->update([
+				'status' => 'Y',
+				'updated_by' => Auth::User()->id
+			]);
 
 			return view('backend.contact.show', compact('contact'));
 		} else {

@@ -59,10 +59,10 @@ class CommentController extends Controller
 				return $check;
 			})
 			->addColumn('name', function ($comment) {
-				return $comment->name.'<br />'.$comment->email.'<br />'.__('comment.post').' : <a href="'.url('/detailpost/'.$comment->post->seotitle).'" target="_blank">'.url('/comment/'.$comment->post->title).'</a>';
+				return $comment->name.' - '.$comment->email.'<br />'.__('comment.post').' : <a href="'.url('/detailpost/'.$comment->post->seotitle).'" target="_blank">'.$comment->post->title.'</a>';
 			})
 			->addColumn('active', function ($comment) {
-				return $comment->active == 'Y' ? __('comment.active') : __('comment.deactive');
+				return $comment->active == 'Y' ? __('comment.publish') : __('comment.unpublish');
 			})
 			->addColumn('created_at', function ($comment) {
 				return date('d M y H:i', strtotime($comment->created_at));
@@ -70,6 +70,7 @@ class CommentController extends Controller
             ->addColumn('action', function ($comment) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
 				$btn .= '<a href="'.url('dashboard/comments/'.Hashids::encode($comment->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/comments/reply/'.Hashids::encode($comment->id)).'" class="btn btn-success btn-xs btn-icon" title="'.__('comment.reply').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-reply"></i></a>';
 				$btn .= '<a href="'.url('dashboard/comments/'.Hashids::encode($comment->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				$btn .= '<a href="'.url('dashboard/comments/'.Hashids::encode($comment->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
@@ -141,6 +142,10 @@ class CommentController extends Controller
 		if(Auth::user()->can('read-comments')) {
 			$ids = Hashids::decode($id);
 			$comment = Comment::findOrFail($ids[0]);
+			$comment->update([
+				'status' => 'Y',
+				'updated_by' => Auth::User()->id
+			]);
 
 			return view('backend.comment.show', compact('comment'));
 		} else {
@@ -161,7 +166,7 @@ class CommentController extends Controller
 			$ids = Hashids::decode($id);
 			$comment = Comment::findOrFail($ids[0]);
 
-			return view('backend.comment.edit'. compact('comment'));
+			return view('backend.comment.edit', compact('comment'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -239,6 +244,45 @@ class CommentController extends Controller
 			} else {
 				return redirect('dashboard/comments')->with('flash_message', __('comment.destroy_error_notif'));
 			}
+		} else {
+			return redirect('forbidden');
+		}
+    }
+	
+	public function reply($id)
+    {
+		if(Auth::user()->can('update-comments')) {
+			$ids = Hashids::decode($id);
+			$comment = Comment::findOrFail($ids[0]);
+
+			return view('backend.comment.reply', compact('comment'));
+		} else {
+			return redirect('forbidden');
+		}
+    }
+	
+	public function postReply(Request $request)
+    {
+		if(Auth::user()->can('create-comments')) {
+			$this->validate($request,[
+				'parent' => 'required',
+				'post_id' => 'required',
+				'content' => 'required'
+			]);
+
+			$request->request->add([
+				'name' => Auth::User()->name,
+				'email' => Auth::User()->email,
+				'active' => 'Y',
+				'status' => 'Y',
+				'created_by' => Auth::User()->id,
+				'updated_by' => Auth::User()->id
+			]);
+			$requestData = $request->all();
+
+			Comment::create($requestData);
+			
+			return redirect('dashboard/comments')->with('flash_message', __('comment.store_notif'));
 		} else {
 			return redirect('forbidden');
 		}
