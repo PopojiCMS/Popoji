@@ -50,7 +50,8 @@
 <script type="text/javascript">
 	tinymce.init({
 		selector: "#content",
-		height: 300,
+		height: 600,
+		min_height: 600,
 		plugins: [
 			"advlist autolink link image lists charmap print preview hr anchor pagebreak",
 			"searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",

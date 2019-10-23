@@ -41151,3 +41151,8 @@ table.dataTable.dtr-column > tbody > tr > td.control::before, table.dataTable.dt
 .toast {
 	background-color: #fff;
 }
+
+.bootstrap-tagsinput .tag {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
