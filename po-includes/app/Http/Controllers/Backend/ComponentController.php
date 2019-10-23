@@ -285,10 +285,17 @@ class ComponentController extends Controller
 										'updated_by' => Auth::User()->id
 									]);
 									
-									$urlname = Str::kebab($info['title']);
-									$modelname = ucfirst(Str::camel($info['title']));
+									$kebabname = Str::kebab($info['title']);
+									$camelname = ucfirst(Str::camel($info['title']));
 									
-									$this->addRoutes($urlname, $modelname);
+									$this->importRoutes($kebabname, $camelname);
+									$this->importModels($filename);
+									$this->importControllers($filename);
+									$this->importViews($filename);
+									
+									File::deleteDirectory(str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename)));
+									
+									return redirect('dashboard/'.$kebabname.'/install');
 								}
 							} else {
 								return back()->with('flash_message', __('component.install_error_notif'));
@@ -308,19 +315,63 @@ class ComponentController extends Controller
 		}
     }
 	
-	protected function addRoutes($urlname, $modelname)
+	protected function importRoutes($kebabname, $camelname)
     {
 		$routefile = base_path('routes/web.php');
 		$oldcontent = file_get_contents($routefile);
+		
 		$search = '//-----replace-----//';
-		$replace = "Route::get('dashboard/{$urlname}/index','Backend\/{$modelname}Controller@index');\n";
-		$replace .= "\tRoute::get('dashboard/{$urlname}/table','Backend\/{$modelname}Controller@getIndex');\n";
-		$replace .= "\tRoute::get('dashboard/{$urlname}/data','Backend\/{$modelname}Controller@anyData');\n";
-		$replace .= "\tRoute::get('dashboard/{$urlname}/install','Backend\/{$modelname}Controller@install');\n";
-		$replace .= "\tRoute::post('dashboard/{$urlname}/deleteall', 'Backend\/{$modelname}Controller@deleteAll');\n";
-		$replace .= "\tRoute::resource('dashboard/{$urlname}', 'Backend\/{$modelname}Controller');\n\t\n";
-		$replace .= "\t//-----replace-----//\n";
+		$replace = "Route::get('dashboard/{$kebabname}/index','Backend\/{$camelname}Controller@index');\n";
+		$replace .= "\tRoute::get('dashboard/{$kebabname}/table','Backend\/{$camelname}Controller@getIndex');\n";
+		$replace .= "\tRoute::get('dashboard/{$kebabname}/data','Backend\/{$camelname}Controller@anyData');\n";
+		$replace .= "\tRoute::get('dashboard/{$kebabname}/install','Backend\/{$camelname}Controller@install');\n";
+		$replace .= "\tRoute::post('dashboard/{$kebabname}/deleteall', 'Backend\/{$camelname}Controller@deleteAll');\n";
+		$replace .= "\tRoute::resource('dashboard/{$kebabname}', 'Backend\/{$camelname}Controller');\n\t\n";
+		$replace .= "\t//-----replace-----//\n\t";
+		
 		$newcontent = str_replace($search, $replace, $oldcontent);
 		file_put_contents($routefile, $newcontent);
     }
+	
+	protected function importModels($filename)
+    {
+		$directory = str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename.'/Model'));
+		$files = File::allFiles($directory);
+		foreach($files as $file){
+			$pathinfo = pathinfo($file);
+			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
+			$newpath = base_path('app/'.$pathinfo['basename']);
+			if(!File::isFile($newpath)){
+				File::move($oldpath, $newpath);
+			}
+		}
+	}
+	
+	protected function importControllers($filename)
+    {
+		$directory = str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename.'/Controller'));
+		$files = File::allFiles($directory);
+		foreach($files as $file){
+			$pathinfo = pathinfo($file);
+			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
+			$newpath = base_path('app/Http/Controllers/Backend/'.$pathinfo['basename']);
+			if(!File::isFile($newpath)){
+				File::move($oldpath, $newpath);
+			}
+		}
+	}
+	
+	protected function importViews($filename)
+    {
+		$directory = str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename.'/View'));
+		$files = File::directories($directory);
+		foreach($files as $file){
+			$pathinfo = pathinfo($file);
+			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
+			$newpath = base_path('resources/views/backend/'.$pathinfo['basename']);
+			if(!File::isDirectory($newpath)){
+				File::moveDirectory($oldpath, $newpath);
+			}
+		}
+	}
 }
