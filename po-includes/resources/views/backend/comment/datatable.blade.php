@@ -131,6 +131,10 @@
 		});
 		
 		$('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+		
+		$('.data-search').on('keyup', function() {
+			table.search(this.value).draw();
+		});
 	});
 </script>
 @endpush

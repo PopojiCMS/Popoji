@@ -71,7 +71,7 @@
 		<div class="content-header">
 			<div class="content-search">
 				<i data-feather="search"></i>
-				<input type="search" class="form-control" placeholder="{{ __('general.search') }}...">
+				<input type="search" class="form-control data-search" placeholder="{{ __('general.search') }}...">
 			</div>
 			
 			<div class="row">
