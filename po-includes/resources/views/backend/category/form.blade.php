@@ -8,6 +8,7 @@
 				@else
 					<option value="{{ $category->parent }}">{{ __('general.selected') }} {{ $category->mainParent->title }}</option>
 				@endif
+				<option value="0">{{ __('category.no_parent') }}</option>
 			@else
 				<option value="0">{{ __('category.no_parent') }}</option>
 			@endif
