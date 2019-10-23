@@ -63,7 +63,7 @@ class ComponentController extends Controller
             ->addColumn('action', function ($component) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
 				$btn .= '<a href="'.url('dashboard/'.Str::kebab($component->title).($component->folder == 'gallery' || $component->folder == 'contact' ? 's' : '').'/table').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
-				//$btn .= '<a href="'.url('dashboard/components/'.Hashids::encode($component->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
+				$btn .= '<a href="'.url('dashboard/components/'.Hashids::encode($component->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				$btn .= '<a href="'.url('dashboard/components/'.Hashids::encode($component->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
 				return $btn;
@@ -257,8 +257,8 @@ class ComponentController extends Controller
 				$extention = $request->file('files')->getClientOriginalExtension();
 				$filenamewithext = $filename.'.'.$extention;
 				
-				if(!File::isDirectory(str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename)))){
-					File::makeDirectory(str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename)), 0777, true, true);
+				if(!File::isDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/components/'.$filename))))){
+					File::makeDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/components/'.$filename))), 0777, true, true);
 					$upload = $request->file('files')->move('po-content/installer/components/'.$filename, $filenamewithext);
 					
 					if($upload) {
@@ -293,7 +293,7 @@ class ComponentController extends Controller
 									$this->importControllers($filename);
 									$this->importViews($filename);
 									
-									File::deleteDirectory(str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename)));
+									File::deleteDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/components/'.$filename))));
 									
 									return redirect('dashboard/'.$kebabname.'/install');
 								}
@@ -335,7 +335,7 @@ class ComponentController extends Controller
 	
 	protected function importModels($filename)
     {
-		$directory = str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename.'/Model'));
+		$directory = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/components/'.$filename.'/Model')));
 		$files = File::allFiles($directory);
 		foreach($files as $file){
 			$pathinfo = pathinfo($file);
@@ -349,7 +349,7 @@ class ComponentController extends Controller
 	
 	protected function importControllers($filename)
     {
-		$directory = str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename.'/Controller'));
+		$directory = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/components/'.$filename.'/Controller')));
 		$files = File::allFiles($directory);
 		foreach($files as $file){
 			$pathinfo = pathinfo($file);
@@ -363,7 +363,7 @@ class ComponentController extends Controller
 	
 	protected function importViews($filename)
     {
-		$directory = str_replace('\po-includes', '', base_path('po-content/installer/components/'.$filename.'/View'));
+		$directory = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/components/'.$filename.'/View')));
 		$files = File::directories($directory);
 		foreach($files as $file){
 			$pathinfo = pathinfo($file);
