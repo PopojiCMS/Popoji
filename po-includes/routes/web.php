@@ -130,4 +130,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/contacts/data','Backend\ContactController@anyData');
 	Route::post('dashboard/contacts/deleteall', 'Backend\ContactController@deleteAll');
 	Route::resource('dashboard/contacts', 'Backend\ContactController');
+	
+	//-----replace-----//
+	
 });

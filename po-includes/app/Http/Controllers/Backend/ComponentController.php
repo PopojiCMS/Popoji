@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 use App\Component;
 
@@ -61,7 +62,7 @@ class ComponentController extends Controller
 			})
             ->addColumn('action', function ($component) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
-				$btn .= '<a href="'.url('dashboard/components/'.Hashids::encode($component->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/'.Str::kebab($component->title).($component->folder == 'gallery' || $component->folder == 'contact' ? 's' : '').'/table').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
 				//$btn .= '<a href="'.url('dashboard/components/'.Hashids::encode($component->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				$btn .= '<a href="'.url('dashboard/components/'.Hashids::encode($component->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
@@ -283,6 +284,11 @@ class ComponentController extends Controller
 										'created_by' => Auth::User()->id,
 										'updated_by' => Auth::User()->id
 									]);
+									
+									$urlname = Str::kebab($info['title']);
+									$modelname = ucfirst(Str::camel($info['title']));
+									
+									$this->addRoutes($urlname, $modelname);
 								}
 							} else {
 								return back()->with('flash_message', __('component.install_error_notif'));
@@ -300,5 +306,21 @@ class ComponentController extends Controller
 		} else {
 			return redirect('forbidden');
 		}
+    }
+	
+	protected function addRoutes($urlname, $modelname)
+    {
+		$routefile = base_path('routes/web.php');
+		$oldcontent = file_get_contents($routefile);
+		$search = '//-----replace-----//';
+		$replace = "Route::get('dashboard/{$urlname}/index','Backend\/{$modelname}Controller@index');\n";
+		$replace .= "\tRoute::get('dashboard/{$urlname}/table','Backend\/{$modelname}Controller@getIndex');\n";
+		$replace .= "\tRoute::get('dashboard/{$urlname}/data','Backend\/{$modelname}Controller@anyData');\n";
+		$replace .= "\tRoute::get('dashboard/{$urlname}/install','Backend\/{$modelname}Controller@install');\n";
+		$replace .= "\tRoute::post('dashboard/{$urlname}/deleteall', 'Backend\/{$modelname}Controller@deleteAll');\n";
+		$replace .= "\tRoute::resource('dashboard/{$urlname}', 'Backend\/{$modelname}Controller');\n\t\n";
+		$replace .= "\t//-----replace-----//\n";
+		$newcontent = str_replace($search, $replace, $oldcontent);
+		file_put_contents($routefile, $newcontent);
     }
 }
