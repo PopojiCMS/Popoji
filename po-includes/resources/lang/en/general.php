@@ -60,6 +60,7 @@ return [
 	'actions' => 'Actions',
 	'check_all' => 'Check All',
 	'delete_selected' => 'Delete Selected',
+	'select_file' => 'Select File',
 	'selected' => 'Selected',
 	'filemanager' => 'File Manager',
 	'notification' => 'Notification',

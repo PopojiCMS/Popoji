@@ -637,6 +637,7 @@ function genInstallationProcessPage($errorMessage = '') {
 	$sForm = '';
 	
 	if ('done' ==  $resRunSQL) {
+		RunLastSQL();
 		$sForm = '
 		<form action="./" method="post" role="form">
 			<div class="text-center" style="margin:0 auto;">
@@ -841,6 +842,7 @@ function RunSQL() {
 
 	$pass = true;
 	$errorMes = '';
+	$ret = '';
 	$filename = $_POST['sql_file'];
 
 	$vLink = @mysqli_connect($confDB['host'], $confDB['user'], $confDB['passwd']);
@@ -879,6 +881,38 @@ function RunSQL() {
 
     fclose($f);
 
+    mysqli_close($vLink);
+
+    if (strlen($errorMes)) {
+    	return printInstallError($errorMes);
+    } else {
+    	return 'done';
+    }
+}
+
+function RunLastSQL() {
+	$confDB['host'] = $_POST['db_host'];
+	$confDB['sock'] = $_POST['db_sock'];
+	$confDB['port'] = $_POST['db_port'];
+	$confDB['user'] = $_POST['db_user'];
+	$confDB['passwd'] = $_POST['db_password'];
+	$confDB['db'] = $_POST['db_name'];
+
+	$confDB['host'] .= ( $confDB['port'] ? ":{$confDB['port']}" : '' ) . ( $confDB['sock'] ? ":{$confDB['sock']}" : '' );
+
+	$errorMes = '';
+	$ret = '';
+
+	$vLink = @mysqli_connect($confDB['host'], $confDB['user'], $confDB['passwd']);
+
+	if( !$vLink )
+		return printInstallError( mysqli_error($vLink) );
+
+	if (!mysqli_select_db ($vLink, $confDB['db']))
+		return printInstallError( $confDB['db'] . ': ' . mysqli_error($vLink) );
+
+    mysqli_query ($vLink, "SET sql_mode = ''");
+
 	$siteEmail = DbEscape($vLink, $_POST['site_email']);
 	$siteTitle = DbEscape($vLink, $_POST['site_title']);
 	$siteDesc = DbEscape($vLink, $_POST['site_desc']);
@@ -886,10 +920,10 @@ function RunSQL() {
 	$sitePass = DbEscape($vLink, $_POST['site_pass']);
 	$siteTimezone = DbEscape($vLink, $_POST['site_timezone']);
 	$sitePassEnc = password_hash($sitePass, PASSWORD_BCRYPT);
-	$strUrlsim = rtrim("http://".$_SERVER['HTTP_HOST'], "/").$_SERVER['PHP_SELF'];
+	$strUrlsim = rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://".$_SERVER['HTTP_HOST'], "/").$_SERVER['PHP_SELF'];
 	$siteUrlsim = rtrim(str_replace("install.php","",$strUrlsim), "/");
 	date_default_timezone_set($siteTimezone);
-	$siteTgl = date("Ymd");
+	
 	if ($siteEmail != '' && $siteTitle != '' && $siteUser != '' && $sitePass != '') {
 		if (!(mysqli_query($vLink, "UPDATE settings SET value = '{$siteTitle}' WHERE id = '1'")))
 			$ret .= "<font color='red'><i><b>Error</b>:</i> ".mysqli_error($vLink)."</font>";
@@ -917,8 +951,6 @@ function RunSQL() {
 
     if (strlen($errorMes)) {
     	return printInstallError($errorMes);
-    } else {
-    	return 'done';
     }
 }
 

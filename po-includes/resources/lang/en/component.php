@@ -18,10 +18,12 @@ return [
 	'create_title' => 'Add Components',
 	'edit_title' => 'Edit Components',
 	'show_title' => 'View Components',
+	'install_title' => 'Install Components',
 	'store_notif' => 'Component added!',
     'update_notif' => 'Component updated!',
 	'destroy_notif' => 'Component deleted!',
 	'destroy_error_notif' => 'Component error deleted!',
+	'install_error_notif' => 'Component error installed!',
 	'title' => 'Title',
 	'author' => 'Author',
 	'folder' => 'Folder',
@@ -30,5 +32,7 @@ return [
 	'type_widget' => 'Widget',
 	'active' => 'Active',
 	'deactive' => 'Deactive',
+	'install' => 'Install',
+	'files' => 'Files (.zip)',
 
 ];

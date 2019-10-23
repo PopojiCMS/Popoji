@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::match(['get', 'post'], '/', function () {
     return view('welcome');
 });
 
@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/components/index','Backend\ComponentController@index');
 	Route::get('dashboard/components/table','Backend\ComponentController@getIndex');
 	Route::get('dashboard/components/data','Backend\ComponentController@anyData');
+	Route::get('dashboard/components/install','Backend\ComponentController@install');
+	Route::post('dashboard/components/process-install','Backend\ComponentController@processInstall');
 	Route::post('dashboard/components/deleteall', 'Backend\ComponentController@deleteAll');
 	Route::resource('dashboard/components', 'Backend\ComponentController');
 	
