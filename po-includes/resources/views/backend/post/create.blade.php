@@ -97,7 +97,7 @@
 			typeaheadjs: {
 				name: 'tagname',
 				displayKey: 'title',
-				valueKey: 'seotitle',
+				valueKey: 'title',
 				source: tagname.ttAdapter()
 			}
 		});

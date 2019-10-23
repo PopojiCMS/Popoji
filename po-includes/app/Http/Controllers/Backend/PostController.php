@@ -148,10 +148,20 @@ class PostController extends Controller
 			$totaltags = count($breaktags);
 			if ($totaltags > 0) {
 				for($i=0; $i<$totaltags; $i++){
-					Tag::where('seotitle', '=', $breaktags[$i])->update([
-						'count' => DB::raw('count+1'),
-						'updated_by' => Auth::User()->id
-					]);
+					$checktag = Tag::where('seotitle', '=', Str::slug($breaktags[$i], '-'))->count();
+					if($checktag > 0) {
+						Tag::where('seotitle', '=', Str::slug($breaktags[$i], '-'))->update([
+							'count' => DB::raw('count+1'),
+							'updated_by' => Auth::User()->id
+						]);
+					} else {
+						Tag::create([
+							'title' => $breaktags[$i],
+							'seotitle' => Str::slug($breaktags[$i], '-'),
+							'created_by' => Auth::User()->id,
+							'updated_by' => Auth::User()->id
+						]);
+					}
 				}
 			}
 			
@@ -243,10 +253,20 @@ class PostController extends Controller
 			$totaltags = count($breaktags);
 			if ($totaltags > 0) {
 				for($i=0; $i<$totaltags; $i++){
-					Tag::where('seotitle', '=', $breaktags[$i])->update([
-						'count' => DB::raw('count+1'),
-						'updated_by' => Auth::User()->id
-					]);
+					$checktag = Tag::where('seotitle', '=', Str::slug($breaktags[$i], '-'))->count();
+					if($checktag > 0) {
+						Tag::where('seotitle', '=', Str::slug($breaktags[$i], '-'))->update([
+							'count' => DB::raw('count+1'),
+							'updated_by' => Auth::User()->id
+						]);
+					} else {
+						Tag::create([
+							'title' => $breaktags[$i],
+							'seotitle' => Str::slug($breaktags[$i], '-'),
+							'created_by' => Auth::User()->id,
+							'updated_by' => Auth::User()->id
+						]);
+					}
 				}
 			}
 
