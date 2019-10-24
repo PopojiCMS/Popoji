@@ -58,13 +58,15 @@ class BackendController extends Controller
      */
     public function analytics()
     {
+		$fetchTotalVisitorsAndPageViews = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
 		$fetchMostVisitedPages = Analytics::fetchMostVisitedPages(Period::days(7), 8);
 		$fetchTopBrowsers = Analytics::fetchTopBrowsers(Period::days(7), 8);
 		$fetchTopOperatingSystem = $this->fetchTopOperatingSystem(Period::days(7), 8);
 		$fetchTopCountry = $this->fetchTopCountry(Period::days(7), 8);
 		$fetchRealtimeUsers = $this->fetchRealtimeUsers();
+		$fetchTopDevice = $this->fetchTopDevice(Period::days(7), 8);
 		
-		return view('backend.analytics', compact('fetchMostVisitedPages', 'fetchTopBrowsers', 'fetchTopOperatingSystem', 'fetchTopCountry', 'fetchRealtimeUsers'));
+		return view('backend.analytics', compact('fetchTotalVisitorsAndPageViews', 'fetchMostVisitedPages', 'fetchTopBrowsers', 'fetchTopOperatingSystem', 'fetchTopCountry', 'fetchRealtimeUsers', 'fetchTopDevice'));
 	}
 	
 	/**
@@ -85,7 +87,7 @@ class BackendController extends Controller
 				'rt:activeUsers'
 			);
 
-		return $results->rows[0][0];
+		return $results->rows[0][0] ? $results->rows[0][0] : 0;
 	}
 	
 	public function fetchTopOperatingSystem(Period $period, int $maxResults = 10): Collection
@@ -158,5 +160,20 @@ class BackendController extends Controller
 				'country' => 'Others',
 				'sessions' => $topCountrys->splice($maxResults - 1)->sum('sessions'),
 			]);
+	}
+	
+	public function fetchTopDevice(Period $period): Collection
+	{
+		$response = Analytics::performQuery(
+			$period,
+			'ga:users',
+			[
+				'dimensions' => 'ga:deviceCategory'
+			]
+		);
+
+		return collect($response['rows'] ?? [])->map(function (array $deviceRow) {
+			return $deviceRow;
+		});
 	}
 }

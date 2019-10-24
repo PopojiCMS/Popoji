@@ -15,11 +15,12 @@
 		
 		<div class="d-none d-md-block">
 			<a href="{{ url('dashboard') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="arrow-left" class="wd-10 mg-r-5"></i> {{ __('general.back') }}</a>
+			<a href="https://github.com/spatie/laravel-analytics#retrieve-data-from-google-analytics" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10" target="_blank"><i data-feather="help-circle" class="wd-10 mg-r-5"></i> {{ __('dashboard.help') }}</a>
 		</div>
 	</div>
 	
 	<div class="row row-xs">
-		<div class="col-lg-3 mg-t-10">
+		<div class="col-lg-4 mg-t-10">
 			<div class="card">
 				<div class="card-header">
 					<h6 class="mg-b-0">{{ __('dashboard.realtime_users') }}</h6>
@@ -30,10 +31,49 @@
 					<p class="tx-12 tx-color-03 mg-b-0">{{ __('dashboard.please_refresh') }}</p>
 				</div>
 			</div>
+			
+			<div class="card mg-t-10">
+				<div class="card-header">
+					<h6 class="mg-b-0">{{ __('dashboard.device_users') }}</h6>
+				</div>
+				<div class="card-body">
+					<div class="row row-xs">
+						<div class="col-4 col-lg">
+							<div class="d-flex align-items-baseline">
+								<span class="d-block wd-8 ht-8 rounded-circle bg-primary"></span>
+								<span class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">{{ __('dashboard.desktop') }}</span>
+							</div>
+							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ $fetchTopDevice[0][1] }}</h4>
+						</div>
+						<div class="col-4 col-lg">
+							<div class="d-flex align-items-baseline">
+								<span class="d-block wd-8 ht-8 rounded-circle bg-teal"></span>
+								<span class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">{{ __('dashboard.mobile') }}</span>
+							</div>
+							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ $fetchTopDevice[1][1] }}</h4>
+						</div>
+						<div class="col-4 col-lg">
+							<div class="d-flex align-items-baseline">
+								<span class="d-block wd-8 ht-8 rounded-circle bg-gray-300"></span>
+								<span class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">{{ __('dashboard.tablet') }}</span>
+							</div>
+							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ $fetchTopDevice[2][1] }}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
-		<div class="col-lg-9 mg-t-10">
-		
+		<div class="col-lg-8 mg-t-10">
+			<div class="card">
+				<div class="card-header d-flex align-items-start justify-content-between">
+					<h6 class="lh-5 mg-b-0">{{ __('dashboard.visitor_pageview') }}</h6>
+					<a href="" class="tx-13 link-03">{{ __('dashboard.in_7_days') }}</a>
+				</div>
+				<div class="card-body pd-y-15 pd-x-10">
+					<div class="ht-250 ht-lg-300"><canvas id="chartBar"></canvas></div>
+				</div>
+			</div>
 		</div>
 		
 		<div class="col-lg-6 mg-t-10">
@@ -42,7 +82,7 @@
 					<h6 class="lh-5 mg-b-0">{{ __('dashboard.total_visits') }}</h6>
 					<a href="" class="tx-13 link-03">{{ __('dashboard.in_7_days') }}</a>
 				</div>
-				<div class="card-body pd-y-15 pd-x-10">
+				<div class="card-body pd-y-15 pd-x-10" style="height:300px;">
 					<div class="table-responsive">
 						<table class="table table-borderless table-sm tx-13 tx-nowrap mg-b-0">
 							<thead>
@@ -73,7 +113,7 @@
 					<h6 class="lh-5 mg-b-0">{{ __('dashboard.browser_used_by_users') }}</h6>
 					<a href="" class="tx-13 link-03">{{ __('dashboard.in_7_days') }}</a>
 				</div>
-				<div class="card-body pd-y-15 pd-x-10">
+				<div class="card-body pd-y-15 pd-x-10" style="height:300px;">
 					<div class="table-responsive">
 						<table class="table table-borderless table-sm tx-13 tx-nowrap mg-b-0">
 							<thead>
@@ -102,7 +142,7 @@
 					<h6 class="lh-5 mg-b-0">{{ __('dashboard.os_used_by_users') }}</h6>
 					<a href="" class="tx-13 link-03">{{ __('dashboard.in_7_days') }}</a>
 				</div>
-				<div class="card-body pd-y-15 pd-x-10">
+				<div class="card-body pd-y-15 pd-x-10" style="height:300px;">
 					<div class="table-responsive">
 						<table class="table table-borderless table-sm tx-13 tx-nowrap mg-b-0">
 							<thead>
@@ -133,7 +173,7 @@
 					<h6 class="lh-5 mg-b-0">{{ __('dashboard.users_by_country') }}</h6>
 					<a href="" class="tx-13 link-03">{{ __('dashboard.in_7_days') }}</a>
 				</div>
-				<div class="card-body pd-y-15 pd-x-10">
+				<div class="card-body pd-y-15 pd-x-10" style="height:300px;">
 					<div class="table-responsive">
 						<table class="table table-borderless table-sm tx-13 tx-nowrap mg-b-0">
 							<thead>
@@ -163,5 +203,77 @@
 @endpush
 
 @push('scripts')
+<script src="{{ asset('po-admin/lib/chart.js/Chart.bundle.min.js') }}"></script>
 
+<script type="text/javascript">
+	$(function() {
+		'use strict'
+		
+		var ctxLabel = ['{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[0]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[1]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[2]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[3]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[4]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[5]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[6]['date'])) }}'];
+		var ctxData1 = [{{ $fetchTotalVisitorsAndPageViews[0]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['visitors'] }}];
+		var ctxData2 = [{{ $fetchTotalVisitorsAndPageViews[0]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['pageViews'] }}];
+		var ctxColor1 = '#001737';
+		var ctxColor2 = '#1ce1ac';
+		var ctx = document.getElementById('chartBar').getContext('2d');
+
+		var gradient1 = ctx.createLinearGradient(0, 350, 0, 0);
+		gradient1.addColorStop(0, '#001737');
+		gradient1.addColorStop(1, '#0168fa');
+
+		var gradient2 = ctx.createLinearGradient(0, 400, 0, 0);
+		gradient2.addColorStop(0, '#0168fa');
+		gradient2.addColorStop(1, '#1ce1ac');
+
+
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ctxLabel,
+				datasets: [{
+					label: 'Visitors',
+					data: ctxData1,
+					backgroundColor: gradient1
+				}, {
+					label: 'Page Views',
+					data: ctxData2,
+					backgroundColor: gradient2
+				}]
+			},
+			options: {
+				maintainAspectRatio: false,
+				responsive: true,
+				legend: {
+					display: false,
+					labels: {
+						display: false
+					}
+				},
+				scales: {
+					yAxes: [{
+						gridLines: {
+							color: '#e5e9f2'
+						},
+						ticks: {
+							beginAtZero: true,
+							fontSize: 10,
+							fontColor: '#182b49',
+							max: 1000
+						}
+					}],
+					xAxes: [{
+						gridLines: {
+							display: false
+						},
+						barPercentage: 0.6,
+						ticks: {
+							beginAtZero: true,
+							fontSize: 11,
+							fontColor: '#182b49'
+						}
+					}]
+				}
+			}
+		});
+	});
+</script>
 @endpush

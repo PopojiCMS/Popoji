@@ -34,6 +34,8 @@ return [
 	'items' => 'Items',
 	'analytics_title' => 'Web Analytic',
 	'realtime_users' => 'Realtime Users',
+	'device_users' => 'Device Users',
+	'visitor_pageview' => 'Visitor & Pageview',
 	'total_visits' => 'Total Visits',
 	'in_7_days' => 'In 7 Days',
 	'link' => 'Link',
@@ -48,5 +50,9 @@ return [
 	'users_by_country' => 'Users By Country',
 	'country' => 'Country',
 	'please_refresh' => 'Please refresh to count new result',
+	'mobile' => 'Mobile',
+	'desktop' => 'Desktop',
+	'tablet' => 'Tablet',
+	'help' => 'Setting Analytic',
 
 ];
