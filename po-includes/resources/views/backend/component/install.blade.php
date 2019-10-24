@@ -37,6 +37,17 @@
 					</div>
 					{!! $errors->first('files', '<p class="help-block">:message</p>') !!}
 				</div>
+				
+				<div class="bd pd-20 mg-b-20">
+					<label class="tx-sans tx-10 tx-medium tx-spacing-1 tx-uppercase tx-color-03 mg-b-10">{{ __('component.instruction_1') }}</label>
+					<ol class="lh-7 mg-b-0">
+						<li>{{ __('component.instruction_2') }}</li>
+						<li>{{ __('component.instruction_3') }}</li>
+						<li>{{ __('component.instruction_4') }}</li>
+						<li>{{ __('component.instruction_5') }}</li>
+						<li>{{ __('component.instruction_6') }}</li>
+					</ol>
+				</div>
 			</div>
 			<div class="card-footer">
 				<button type="submit" class="btn btn-primary"><i data-feather="settings" class="wd-10 mg-r-5"></i> {{ __('component.install') }}</button>

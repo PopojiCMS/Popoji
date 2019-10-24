@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Artisan;
 
 use App\Component;
 
@@ -288,6 +289,7 @@ class ComponentController extends Controller
 									$kebabname = Str::kebab($info['title']);
 									$camelname = ucfirst(Str::camel($info['title']));
 									
+									$this->importMigrations($filename);
 									$this->importRoutes($kebabname, $camelname);
 									$this->importModels($filename);
 									$this->importControllers($filename);
@@ -314,6 +316,22 @@ class ComponentController extends Controller
 			return redirect('forbidden');
 		}
     }
+	
+	protected function importMigrations($filename)
+    {
+		$directory = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/components/'.$filename.'/Migration')));
+		$files = File::allFiles($directory);
+		foreach($files as $file){
+			$pathinfo = pathinfo($file);
+			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
+			$newpath = base_path('database/migrations/'.$pathinfo['basename']);
+			if(!File::isFile($newpath)){
+				File::move($oldpath, $newpath);
+			}
+		}
+		
+		Artisan::call('migrate', ['--force' => true]);
+	}
 	
 	protected function importRoutes($kebabname, $camelname)
     {
