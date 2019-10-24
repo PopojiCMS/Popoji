@@ -13,7 +13,7 @@
 		</div>
 		
 		<div class="d-none d-md-block">
-			<button class="btn btn-sm pd-x-15 btn-white btn-uppercase"><i data-feather="bar-chart-2" class="wd-10 mg-r-5"></i> {{ __('dashboard.analytic') }}</button>
+			<a href="{{ url('dashboard/analytics') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase"><i data-feather="bar-chart-2" class="wd-10 mg-r-5"></i> {{ __('dashboard.analytic') }}</a>
 		</div>
 	</div>
 	

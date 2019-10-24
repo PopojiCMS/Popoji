@@ -19,6 +19,7 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard', 'Backend\BackendController@index');
+	Route::get('dashboard/analytics', 'Backend\BackendController@analytics');
 	Route::get('forbidden', 'Backend\BackendController@forbidden');
 	
 	Route::get('dashboard/users/index', 'Backend\UsersController@index');
