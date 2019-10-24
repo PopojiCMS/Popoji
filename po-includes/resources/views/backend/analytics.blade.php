@@ -15,7 +15,7 @@
 		
 		<div class="d-none d-md-block">
 			<a href="{{ url('dashboard') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="arrow-left" class="wd-10 mg-r-5"></i> {{ __('general.back') }}</a>
-			<a href="https://github.com/spatie/laravel-analytics#retrieve-data-from-google-analytics" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10" target="_blank"><i data-feather="help-circle" class="wd-10 mg-r-5"></i> {{ __('dashboard.help') }}</a>
+			<a href="https://github.com/spatie/laravel-analytics#how-to-obtain-the-credentials-to-communicate-with-google-analytics" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10" target="_blank"><i data-feather="help-circle" class="wd-10 mg-r-5"></i> {{ __('dashboard.help') }}</a>
 		</div>
 	</div>
 	
