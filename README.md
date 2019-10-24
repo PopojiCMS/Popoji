@@ -16,7 +16,7 @@ Contact : info@popojicms.org
 
 1. Extract file popoji.v.x.x.x-composer.zip di directory web Anda.
 2. Buatlah database baru dengan collation utf8mb4_unicode_ci yang nantinya sebagai tempat instalasi tabel-tabel.
-3. Buka command line dan masuk ke path hasil ekstraksi tadi /path/po-includes kemudian jalankan composer install atau composer require
+3. Buka command line dan masuk ke path hasil ekstraksi tadi /path/po-includes kemudian jalankan ``composer install`` atau ``composer require``
 4. Setalah proses composer selesai, melalui browser Anda masuk ke alamat web dimana file popoji.v.x.x.x-composer.zip tadi diextract.
 5. Ikuti petunjuk instalasi dengan benar dan pastikan semua kebutuhan sistem terpenuhi sebelum instalasi.
 6. Jika instalasi berhasil, hapuslah atau rename file install.php dan hapus README file ini dari directory web Anda.
@@ -51,8 +51,8 @@ Untuk di hosting, lakukan perubahan user permission untuk folder-folder berikut 
 ## Login backend POPOJI
 * Masuk ke alamat http://nama.web.anda/login
 * Masukkan data login sebagai berikut :
-** Username : seperti yg telah diinputkan pada saat proses instalasi.
-** Password : seperti yg telah diinputkan pada saat proses instalasi.
+	* Username : seperti yg telah diinputkan pada saat proses instalasi.
+	* Password : seperti yg telah diinputkan pada saat proses instalasi.
 
 
 # Terima Kasih Kepada
