@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use App\Contact;
+
+use App\Mail\ContactMail;
 
 use Yajra\Datatables\Datatables;
 use Vinkla\Hashids\Facades\Hashids;
@@ -70,6 +73,7 @@ class ContactController extends Controller
             ->addColumn('action', function ($contact) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
 				$btn .= '<a href="'.url('dashboard/contacts/'.Hashids::encode($contact->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/contacts/reply/'.Hashids::encode($contact->id)).'" class="btn btn-success btn-xs btn-icon" title="'.__('comment.reply').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-reply"></i></a>';
 				$btn .= '<a href="'.url('dashboard/contacts/'.Hashids::encode($contact->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				$btn .= '<a href="'.url('dashboard/contacts/'.Hashids::encode($contact->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
@@ -242,6 +246,40 @@ class ContactController extends Controller
 			} else {
 				return redirect('dashboard/contacts')->with('flash_message', __('contact.destroy_error_notif'));
 			}
+		} else {
+			return redirect('forbidden');
+		}
+    }
+	
+	public function reply($id)
+    {
+		if(Auth::user()->can('update-contacts')) {
+			$ids = Hashids::decode($id);
+			$contact = Contact::findOrFail($ids[0]);
+
+			return view('backend.contact.reply', compact('contact'));
+		} else {
+			return redirect('forbidden');
+		}
+    }
+	
+	public function postReply(Request $request)
+    {
+		if(Auth::user()->can('create-contacts')) {
+			$this->validate($request,[
+				'id' =>  'required',
+				'message' => 'required'
+			]);
+
+			$contact = Contact::findOrFail($request->id);
+			
+			Mail::to($contact->email, $contact->name)
+				->queue(new ContactMail([
+					'contact' => $contact,
+					'content' => $request->message
+				]));
+			
+			return redirect('dashboard/contacts')->with('flash_message', __('contact.reply_notif'));
 		} else {
 			return redirect('forbidden');
 		}

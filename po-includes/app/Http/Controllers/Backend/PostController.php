@@ -91,7 +91,7 @@ class PostController extends Controller
             ->addColumn('action', function ($post) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
 				$btn .= '<a href="'.url('dashboard/posts/'.Hashids::encode($post->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
-				$btn .= '<a href="'.url('dashboard/posts/subscribes/'.Hashids::encode($post->id).'').'" class="btn btn-warning btn-xs btn-icon" title="'.__('general.send_subscribes').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-envelope"></i></a>';
+				$btn .= '<a href="'.url('dashboard/posts/subscribes/'.Hashids::encode($post->id).'').'" class="btn btn-success btn-xs btn-icon" title="'.__('general.send_subscribes').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-envelope"></i></a>';
 				$btn .= '<a href="'.url('dashboard/posts/'.Hashids::encode($post->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				$btn .= '<a href="'.url('dashboard/posts/'.Hashids::encode($post->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';

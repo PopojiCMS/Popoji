@@ -129,6 +129,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/contacts/index','Backend\ContactController@index');
 	Route::get('dashboard/contacts/table','Backend\ContactController@getIndex');
 	Route::get('dashboard/contacts/data','Backend\ContactController@anyData');
+	Route::get('dashboard/contacts/reply/{id}','Backend\ContactController@reply');
+	Route::post('dashboard/contacts/post-reply', 'Backend\ContactController@postReply');
 	Route::post('dashboard/contacts/deleteall', 'Backend\ContactController@deleteAll');
 	Route::resource('dashboard/contacts', 'Backend\ContactController');
 	

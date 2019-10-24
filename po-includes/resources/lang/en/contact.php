@@ -18,10 +18,12 @@ return [
 	'create_title' => 'Add Contacts',
 	'edit_title' => 'Edit Contacts',
 	'show_title' => 'View Contacts',
+	'reply_title' => 'Reply Contacts',
 	'store_notif' => 'Contact added!',
     'update_notif' => 'Contact updated!',
 	'destroy_notif' => 'Contact deleted!',
 	'destroy_error_notif' => 'Contact error deleted!',
+	'reply_notif' => 'Reply Success Sended',
 	'name' => 'Name',
 	'email' => 'Email',
 	'subject' => 'Subject',
@@ -30,5 +32,6 @@ return [
 	'read' => 'Read',
 	'unread' => 'Unread',
 	'created_at' => 'Date & Time',
+	'reply' => 'Reply',
 
 ];
