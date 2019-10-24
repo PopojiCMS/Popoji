@@ -35,6 +35,7 @@ return [
 	'roles' => 'Roles',
 	'permissions' => 'Permissions',
 	'subscribes' => 'Subscribes',
+	'send_subscribes' => 'Send To Subscribes',
 	'search' => 'Search',
 	'view_front_page' => 'View Front Page',
 	'edit_profile' => 'Edit Profile',

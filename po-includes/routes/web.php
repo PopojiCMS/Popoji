@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/posts/index','Backend\PostController@index');
 	Route::get('dashboard/posts/table','Backend\PostController@getIndex');
 	Route::get('dashboard/posts/data','Backend\PostController@anyData');
+	Route::get('dashboard/posts/subscribes/{id}','Backend\PostController@subscribes');
 	Route::post('dashboard/posts/deleteall', 'Backend\PostController@deleteAll');
 	Route::post('dashboard/posts/create-gallery', 'Backend\\PostController@createGallery');
 	Route::post('dashboard/posts/delete-gallery', 'Backend\\PostController@deleteGallery');

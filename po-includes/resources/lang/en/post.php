@@ -22,6 +22,7 @@ return [
     'update_notif' => 'Post updated!',
 	'destroy_notif' => 'Post deleted!',
 	'destroy_error_notif' => 'Post error deleted!',
+	'subscribe_notif' => 'Post sended to subscribes',
 	'category' => 'Category',
 	'title' => 'Title',
 	'seotitle' => 'SEO Title',

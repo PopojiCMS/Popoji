@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 use App\Post;
 use App\PostGallery;
 use App\Category;
 use App\Tag;
+use App\Subscribe;
+
+use App\Mail\SubscribeMail;
 
 use DB;
 
@@ -87,6 +91,7 @@ class PostController extends Controller
             ->addColumn('action', function ($post) {
 				$btn = '<div style="text-align:center;"><div class="btn-group">';
 				$btn .= '<a href="'.url('dashboard/posts/'.Hashids::encode($post->id).'').'" class="btn btn-secondary btn-xs btn-icon" title="'.__('general.view').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-eye"></i></a>';
+				$btn .= '<a href="'.url('dashboard/posts/subscribes/'.Hashids::encode($post->id).'').'" class="btn btn-warning btn-xs btn-icon" title="'.__('general.send_subscribes').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-envelope"></i></a>';
 				$btn .= '<a href="'.url('dashboard/posts/'.Hashids::encode($post->id).'/edit').'" class="btn btn-primary btn-xs btn-icon" title="'.__('general.edit').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-edit"></i></a>';
 				$btn .= '<a href="'.url('dashboard/posts/'.Hashids::encode($post->id).'').'" class="btn btn-danger btn-xs btn-icon" data-delete="" title="'.__('general.delete').'" data-toggle="tooltip" data-placement="left"><i class="fa fa-trash"></i></a>';
 				$btn .= '</div></div>';
@@ -401,4 +406,21 @@ class PostController extends Controller
 			return \Response::json($result);
 		}
     }
+	
+	public function subscribes($id)
+    {
+		$ids = Hashids::decode($id);
+		$subscribes = Subscribe::where('follow', '=', 'Y')->get();
+		$post = Post::findOrFail($ids[0]);
+		
+		foreach($subscribes as $subscribe) {
+			Mail::to($subscribe->email, $subscribe->name)
+				->queue(new SubscribeMail([
+					'person' => $subscribe,
+					'post' => $post
+				]));
+		}
+		
+		return redirect('dashboard/posts')->with('flash_message', __('post.subscribe_notif'));
+	}
 }
