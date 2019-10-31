@@ -1,6 +1,7 @@
 <?php
 
 use App\Setting;
+use App\Theme;
 
 if (!function_exists('getSetting')) {
     function getSetting($options)
@@ -10,6 +11,19 @@ if (!function_exists('getSetting')) {
 			return $result->value;
 		} else {
 			return '';
+		}
+	}
+}
+
+if (!function_exists('getTheme')) {
+    function getTheme($files)
+    {
+		$result = Theme::where('active', 'Y')->first();
+		if ($result) {
+			return 'frontend.'.$result->folder.'.'.$files;
+		} else {
+			$resultdef = Theme::where('id', '1')->first();
+			return 'frontend.'.$resultdef->folder.'.'.$files;
 		}
 	}
 }

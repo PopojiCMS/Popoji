@@ -414,14 +414,6 @@ EOF;
 	}
 	$startinstallc .= <<<EOF
 						<tr>
-							<td class="text-center" colspan="3">PHP Setting</td>
-						</tr>
-						<tr>
-							<td class="text-center">Short Open Tag</td>
-							<td class="text-center">{$ifshorttag}</td>
-							<td class="text-center"><span class="text-success">ON</span></td>
-						</tr>
-						<tr>
 							<td class="text-center" colspan="3">PHP Extension</td>
 						</tr>
 						<tr>

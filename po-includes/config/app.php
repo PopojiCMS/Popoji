@@ -172,6 +172,8 @@ return [
 		Maatwebsite\Excel\ExcelServiceProvider::class,
 		Spatie\Permission\PermissionServiceProvider::class,
 		Yajra\DataTables\DataTablesServiceProvider::class,
+		Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+		Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -238,6 +240,12 @@ return [
 		'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 		'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
 		'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+		'SEOMeta' => Artesaos\SEOTools\Facades\SEOMeta::class,
+		'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
+		'Twitter' => Artesaos\SEOTools\Facades\TwitterCard::class,
+		'JsonLd' => Artesaos\SEOTools\Facades\JsonLd::class,
+		'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+		'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ],
 

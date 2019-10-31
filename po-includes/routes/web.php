@@ -11,9 +11,8 @@
 |
 */
 
-Route::match(['get', 'post'], '/', function () {
-    return view('welcome');
-});
+Route::match(['get', 'post'], '/', 'HomeController@index');
+Route::get('home', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
 
