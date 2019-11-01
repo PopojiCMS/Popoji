@@ -36,7 +36,7 @@
 				</ul>
 				
 				@if($post->picture != '')
-					<p><img src="{{ asset('po-content/uploads/'.$post->picture) }}" class="img-fluid" /></p>
+					<p><img src="{{ getPicture($post->picture, '', $post->updated_by) }}" class="img-fluid" /></p>
 					<p class="tx-color-03 tx-13">{{ $post->picture_description }}</p>
 				@endif
 				{!! $post->content !!}

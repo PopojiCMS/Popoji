@@ -37,6 +37,158 @@
 	{!! NoCaptcha::renderJs() !!}
 </head>
 <body>
+	<header>
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
+						<div class="header-social">
+							<ul>
+								<li><a href="{{ getSetting('facebook') }}"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="{{ getSetting('twitter') }}"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="{{ getSetting('youtube') }}"><i class="fa fa-youtube-play"></i></a></li>
+							</ul>
+						</div>
+						<div class="top-left-menu">
+							<ul>
+								<li><a href="{{ url('contact') }}">Contact</a></li>
+								<li><a href="{{ url('pages/about-us') }}">About Us</a></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="hidden-xs col-md-6 col-sm-6 col-lg-6">
+						<div class="header-right-menu">
+							<ul>
+								<li><a href="{{ url('register') }}"><i class="fa fa-lock"></i> Sign Up</a> or <a href="{{ url('login') }}"> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="header-mid hidden-xs">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo">
+							<a href="{{ url('/') }}"><img src="{{ asset('po-content/uploads/'.getSetting('logo')) }}" class="img-responsive" alt=""></a>
+						</div>
+					</div>
+					
+					<div class="col-sm-8">
+						<a href="{{ url('/') }}"><img src="{{ asset('po-content/frontend/inews/images/add728x90-1.jpg') }}" class="img-responsive" alt=""></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<nav class="navbar navbar-default navbar-sticky navbar-mobile bootsnav">
+			<div class="top-search">
+				<div class="container">
+					<form method="get" action="{{ url('search') }}">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-search"></i></span>
+							<input name="terms" type="text" class="form-control" placeholder="Search">
+							<span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="container">
+				<div class="attr-nav">
+					<ul>
+						<li class="search"><a href="javascript:void(0);"><i class="fa fa-search"></i></a></li>
+					</ul>
+				</div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+						<i class="fa fa-bars"></i>
+					</button>
+					<a class="navbar-brand hidden-sm hidden-md hidden-lg" href="#brand"><img src="{{ asset('po-content/uploads/'.getSetting('logo')) }}" class="logo" alt=""></a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-menu">
+					<ul class="nav navbar-nav navbar-left" data-in="" data-out="">
+						@each(getTheme('partials.menu'), getMenus(), 'menu', getTheme('partials.menu'))
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+	<main class="page_main_wrapper">
+		@yield('content')
+	</main>
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 footer-box">
+					<div class="about-inner">
+						<img src="{{ asset('po-content/uploads/'.getSetting('logo_footer')) }}" class="img-responsive" alt=""/>
+						<p>{{ \Str::limit(strip_tags(getPages(1)->content), 200) }}</p>
+						<ul>
+							<li><i class="ti-location-arrow"></i>{{ getSetting('address') }}</li>
+							<li><i class="ti-mobile"></i>{{ getSetting('telephone') }}</li>
+							<li><i class="ti-email"></i>{{ getSetting('email') }}</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="col-sm-2 footer-box">
+					<h3 class="wiget-title">Sitemap</h3>
+					<ul class="menu-services">
+						<li><a href="{{ url('/') }}">Home</a></li>
+						<li><a href="{{ url('pages/about-us') }}">About Us</a></li>
+						<li><a href="{{ url('pages/services') }}">Services</a></li>
+						<li><a href="{{ url('album/all') }}">Gallery</a></li>
+						<li><a href="{{ url('contact') }}">Contact</a></li>
+					</ul>
+				</div>
+				
+				<div class="col-sm-2 footer-box">
+					<h3 class="wiget-title">Category</h3>
+					<ul class="menu-services">
+						@foreach(getCategory(7) as $category)
+							<li><a href="{{ url('category/'.$category->seotitle) }}">{{ $category->title }} ({{ $category->posts_count }})</a></li>
+						@endforeach
+					</ul>
+				</div>
+				
+				<div class="col-sm-4 footer-box">
+					<h3 class="wiget-title">Recent Post</h3>
+					<div class="footer-news-grid">
+						@foreach(latestPost(2) as $latestpost)
+							<div class="news-list-item">
+								<div class="img-wrapper">
+									<a href="{{ url('detailpost/'.$latestpost->seotitle) }}" class="thumb">
+										<img src="{{ getPicture($latestpost->picture, 'thumb', $latestpost->updated_by) }}" alt="" class="img-responsive">
+										@if($latestpost->type == 'picture')
+											<div class="link-icon">
+												<i class="fa fa-image"></i>
+											</div>
+										@elseif($latestpost->type == 'video')
+											<div class="link-icon">
+												<i class="fa fa-camera"></i>
+											</div>
+										@endif
+									</a>
+								</div>
+								<div class="post-info-2">
+									<h5><a href="{{ url('detailpost/'.$latestpost->seotitle) }}" class="title">{{ $latestpost->title }}</a></h5>
+									<ul class="authar-info">
+										<li><i class="ti-timer"></i> {{ date('d F Y', strtotime($latestpost->created_at)) }}</li>
+									</ul>
+								</div>
+							</div>
+						@endforeach
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 	
 	<div class="sub-footer">
 		<div class="container">
@@ -44,6 +196,7 @@
 				<div class="col-xs-12 col-sm-5 col-md-5">
 					<div class="copy">Copyright &copy; 2019 {{ getSetting('web_author') }}. All Rights Reserved.</div>
 				</div>
+				
 				<div class="col-xs-12 col-sm-7 col-md-7">
 					<ul class="footer-nav">
 						<li><a href="{{ url('pages/about-us') }}">About Us</a></li>

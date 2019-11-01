@@ -61,5 +61,9 @@ class Category extends Model
 		return static::with(implode('.', array_fill(0, 100, 'children')))->get();
 	}
 	
+	public function posts() {
+		return $this->hasMany('App\Post', 'category_id');
+	}
+	
 	protected static $logAttributes = ['*'];
 }

@@ -23,7 +23,7 @@
 <div class="form-group">
     {!! Form::label('value', __('setting.value').' *', ['class' => 'control-label']) !!}
 	@if(isset($setting))
-		@if ($setting->options == 'favicon' || $setting->options == 'logo')
+		@if ($setting->options == 'favicon' || $setting->options == 'logo' || $setting->options == 'logo_footer')
 			<div class="input-group">
 				{!! Form::text('value', null, ['class' => $errors->has('value') ? 'form-control is-invalid' : 'form-control', 'id' => 'input-filemanager', 'required' => 'required']) !!}
 				<span class="input-group-append">
