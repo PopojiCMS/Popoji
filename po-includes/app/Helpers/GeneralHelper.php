@@ -6,6 +6,7 @@ use App\Menu;
 use App\Pages;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 if (!function_exists('getPicture')) {
 	function getPicture($name, $type, $user)
@@ -140,6 +141,35 @@ if (!function_exists('headlinePost')) {
 			->where([['posts.active', '=', 'Y'],['posts.headline', '=', 'Y']])
 			->select('posts.*', 'categories.title as ctitle', 'users.name')
 			->orderBy('posts.id', 'desc')
+			->limit($limit)
+			->offset($offset)
+			->get();
+		return $result;
+	}
+}
+
+if (!function_exists('popularPost')) {
+	function popularPost($limit, $offset = '0')
+	{
+		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+			->leftJoin('categories', 'categories.id', 'posts.category_id')
+			->where([['posts.active', '=', 'Y']])
+			->select('posts.*', 'categories.title as ctitle', 'users.name')
+			->orderBy('posts.hits', 'desc')
+			->limit($limit)
+			->offset($offset)
+			->get();
+		return $result;
+	}
+}
+
+if (!function_exists('getTag')) {
+	function getTag($limit, $offset = '0')
+	{
+		$result = Tag::leftJoin('users', 'users.id', 'tags.created_by')
+			->where([['tags.count', '>', '1']])
+			->select('tags.*', 'users.name')
+			->orderBy('tags.count', 'desc')
 			->limit($limit)
 			->offset($offset)
 			->get();

@@ -9,7 +9,7 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => "PopojiCMS - Engine Management System Indonesia, Buat Sendiri Rasa Webmu", // set false to total remove
+            'title'        => false, // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
             'description'  => 'PopojiCMS - CMS Indonesia, buat sendiri rasa webmu, menawarankan konsep web yang menarik dan simpel tentunya, bisa dijadikan alternatif engine web anda, karena kami adalah CMS Gratis Indonesia', // set false to total remove
             'separator'    => ' - ',
