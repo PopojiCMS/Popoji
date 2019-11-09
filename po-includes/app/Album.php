@@ -49,5 +49,9 @@ class Album extends Model
 		return $this->belongsTo('App\User', 'updated_by');
 	}
 	
+	public function gallerys() {
+		return $this->hasMany('App\Gallery', 'album_id');
+	}
+	
 	protected static $logAttributes = ['*'];
 }

@@ -26,7 +26,7 @@ class PagesController extends Controller
      */
     public function index($seotitle)
     {
-		$pages = Pages::where('seotitle', '=', $seotitle)->first();
+		$pages = Pages::where([['seotitle', '=', $seotitle],['active', '=', 'Y']])->first();
 		
 		if($pages) {
 			$twitterid = explode('/', getSetting('twitter'));

@@ -14,6 +14,8 @@
 Route::match(['get', 'post'], '/', 'HomeController@index');
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('pages/{seotitle}', 'PagesController@index');
+Route::get('category/{seotitle}', 'CategoryController@index');
+Route::get('album/{seotitle}', 'GalleryController@index');
 Route::get('404', 'HomeController@error404')->name('404');
 
 Auth::routes(['verify' => true]);
