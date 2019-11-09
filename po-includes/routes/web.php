@@ -17,6 +17,8 @@ Route::get('pages/{seotitle}', 'PagesController@index');
 Route::get('category/{seotitle}', 'CategoryController@index');
 Route::get('album/{seotitle}', 'GalleryController@index');
 Route::get('404', 'HomeController@error404')->name('404');
+Route::get('contact', 'ContactController@index');
+Route::post('contact/send', 'ContactController@send');
 
 Auth::routes(['verify' => true]);
 

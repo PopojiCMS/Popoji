@@ -33,5 +33,6 @@ return [
 	'unread' => 'Unread',
 	'created_at' => 'Date & Time',
 	'reply' => 'Reply',
+	'send_notif' => 'Thanks for contacting us. We will get in touch with you shortly.',
 
 ];
