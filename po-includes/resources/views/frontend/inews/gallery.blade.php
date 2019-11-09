@@ -24,12 +24,12 @@
 											<div class="col-xs-6 col-sm-4 col-md-4">
 												<div class="grid-item">
 													<div class="grid-item-img">
-														<a href="{{ getPicture($gallery->picture, 'original', $gallery->updated_by) }}">
+														<a href="{{ getPicture($gallery->picture, 'original', $gallery->updated_by) }}" class="gallery" title="{{ $gallery->title }}" rel="album-gallery">
 															<img src="{{ getPicture($gallery->picture, 'medium', $gallery->updated_by) }}" class="img-responsive" alt="">
 															<div class="link-icon"><i class="fa fa-camera"></i></div>
 														</a>
 													</div>
-													<h5><a href="{{ getPicture($gallery->picture, 'original', $gallery->updated_by) }}" class="title">{{ $gallery->title }}</a></h5>
+													<h5><a href="{{ getPicture($gallery->picture, 'original', $gallery->updated_by) }}" class="gallery title" title="{{ $gallery->title }}" rel="album-gallery">{{ $gallery->title }}</a></h5>
 												</div>
 											</div>
 										@endforeach
@@ -69,3 +69,19 @@
 		</div>
 	</div>
 @endsection
+
+@push('styles')
+<link href="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<script src="{{ asset('po-content/filemanager/fancybox/jquery.fancybox.js') }}"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$(".gallery").fancybox({
+			'type' : 'image'
+		});
+	});
+</script>
+@endpush
