@@ -52,8 +52,9 @@ class TagController extends Controller
 			SEOTools::jsonLd()->setImage(asset('po-content/uploads/'.getSetting('logo')));
 			
 			$posts = Post::leftJoin('users', 'users.id', 'posts.created_by')
+				->leftJoin('categories', 'categories.id', 'posts.category_id')
 				->where([['posts.tag', 'LIKE', '%'.$tag->title.'%'],['posts.active', '=', 'Y']])
-				->select('posts.*', 'users.name')
+				->select('posts.*', 'categories.title as ctitle', 'users.name')
 				->orderBy('posts.id', 'desc')
 				->paginate(5);
 			
