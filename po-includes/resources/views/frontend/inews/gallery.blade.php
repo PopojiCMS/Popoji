@@ -10,7 +10,7 @@
 					<div class="post-inner">
 						<div class="post-head">
 							@if(isset($album))
-								<h2 class="title">{{ $album->title }} ({{ $gallerys->count() }})</h2>
+								<h2 class="title">{{ $album->title }} ({{ $gallerys->total() }})</h2>
 							@else
 								<h2 class="title">All Album</h2>
 							@endif

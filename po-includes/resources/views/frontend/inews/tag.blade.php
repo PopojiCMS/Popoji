@@ -9,11 +9,7 @@
 				<div class="theiaStickySidebar">
 					<div class="post-inner">
 						<div class="post-head">
-							@if(isset($category))
-								<h2 class="title">{{ $category->title }} ({{ $posts->total() }})</h2>
-							@else
-								<h2 class="title">All Category</h2>
-							@endif
+							<h2 class="title">{{ $tag->title }} ({{ $posts->total() }})</h2>
 						</div>
 						
 						<div class="post-body">
