@@ -58,7 +58,7 @@
 				<li class="nav-item"><a href="{{ url('/dashboard/components/table') }}" class="nav-link"><i data-feather="package"></i> <span>{{ __('general.components') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/gallerys/table') }}" class="nav-link"><i data-feather="image"></i> <span>{{ __('general.gallerys') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/contacts/table') }}" class="nav-link"><i data-feather="mail"></i> <span>{{ __('general.contacts') }}</span></a></li>
-				<li class="nav-item"><a href="{{ url('/dashboard/clark') }}" class="nav-link"><i data-feather="command"></i> <span>{{ __('general.clark') }}</span></a></li>
+				<!-- <li class="nav-item"><a href="{{ url('/dashboard/clark') }}" class="nav-link"><i data-feather="command"></i> <span>{{ __('general.clark') }}</span></a></li> !-->
 				<li class="nav-label mg-t-25">{{ __('general.user') }}</li>
 				<li class="nav-item"><a href="{{ url('/dashboard/users/table') }}" class="nav-link"><i data-feather="users"></i> <span>{{ __('general.users') }}</span></a></li>
 				<li class="nav-item"><a href="{{ url('/dashboard/roles/table') }}" class="nav-link"><i data-feather="life-buoy"></i> <span>{{ __('general.roles') }}</span></a></li>
