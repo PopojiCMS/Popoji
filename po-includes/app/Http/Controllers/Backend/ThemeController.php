@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Artisan;
 
 use App\Theme;
 
@@ -231,4 +234,105 @@ class ThemeController extends Controller
 			return redirect('forbidden');
 		}
     }
+	
+	public function install(Request $request)
+    {
+		if(Auth::user()->can('read-themes')) {
+			return view('backend.theme.install');
+		} else {
+			return redirect('forbidden');
+		}
+    }
+	
+	public function processInstall(Request $request)
+    {
+		if(Auth::user()->can('create-themes')) {
+			$this->validate($request, [
+				'files' => 'required|mimetypes:application/zip,application/octet-stream'
+			]);
+			
+			if ($request->file('files')->isValid()) {
+				$filename = rand(111,999).date('YmdHis');
+				$extention = $request->file('files')->getClientOriginalExtension();
+				$filenamewithext = $filename.'.'.$extention;
+				
+				if(!File::isDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/themes/'.$filename))))){
+					File::makeDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/themes/'.$filename))), 0777, true, true);
+					$upload = $request->file('files')->move('po-content/installer/themes/'.$filename, $filenamewithext);
+					
+					if($upload) {
+						$zip = new \ZipArchive;
+						$res = $zip->open('po-content/installer/themes/'.$filename.'/'.$filenamewithext);
+						
+						if($res===TRUE) {
+							$zip->extractTo('po-content/installer/themes/'.$filename);
+							$zip->close();
+							
+							$info = json_decode(file_get_contents('po-content/installer/themes/'.$filename.'/info.json'), true);
+							if($info) {
+								$checktheme = Theme::where('folder', '=', $info['folder'])->count();
+								if ($checktheme > 0) {
+									return back()->with('flash_message', __('theme.install_error_notif'));
+								} else {
+									Theme::create([
+										'title' => $info['title'],
+										'author' => $info['author'],
+										'folder' => $info['folder'],
+										'active' => 'N',
+										'created_by' => Auth::User()->id,
+										'updated_by' => Auth::User()->id
+									]);
+									
+									$this->importAssets($filename);
+									$this->importViews($filename);
+									
+									File::deleteDirectory(str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/themes/'.$filename))));
+									
+									return redirect('dashboard/themes')->with('flash_message', __('theme.store_notif'));
+								}
+							} else {
+								return back()->with('flash_message', __('theme.install_error_notif'));
+							}
+						} else {
+							return back()->with('flash_message', __('theme.install_error_notif'));
+						}
+					} else {
+						return back()->with('flash_message', __('theme.install_error_notif'));
+					}
+				}
+			} else {
+				return back()->with('flash_message', __('theme.install_error_notif'));
+			}
+		} else {
+			return redirect('forbidden');
+		}
+    }
+	
+	protected function importAssets($filename)
+    {
+		$directory = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/themes/'.$filename.'/Asset')));
+		$files = File::directories($directory);
+		foreach($files as $file){
+			$pathinfo = pathinfo($file);
+			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
+			$newpath = base_path('resources/views/frontend/'.$pathinfo['basename']);
+			if(!File::isDirectory($newpath)){
+				File::moveDirectory($oldpath, $newpath);
+			}
+		}
+	}
+	
+	protected function importViews($filename)
+    {
+		$directory = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/installer/themes/'.$filename.'/View')));
+		$files = File::directories($directory);
+		foreach($files as $file){
+			$pathinfo = pathinfo($file);
+			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
+			$newpath = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/frontend/'.$pathinfo['basename'])));
+			if(!File::isDirectory($newpath)){
+				File::moveDirectory($oldpath, $newpath);
+			}
+		}
+	}
 }

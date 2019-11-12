@@ -27,5 +27,6 @@ return [
 	'follow' => 'Follow',
 	'unfollow' => 'Unfollow',
 	'created_at' => 'Date & Time',
+	'send_notif' => 'Thanks for subscribe us. We will get in touch with you shortly.',
 
 ];

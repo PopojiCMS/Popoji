@@ -21,6 +21,7 @@ Route::get('album/{seotitle}', 'GalleryController@index');
 Route::get('404', 'HomeController@error404')->name('404');
 Route::get('contact', 'ContactController@index');
 Route::post('contact/send', 'ContactController@send');
+Route::post('subscribe', 'HomeController@subscribe');
 
 Auth::routes(['verify' => true]);
 
@@ -102,6 +103,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/themes/index','Backend\ThemeController@index');
 	Route::get('dashboard/themes/table','Backend\ThemeController@getIndex');
 	Route::get('dashboard/themes/data','Backend\ThemeController@anyData');
+	Route::get('dashboard/themes/install','Backend\ThemeController@install');
+	Route::post('dashboard/themes/process-install','Backend\ThemeController@processInstall');
 	Route::post('dashboard/themes/deleteall', 'Backend\ThemeController@deleteAll');
 	Route::resource('dashboard/themes', 'Backend\ThemeController');
 	

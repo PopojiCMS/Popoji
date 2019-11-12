@@ -76,4 +76,25 @@ class HomeController extends Controller
 		
 		return response()->view(getTheme('404'), [], 404);
 	}
+	
+	public function subscribe(Request $request)
+    {
+		$this->validate($request,[
+			'email' => 'required|string|max:255|email'
+		]);
+		
+		$name = explode('@', $request->email);
+		$finalname = ucfirst($name[0]);
+		
+		$request->request->add([
+			'name' => $finalname,
+			'created_by' => 1,
+			'updated_by' => 1
+		]);
+		$requestData = $request->all();
+
+		Subscribe::create($requestData);
+		
+		return redirect('contact')->with('flash_message', __('subscribe.send_notif'));
+    }
 }
