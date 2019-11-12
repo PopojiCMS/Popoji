@@ -7,6 +7,7 @@ use App\Pages;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\Gallery;
 
 if (!function_exists('getPicture')) {
 	function getPicture($name, $type, $user)
@@ -87,7 +88,6 @@ if (!function_exists('categoryTreeOption')) {
 		foreach ($elements as $key => $element) {
 			if ($element['parent'] == $parentId) {
 				echo '<option value="'.$element['id'].'">'.$indent.' '.$element['title'].'</option>';
-				
 				$children = categoryTreeOption($elements, $element['id'], $indent.'-');
 			}
 		}
@@ -124,11 +124,24 @@ if (!function_exists('latestPost')) {
 		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
 			->leftJoin('categories', 'categories.id', 'posts.category_id')
 			->where([['posts.active', '=', 'Y']])
-			->select('posts.*', 'categories.title as ctitle', 'users.name')
+			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
 			->orderBy('posts.id', 'desc')
 			->limit($limit)
 			->offset($offset)
 			->get();
+		return $result;
+	}
+}
+
+if (!function_exists('latestPostWithPaging')) {
+	function latestPostWithPaging($limit)
+	{
+		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+			->leftJoin('categories', 'categories.id', 'posts.category_id')
+			->where([['posts.active', '=', 'Y']])
+			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+			->orderBy('posts.id', 'desc')
+			->paginate($limit);
 		return $result;
 	}
 }
@@ -139,7 +152,7 @@ if (!function_exists('headlinePost')) {
 		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
 			->leftJoin('categories', 'categories.id', 'posts.category_id')
 			->where([['posts.active', '=', 'Y'],['posts.headline', '=', 'Y']])
-			->select('posts.*', 'categories.title as ctitle', 'users.name')
+			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
 			->orderBy('posts.id', 'desc')
 			->limit($limit)
 			->offset($offset)
@@ -154,8 +167,25 @@ if (!function_exists('popularPost')) {
 		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
 			->leftJoin('categories', 'categories.id', 'posts.category_id')
 			->where([['posts.active', '=', 'Y']])
-			->select('posts.*', 'categories.title as ctitle', 'users.name')
+			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
 			->orderBy('posts.hits', 'desc')
+			->limit($limit)
+			->offset($offset)
+			->get();
+		return $result;
+	}
+}
+
+if (!function_exists('trendingPost')) {
+	function trendingPost($limit, $offset = '0')
+	{
+		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+			->leftJoin('categories', 'categories.id', 'posts.category_id')
+			->where([['posts.active', '=', 'Y']])
+			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+			->selectRaw('(select count(id) as total from comments where post_id = posts.id) as ctotal')
+			->orderBy('posts.hits', 'desc')
+			->orderBy('ctotal', 'desc')
 			->limit($limit)
 			->offset($offset)
 			->get();
@@ -170,6 +200,21 @@ if (!function_exists('getTag')) {
 			->where([['tags.count', '>', '1']])
 			->select('tags.*', 'users.name')
 			->orderBy('tags.count', 'desc')
+			->limit($limit)
+			->offset($offset)
+			->get();
+		return $result;
+	}
+}
+
+if (!function_exists('latestGallery')) {
+	function latestGallery($limit, $offset = '0')
+	{
+		$result = Gallery::leftJoin('users', 'users.id', 'gallerys.created_by')
+			->leftJoin('albums', 'albums.id', 'gallerys.album_id')
+			->where('albums.active', '=', 'Y')
+			->select('gallerys.*', 'albums.title as atitle', 'albums.seotitle as aseotitle', 'users.name')
+			->orderBy('gallerys.id', 'desc')
 			->limit($limit)
 			->offset($offset)
 			->get();
