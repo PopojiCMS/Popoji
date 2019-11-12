@@ -24,7 +24,11 @@ class ThemeController extends Controller
     public function index(Request $request)
     {
 		if(Auth::user()->can('read-themes')) {
-			return view('backend.theme.datatable');
+			$themes = Theme::leftJoin('users', 'users.id', '=', 'themes.created_by')
+				->select('themes.*', 'users.id as uid', 'users.name as uname')
+				->get();
+			
+			return view('backend.theme.datatable', compact('themes'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -38,7 +42,11 @@ class ThemeController extends Controller
     public function getIndex()
 	{
 		if(Auth::user()->can('read-themes')) {
-			return view('backend.theme.datatable');
+			$themes = Theme::leftJoin('users', 'users.id', '=', 'themes.created_by')
+				->select('themes.*', 'users.id as uid', 'users.name as uname')
+				->get();
+			
+			return view('backend.theme.datatable', compact('themes'));
 		} else {
 			return redirect('forbidden');
 		}
@@ -315,7 +323,7 @@ class ThemeController extends Controller
 		foreach($files as $file){
 			$pathinfo = pathinfo($file);
 			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
-			$newpath = base_path('resources/views/frontend/'.$pathinfo['basename']);
+			$newpath = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/frontend/'.$pathinfo['basename'])));
 			if(!File::isDirectory($newpath)){
 				File::moveDirectory($oldpath, $newpath);
 			}
@@ -329,7 +337,7 @@ class ThemeController extends Controller
 		foreach($files as $file){
 			$pathinfo = pathinfo($file);
 			$oldpath = $pathinfo['dirname'].'/'.$pathinfo['basename'];
-			$newpath = str_replace('\po-includes', '', str_replace('/po-includes', '', base_path('po-content/frontend/'.$pathinfo['basename'])));
+			$newpath = base_path('resources/views/frontend/'.$pathinfo['basename']);
 			if(!File::isDirectory($newpath)){
 				File::moveDirectory($oldpath, $newpath);
 			}

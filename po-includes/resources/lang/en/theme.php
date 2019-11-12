@@ -35,6 +35,6 @@ return [
 	'instruction_2' => 'Upload the .zip theme file which can be downloaded via POPOJI official website or from a trusted developer.',
 	'instruction_3' => 'The system will automatically install the theme files that you need.',
 	'instruction_4' => 'If an error occurs, please repeat the steps from the beginning. If there are the same themes, the system will not run the installation process.',
-	'instruction_5' => 'A standard theme contains files assets (css, js ,etc) and blade template.',
+	'instruction_5' => 'A standard theme contains files assets (css, js, preview ,etc) and blade template.',
 
 ];
