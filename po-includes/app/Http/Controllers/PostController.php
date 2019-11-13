@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Post;
+use App\PostGallery;
 use App\Comment;
 
 use DB;
@@ -56,6 +57,8 @@ class PostController extends Controller
 				->withCount('comments')
 				->first();
 			
+			$gallery = PostGallery::where('post_id', '=', $post->id)->get();
+			
 			$segment = isset($request->segment) ? $request->segment : 1;
 			$expcontent = explode('<hr />', $post->content);
 			$paginator = $this->customPaginate($expcontent, 1, $segment, [
@@ -94,7 +97,7 @@ class PostController extends Controller
 			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
 			SEOTools::jsonLd()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			
-			return view(getTheme('detailpost'), compact('post', 'content', 'paginator'));
+			return view(getTheme('detailpost'), compact('post', 'content', 'paginator', 'gallery'));
 		} else {
 			return redirect('404');
 		}
@@ -122,6 +125,8 @@ class PostController extends Controller
 				->withCount('comments')
 				->first();
 			
+			$gallery = PostGallery::where('post_id', '=', $post->id)->get();
+			
 			$segment = isset($request->segment) ? $request->segment : 1;
 			$expcontent = explode('<hr />', $post->content);
 			$paginator = $this->customPaginate($expcontent, 1, $segment, [
@@ -160,7 +165,7 @@ class PostController extends Controller
 			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
 			SEOTools::jsonLd()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			
-			return view(getTheme('detailpost'), compact('post', 'content', 'paginator'));
+			return view(getTheme('detailpost'), compact('post', 'content', 'paginator', 'gallery'));
 		} else {
 			return redirect('404');
 		}
