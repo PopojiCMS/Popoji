@@ -36,7 +36,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-		'category_id', 'title', 'seotitle', 'content', 'picture', 'picture_description', 'tag', 'type', 'active', 'headline', 'comment', 'hits', 'created_by', 'updated_by'
+		'category_id', 'title', 'seotitle', 'content', 'meta_description', 'picture', 'picture_description', 'tag', 'type', 'active', 'headline', 'comment', 'hits', 'created_by', 'updated_by'
 	];
 	
 	public function createdBy()
@@ -52,6 +52,10 @@ class Post extends Model
 	public function category()
 	{
 		return $this->belongsTo('App\Category', 'category_id');
+	}
+	
+	public function comments() {
+		return $this->hasMany('App\Comment', 'post_id');
 	}
 	
 	protected static $logAttributes = ['*'];

@@ -28,6 +28,11 @@
 			{!! $errors->first('parent', '<p class="help-block">:message</p>') !!}
 		</div>
 		<div class="form-group">
+			{!! Form::label('meta_description', __('post.meta_description'), ['class' => 'control-label']) !!}
+			{!! Form::textarea('meta_description', null, ['class' => $errors->has('meta_description') ? 'form-control is-invalid ht-100-i' : 'form-control ht-100-i']) !!}
+			{!! $errors->first('meta_description', '<p class="help-block">:message</p>') !!}
+		</div>
+		<div class="form-group">
 			{!! Form::label('tag', __('post.tag'), ['class' => 'control-label']) !!}
 			{!! Form::text('tag', null, ['class' => $errors->has('tag') ? 'form-control is-invalid' : 'form-control']) !!}
 			{!! $errors->first('tag', '<p class="help-block">:message</p>') !!}

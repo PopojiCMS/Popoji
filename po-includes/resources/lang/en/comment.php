@@ -37,5 +37,6 @@ return [
 	'read' => 'Read',
 	'unread' => 'Unread',
 	'reply' => 'Reply',
+	'send_notif' => 'Thanks for comment this post. We will moderation your comment first.',
 
 ];

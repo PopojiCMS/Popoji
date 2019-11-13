@@ -27,6 +27,7 @@ return [
 	'title' => 'Title',
 	'seotitle' => 'SEO Title',
 	'content' => 'Content',
+	'meta_description' => 'Meta Description',
 	'picture' => 'Picture',
 	'picture_description' => 'Picture Description',
 	'tag' => 'Tag',

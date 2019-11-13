@@ -59,7 +59,7 @@ class Comment extends Model
 	
 	public function post()
 	{
-		return $this->belongsTo('App\Post', 'updated_by');
+		return $this->belongsTo('App\Post', 'post_id');
 	}
 	
 	protected static $logAttributes = ['*'];

@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
 			$table->string('title')->nullable();
 			$table->string('seotitle')->nullable();
 			$table->text('content')->nullable();
+			$table->text('meta_description')->nullable();
 			$table->string('picture')->nullable();
 			$table->string('picture_description')->nullable();
 			$table->string('tag')->nullable();

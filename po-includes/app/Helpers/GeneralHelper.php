@@ -193,6 +193,30 @@ if (!function_exists('trendingPost')) {
 	}
 }
 
+if (!function_exists('relatedPost')) {
+	function relatedPost($id, $tag, $limit, $offset = '0')
+	{
+		$tags = explode(',', $tag);
+		$arrtags = [];
+		foreach($arrtags as $a) {
+			$arrtags[] = ['posts.tag', 'LIKE', '%'.$a.'%'];
+		}
+		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+			->leftJoin('categories', 'categories.id', 'posts.category_id')
+			->orWhere($arrtags)
+			->where([
+				['posts.id', '!=', $id],
+				['posts.active', '=', 'Y']
+			])
+			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+			->orderByRaw("RAND()")
+			->limit($limit)
+			->offset($offset)
+			->get();
+		return $result;
+	}
+}
+
 if (!function_exists('getTag')) {
 	function getTag($limit, $offset = '0')
 	{

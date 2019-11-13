@@ -54,7 +54,7 @@ class CategoryController extends Controller
 			$posts = Post::leftJoin('users', 'users.id', 'posts.created_by')
 				->leftJoin('categories', 'categories.id', 'posts.category_id')
 				->where([['posts.category_id', '=', $category->id],['posts.active', '=', 'Y']])
-				->select('posts.*', 'categories.title as ctitle', 'users.name')
+				->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
 				->orderBy('posts.id', 'desc')
 				->paginate(5);
 			
@@ -85,7 +85,7 @@ class CategoryController extends Controller
 				$posts = Post::leftJoin('users', 'users.id', 'posts.created_by')
 					->leftJoin('categories', 'categories.id', 'posts.category_id')
 					->where([['posts.active', '=', 'Y']])
-					->select('posts.*', 'categories.title as ctitle', 'users.name')
+					->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
 					->orderBy('posts.id', 'desc')
 					->paginate(5);
 				

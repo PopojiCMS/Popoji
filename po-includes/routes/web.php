@@ -17,6 +17,8 @@ Route::get('pages/{seotitle}', 'PagesController@index');
 Route::get('category/{seotitle}', 'CategoryController@index');
 Route::get('tag/{seotitle}', 'TagController@index');
 Route::get('search', 'PostController@search');
+Route::get('detailpost/{seotitle}', 'PostController@index');
+Route::post('comment/send/{seotitle}', 'PostController@send');
 Route::get('album/{seotitle}', 'GalleryController@index');
 Route::get('404', 'HomeController@error404')->name('404');
 Route::get('contact', 'ContactController@index');
