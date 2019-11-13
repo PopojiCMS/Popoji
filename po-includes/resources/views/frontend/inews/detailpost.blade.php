@@ -28,7 +28,7 @@
 								@endif
 							</div>
 							
-							{!! $post->content !!}
+							{!! $content !!}
 						</div>
 						
 						@if($post->type == 'pagination')
@@ -36,13 +36,7 @@
 								<div class="row thm-margin">
 									<div class="col-xs-12 col-sm-12 col-md-12 thm-padding">
 										<ul class="pagination">
-											<li class="disabled"><span class="ti-angle-left"></span></li>
-											<li class="active"><span>1</span></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li class="disabled"><span class="extend">...</span></li><li>
-											</li><li><a href="#">12</a></li>
-											<li><a href="#"><i class="ti-angle-right"></i></a></li>
+											{!! postWithPagination($paginator, '<span class="ti-angle-left"></span>', '<span class="ti-angle-right"></span>') !!}
 										</ul>
 									</div>
 								</div>
@@ -124,13 +118,32 @@
 						</div>
 					</div>
 					
+					@if(getSetting('comment') == 'Y')
+						<div class="comments-container">
+							<h3>Comments ({{ $post->comments_count }})</h3>
+							@if($post->comments_count > 0)
+								<ul class="comments-list">
+									@each(getTheme('partials.comment'), getComments($post->id, 5), 'comment', getTheme('partials.comment'))
+								</ul>
+								
+								<div class="post-footer"> 
+									<div class="row thm-margin">
+										<div class="col-xs-12 col-sm-12 col-md-12 thm-padding">
+											{{ getComments($post->id, 5)->links() }}
+										</div>
+									</div>
+								</div>
+							@else
+								<p class="text-center">There are no comments yet</p>
+							@endif
+						</div>
+					@endif
 					
-					
-					<form class="comment-form" action="{{ url('comment/send/'.$post->seotitle) }}" method="post">
+					<form class="comment-form" id="comment-form" action="{{ url('comment/send/'.$post->seotitle) }}" method="post">
 						{{ csrf_field() }}
-						<input type="hidden" name="parent" value="{{ old('parent') == null ? 0 : old('parent') }}" />
-						<input type="hidden" name="post_id" value="{{ $post->id }}" />
-						<h3 id="comment-form"><strong>Leave</strong> a Comment</h3>
+						<input type="hidden" name="parent" id="parent" value="{{ old('parent') == null ? 0 : old('parent') }}" />
+						<input type="hidden" name="post_id" id="post_id" value="{{ $post->id }}" />
+						<h3><strong>Leave</strong> a Comment</h3>
 						<div class="row">
 							<div class="col-sm-12">
 								@if (Session::has('flash_message'))
@@ -180,3 +193,18 @@
 		</div>
 	</div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+	$(function() {
+		$('.po-reply').on('click', function() {
+			var id = $(this).attr('id');
+			$('#comment-form #parent').val(id);
+			
+			$('html, body').animate({
+				scrollTop: $("#comment-form").offset().top
+			}, 1000);
+		});
+	});
+</script>
+@endpush

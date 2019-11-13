@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Post;
 use App\Comment;
@@ -28,7 +31,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index($seotitle)
+    public function index($seotitle, Request $request)
     {
 		$checkpost = Post::where([['seotitle', '=', $seotitle],['active', '=', 'Y']])->first();
 		
@@ -44,6 +47,23 @@ class PostController extends Controller
 				->orderBy('posts.id', 'desc')
 				->withCount('comments')
 				->first();
+			
+			$segment = isset($request->segment) ? $request->segment : 1;
+			$expcontent = explode('<hr />', $post->content);
+			$paginator = $this->customPaginate($expcontent, 1, $segment, [
+				'path' => Paginator::resolveCurrentPath(),
+				'pageName' => 'segment'
+			]);
+			$content = '';
+			if($post->type == 'pagination') {
+				if(count($expcontent) > 0) {
+					$content = $expcontent[$segment-1];
+				} else {
+					$content = $post->content;
+				}
+			} else {
+				$content = $post->content;
+			}
 			
 			$twitterid = explode('/', getSetting('twitter'));
 			SEOTools::setTitle($post->title.' - '.getSetting('web_name'));
@@ -66,7 +86,7 @@ class PostController extends Controller
 			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
 			SEOTools::jsonLd()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			
-			return view(getTheme('detailpost'), compact('post'));
+			return view(getTheme('detailpost'), compact('post', 'content', 'paginator'));
 		} else {
 			return redirect('404');
 		}
@@ -152,4 +172,28 @@ class PostController extends Controller
 		
 		return redirect('detailpost/'.$seotitle.'#comment-form')->with('flash_message', __('comment.send_notif'));
     }
+	
+	public static function customPaginate($items, $perPage = 1, $page = null, $options = [])
+	{
+
+		$page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+		$items = $items instanceof Collection ? $items : Collection::make($items);
+
+		$lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+
+		return [
+			'current_page' => $lap->currentPage(),
+			'data' => $lap ->values(),
+			'first_page_url' => $lap ->url(1),
+			'from' => $lap->firstItem(),
+			'last_page' => $lap->lastPage(),
+			'last_page_url' => $lap->url($lap->lastPage()),
+			'next_page_url' => $lap->nextPageUrl(),
+			'per_page' => $lap->perPage(),
+			'prev_page_url' => $lap->previousPageUrl(),
+			'to' => $lap->lastItem(),
+			'total' => $lap->total(),
+		];
+	}
 }

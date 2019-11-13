@@ -8,6 +8,7 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use App\Gallery;
+use App\Comment;
 
 if (!function_exists('getPicture')) {
 	function getPicture($name, $type, $user)
@@ -243,5 +244,39 @@ if (!function_exists('latestGallery')) {
 			->offset($offset)
 			->get();
 		return $result;
+	}
+}
+
+if (!function_exists('postWithPagination')) {
+    function postWithPagination($paginator, $prev, $next)
+    {
+		$result = '';
+		if($paginator['prev_page_url'] == null) {
+			$result .= '<li class="disabled">'.$prev.'</li>';
+		} else {
+			$result .= '<li><a href="'.$paginator['prev_page_url'].'">'.$prev.'</a></li>';
+		}
+		for($i=1; $i<=$paginator['total']; $i++) {
+			if($i == $paginator['current_page']) {
+				$result .= '<li class="active"><span>'.$i.'</span></li>';
+			} else {
+				$result .= '<li><a href="?segment='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if($paginator['next_page_url'] == null) {
+			$result .= '<li><a class="disabled">'.$next.'</a></li>';
+		} else {
+			$result .= '<li><a href="'.$paginator['next_page_url'].'">'.$next.'</a></li>';
+		}
+		
+		return $result;
+	}
+}
+
+if (!function_exists('getComments')) {
+    function getComments($id, $limit)
+    {
+		$comments = new Comment;
+		return $comments->tree($id, $limit);
 	}
 }

@@ -10,10 +10,10 @@
 		@endif
 @endif
 	@if (count($menu->children) > 0)
-	<ul class="dropdown-menu">
-		@foreach($menu->children as $menu)
-			@include(getTheme('partials.submenu'), $menu)
-		@endforeach
-	</ul>
+		<ul class="dropdown-menu">
+			@foreach($menu->children as $menu)
+				@include(getTheme('partials.submenu'), $menu)
+			@endforeach
+		</ul>
 	@endif
 </li>

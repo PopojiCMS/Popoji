@@ -30,7 +30,7 @@
 					<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=input-filemanager&relative_url=1&akey='.env('FM_KEY')) }}" id="filemanager" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
 				</span>
 			</div>
-		@elseif($setting->options == 'maintenance_mode' || $setting->options == 'member_registration' || $setting->options == 'auto_approve_comment')
+		@elseif($setting->options == 'maintenance_mode' || $setting->options == 'member_registration' || $setting->options == 'comment')
 			<select class="select-style form-control" id="value" name="value">
 				@if (isset($setting))
 				<option value="{{ $setting->value }}">{{ __('general.selected') }} {{ $setting->value == 'Y' ? 'Yes' : 'No' }}</option>

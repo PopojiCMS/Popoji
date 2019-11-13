@@ -57,6 +57,10 @@ class Comment extends Model
 		return $this->hasMany('App\Comment', 'parent', 'id');
 	}
 	
+	public static function tree($id, $limit) {
+		return static::with(implode('.', array_fill(0, 100, 'children')))->where([['post_id', '=', $id],['parent', '=', '0']])->paginate($limit);
+	}
+	
 	public function post()
 	{
 		return $this->belongsTo('App\Post', 'post_id');

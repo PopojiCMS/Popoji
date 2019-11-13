@@ -79,7 +79,7 @@
 			"save code fullscreen autoresize codesample autosave responsivefilemanager"
 		],
 		menubar : false,
-		toolbar1: "undo redo restoredraft | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent table searchreplace",
+		toolbar1: "undo redo restoredraft | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist hr | outdent indent table searchreplace",
 		toolbar2: "| fontsizeselect | styleselect | link unlink anchor | image media emoticons | forecolor backcolor | code codesample fullscreen ",
 		contextmenu: "link paste image imagetools table spellchecker",
 		image_advtab: true,
