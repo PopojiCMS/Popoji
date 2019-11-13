@@ -58,7 +58,7 @@
 												<div class="col-xs-6 col-sm-4 col-md-4 col-padding">
 													<div class="grid-item">
 														<div class="grid-item-img">
-															<a href="{{ url('detailpost/'.$relatedPost->seotitle) }}">
+															<a href="{{ prettyUrl($relatedPost) }}">
 																<img src="{{ getPicture($relatedPost->picture, 'medium', $relatedPost->updated_by) }}" alt="" class="img-responsive">
 																@if($relatedPost->type == 'picture')
 																	<div class="link-icon">
@@ -71,10 +71,10 @@
 																@endif
 															</a>
 														</div>
-														<h5><a href="{{ url('detailpost/'.$relatedPost->seotitle) }}" class="title">{{ $relatedPost->title }}</a></h5>
+														<h5><a href="{{ prettyUrl($relatedPost) }}" class="title">{{ $relatedPost->title }}</a></h5>
 														<ul class="authar-info">
 															<li>{{ date('d F Y', strtotime($relatedPost->created_at)) }}</li>
-															<li class="hidden-sm"><a href="{{ url('detailpost/'.$relatedPost->seotitle) }}" class="link">{{ $relatedPost->hits }} Views</a></li>
+															<li class="hidden-sm"><a href="{{ prettyUrl($relatedPost) }}" class="link">{{ $relatedPost->hits }} Views</a></li>
 														</ul>
 													</div>
 												</div>
@@ -90,7 +90,7 @@
 												<div class="col-xs-6 col-sm-4 col-md-4 col-padding">
 													<div class="grid-item">
 														<div class="grid-item-img">
-															<a href="{{ url('detailpost/'.$relatedPost2->seotitle) }}">
+															<a href="{{ prettyUrl($relatedPost2) }}">
 																<img src="{{ getPicture($relatedPost2->picture, 'medium', $relatedPost2->updated_by) }}" alt="" class="img-responsive">
 																@if($relatedPost2->type == 'picture')
 																	<div class="link-icon">
@@ -103,10 +103,10 @@
 																@endif
 															</a>
 														</div>
-														<h5><a href="{{ url('detailpost/'.$relatedPost2->seotitle) }}" class="title">{{ $relatedPost2->title }}</a></h5>
+														<h5><a href="{{ prettyUrl($relatedPost2) }}" class="title">{{ $relatedPost2->title }}</a></h5>
 														<ul class="authar-info">
 															<li>{{ date('d F Y', strtotime($relatedPost2->created_at)) }}</li>
-															<li class="hidden-sm"><a href="{{ url('detailpost/'.$relatedPost2->seotitle) }}" class="link">{{ $relatedPost2->hits }} Views</a></li>
+															<li class="hidden-sm"><a href="{{ prettyUrl($relatedPost2) }}" class="link">{{ $relatedPost2->hits }} Views</a></li>
 														</ul>
 													</div>
 												</div>

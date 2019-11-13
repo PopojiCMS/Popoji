@@ -56,6 +56,16 @@
 				<option value="monthly">monthly</option>
 				<option value="yearly">yearly</option>
 			</select>
+		@elseif($setting->options == 'slug')
+			<select class="select-style form-control" id="value" name="value">
+				@if (isset($setting))
+				<option value="{{ $setting->value }}">{{ __('general.selected') }} {{ $setting->value }}</option>
+				@endif
+				<option value="detailpost/slug">detailpost/slug</option>
+				<option value="post/slug">post/slug</option>
+				<option value="post/slug-id">post/slug-id</option>
+				<option value="article/yyyy/mm/dd/slug">article/yyyy/mm/dd/slug</option>
+			</select>
 		@else
 			{!! Form::text('value', null, ['class' => $errors->has('value') ? 'form-control is-invalid' : 'form-control', 'required' => 'required']) !!}
 		@endif

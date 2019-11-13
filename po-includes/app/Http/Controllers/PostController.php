@@ -33,6 +33,80 @@ class PostController extends Controller
      */
     public function index($seotitle, Request $request)
     {
+		if(getSetting('slug') == 'post/slug-id') {
+			$expseotitle = explode('-', $seotitle);
+			array_pop($expseotitle);
+			$seotitle = implode('-', $expseotitle);
+		} else {
+			$seotitle = $seotitle;
+		}
+		
+		$checkpost = Post::where([['seotitle', '=', $seotitle],['active', '=', 'Y']])->first();
+		
+		if($checkpost) {
+			$checkpost->update([
+				'hits' => DB::raw('hits+1')
+			]);
+			
+			$post = Post::leftJoin('users', 'users.id', 'posts.created_by')
+				->leftJoin('categories', 'categories.id', 'posts.category_id')
+				->where([['posts.seotitle', '=', $seotitle],['posts.active', '=', 'Y']])
+				->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+				->orderBy('posts.id', 'desc')
+				->withCount('comments')
+				->first();
+			
+			$segment = isset($request->segment) ? $request->segment : 1;
+			$expcontent = explode('<hr />', $post->content);
+			$paginator = $this->customPaginate($expcontent, 1, $segment, [
+				'path' => Paginator::resolveCurrentPath(),
+				'pageName' => 'segment'
+			]);
+			$content = '';
+			if($post->type == 'pagination') {
+				if(count($expcontent) > 0) {
+					$content = $expcontent[$segment-1];
+				} else {
+					$content = $post->content;
+				}
+			} else {
+				$content = $post->content;
+			}
+			
+			$twitterid = explode('/', getSetting('twitter'));
+			SEOTools::setTitle($post->title.' - '.getSetting('web_name'));
+			SEOTools::setDescription($post->meta_description);
+			SEOTools::metatags()->setKeywords(explode(',', getSetting('web_keyword')));
+			SEOTools::setCanonical(getSetting('web_url'));
+			SEOTools::opengraph()->setTitle($post->title.' - '.getSetting('web_name'));
+			SEOTools::opengraph()->setDescription($post->meta_description);
+			SEOTools::opengraph()->setUrl(getSetting('web_url'));
+			SEOTools::opengraph()->setSiteName(getSetting('web_author'));
+			SEOTools::opengraph()->addImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
+			SEOTools::twitter()->setSite('@'.$twitterid[count($twitterid)-1]);
+			SEOTools::twitter()->setTitle($post->title.' - '.getSetting('web_name'));
+			SEOTools::twitter()->setDescription($post->meta_description);
+			SEOTools::twitter()->setUrl(getSetting('web_url'));
+			SEOTools::twitter()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
+			SEOTools::jsonLd()->setTitle($post->title.' - '.getSetting('web_name'));
+			SEOTools::jsonLd()->setDescription($post->meta_description);
+			SEOTools::jsonLd()->setType('WebPage');
+			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
+			SEOTools::jsonLd()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
+			
+			return view(getTheme('detailpost'), compact('post', 'content', 'paginator'));
+		} else {
+			return redirect('404');
+		}
+	}
+	
+	/**
+     * Show the application post.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function article($year, $month, $dat, $seotitle, Request $request)
+    {
 		$checkpost = Post::where([['seotitle', '=', $seotitle],['active', '=', 'Y']])->first();
 		
 		if($checkpost) {

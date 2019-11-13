@@ -280,3 +280,20 @@ if (!function_exists('getComments')) {
 		return $comments->tree($id, $limit);
 	}
 }
+
+if (!function_exists('prettyUrl')) {
+    function prettyUrl($post)
+    {
+		$url = '';
+		if(getSetting('slug') == 'post/slug') {
+			$url = url('post/'.$post->seotitle);
+		} else if(getSetting('slug') == 'post/slug-id') {
+			$url = url('post/'.$post->seotitle.'-'.$post->id);
+		} else if(getSetting('slug') == 'article/yyyy/mm/dd/slug') {
+			$url = url('article/'.date('Y' , strtotime($post->created_at)).'/'.date('m' , strtotime($post->created_at)).'/'.date('d' , strtotime($post->created_at)).'/'.$post->seotitle);
+		} else {
+			$url = url('detailpost/'.$post->seotitle);
+		}
+		return $url;
+	}
+}

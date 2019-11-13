@@ -14,8 +14,8 @@
 				<div class="most-viewed">
 					<ul id="most-today" class="content tabs-content">
 						@php $nol = 1; @endphp
-						@foreach(latestPost(5) as $latestpost)
-							<li><span class="count">0{{ $nol }}</span><span class="text"><a href="{{ url('detailpost/'.$latestpost->seotitle) }}">{{ $latestpost->title }}</a></span></li>
+						@foreach(latestPost(5) as $latestPost)
+							<li><span class="count">0{{ $nol }}</span><span class="text"><a href="{{ prettyUrl($latestPost) }}">{{ $latestPost->title }}</a></span></li>
 							@php $nol++; @endphp
 						@endforeach
 					</ul>
@@ -27,10 +27,10 @@
 					@php $nop = 1; @endphp
 					@foreach(popularPost(5) as $popularPost)
 						<div class="p-post">
-							<h4><a href="{{ url('detailpost/'.$popularPost->seotitle) }}">{{ $popularPost->title }}</a></h4>
+							<h4><a href="{{ prettyUrl($popularPost) }}">{{ $popularPost->title }}</a></h4>
 							<ul class="authar-info">
-								<li><a href="{{ url('detailpost/'.$popularPost->seotitle) }}" class="link"><i class="ti-timer"></i> {{ date('d F Y' , strtotime($popularPost->created_at)) }}</a></li>
-								<li><a href="{{ url('detailpost/'.$popularPost->seotitle) }}" class="link"><i class="ti-eye"></i>{{ $popularPost->hits }} Views</a></li>
+								<li><a href="{{ prettyUrl($popularPost) }}" class="link"><i class="ti-timer"></i> {{ date('d F Y' , strtotime($popularPost->created_at)) }}</a></li>
+								<li><a href="{{ prettyUrl($popularPost) }}" class="link"><i class="ti-eye"></i>{{ $popularPost->hits }} Views</a></li>
 							</ul>
 						</div>
 						@php $nop++; @endphp

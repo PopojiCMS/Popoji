@@ -163,7 +163,7 @@
 						@foreach(latestPost(2) as $latestpost)
 							<div class="news-list-item">
 								<div class="img-wrapper">
-									<a href="{{ url('detailpost/'.$latestpost->seotitle) }}" class="thumb">
+									<a href="{{ prettyUrl($latestpost) }}" class="thumb">
 										<img src="{{ getPicture($latestpost->picture, 'thumb', $latestpost->updated_by) }}" alt="" class="img-responsive">
 										@if($latestpost->type == 'picture')
 											<div class="link-icon">
@@ -177,7 +177,7 @@
 									</a>
 								</div>
 								<div class="post-info-2">
-									<h5><a href="{{ url('detailpost/'.$latestpost->seotitle) }}" class="title">{{ $latestpost->title }}</a></h5>
+									<h5><a href="{{ prettyUrl($latestpost) }}" class="title">{{ $latestpost->title }}</a></h5>
 									<ul class="authar-info">
 										<li><i class="ti-timer"></i> {{ date('d F Y', strtotime($latestpost->created_at)) }}</li>
 									</ul>

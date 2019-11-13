@@ -7,7 +7,7 @@
 			<div id="NewsTicker" class="owl-carousel owl-theme">
 				@foreach(trendingPost(5) as $trendingPost)
 					<div class="item">
-						<a href="{{ url('detailpost/'.$trendingPost->seotitle) }}">{{ $trendingPost->title }}</a>
+						<a href="{{ prettyUrl($trendingPost) }}">{{ $trendingPost->title }}</a>
 					</div>
 				@endforeach
 			</div>
@@ -23,14 +23,14 @@
 							@foreach(headlinePost(3, 0) as $headlinePost)
 								<div class="item">
 									<div class="slider-post post-height-1">
-										<a href="{{ url('detailpost/'.$headlinePost->seotitle) }}" class="news-image"><img src="{{ getPicture($headlinePost->picture, 'original', $headlinePost->updated_by) }}" alt="" class="img-responsive"></a>
+										<a href="{{ prettyUrl($headlinePost) }}" class="news-image"><img src="{{ getPicture($headlinePost->picture, 'original', $headlinePost->updated_by) }}" alt="" class="img-responsive"></a>
 										<div class="post-text">
 											<span class="post-category">{{ $headlinePost->ctitle }}</span>
-											<h2><a href="{{ url('detailpost/'.$headlinePost->seotitle) }}">{{ $headlinePost->title }}</a></h2>
+											<h2><a href="{{ prettyUrl($headlinePost) }}">{{ $headlinePost->title }}</a></h2>
 											<ul class="authar-info">
-												<li class="authar"><a href="{{ url('detailpost/'.$headlinePost->seotitle) }}">{{ $headlinePost->name }}</a></li>
+												<li class="authar"><a href="{{ prettyUrl($headlinePost) }}">{{ $headlinePost->name }}</a></li>
 												<li class="date">{{ date('d F Y' , strtotime($headlinePost->created_at)) }}</li>
-												<li class="view"><a href="{{ url('detailpost/'.$headlinePost->seotitle) }}">{{ $headlinePost->hits }} Views</a></li>
+												<li class="view"><a href="{{ prettyUrl($headlinePost) }}">{{ $headlinePost->hits }} Views</a></li>
 											</ul>
 										</div>
 									</div>
@@ -44,14 +44,14 @@
 						@foreach(headlinePost(2, 3) as $headlinePost2)
 							<div class="col-xs-6 col-sm-12 col-md-12 thm-padding">
 								<div class="slider-post post-height-2">
-									<a href="{{ url('detailpost/'.$headlinePost->seotitle) }}" class="news-image"><img src="{{ getPicture($headlinePost2->picture, 'medium', $headlinePost2->updated_by) }}" alt="" class="img-responsive"></a>
+									<a href="{{ prettyUrl($headlinePost2) }}" class="news-image"><img src="{{ getPicture($headlinePost2->picture, 'medium', $headlinePost2->updated_by) }}" alt="" class="img-responsive"></a>
 									<div class="post-text">
 										<span class="post-category">{{ $headlinePost2->ctitle }}</span>
-										<h4><a href="{{ url('detailpost/'.$headlinePost2->seotitle) }}">{{ $headlinePost2->title }}</a></h4>
+										<h4><a href="{{ prettyUrl($headlinePost2) }}">{{ $headlinePost2->title }}</a></h4>
 										<ul class="authar-info">
-											<li class="authar hidden-xs hidden-sm"><a href="{{ url('detailpost/'.$headlinePost->seotitle) }}">{{ $headlinePost2->name }}</a></li>
+											<li class="authar hidden-xs hidden-sm"><a href="{{ prettyUrl($headlinePost2) }}">{{ $headlinePost2->name }}</a></li>
 											<li class="hidden-xs">{{ date('d F Y' , strtotime($headlinePost2->created_at)) }}</li>
-											<li class="view hidden-xs hidden-sm"><a href="{{ url('detailpost/'.$headlinePost->seotitle) }}">{{ $headlinePost2->hits }} Views</a></li>
+											<li class="view hidden-xs hidden-sm"><a href="{{ prettyUrl($headlinePost2) }}">{{ $headlinePost2->hits }} Views</a></li>
 										</ul>
 									</div>
 								</div>
@@ -80,14 +80,14 @@
 											@foreach(popularPost(1, 0) as $popularPost)
 												<article>
 													<figure>
-														<a href="{{ url('detailpost/'.$popularPost->seotitle) }}"><img src="{{ getPicture($popularPost->picture, 'medium', $popularPost->updated_by) }}" height="242" width="345" alt="" class="img-responsive"></a>
+														<a href="{{ prettyUrl($popularPost) }}"><img src="{{ getPicture($popularPost->picture, 'medium', $popularPost->updated_by) }}" height="242" width="345" alt="" class="img-responsive"></a>
 														<span class="post-category">Business</span>
 													</figure>
 													<div class="post-info">
-														<h3><a href="{{ url('detailpost/'.$popularPost->seotitle) }}">{{ $popularPost->title }}</a></h3>
+														<h3><a href="{{ prettyUrl($popularPost) }}">{{ $popularPost->title }}</a></h3>
 														<ul class="authar-info">
 															<li><i class="ti-timer"></i> {{ date('d F Y' , strtotime($popularPost->created_at)) }}</li>
-															<li class="like"><a href="{{ url('detailpost/'.$popularPost->seotitle) }}"><i class="ti-eye"></i> {{ $popularPost->hits }} Views</a></li>
+															<li class="like"><a href="{{ prettyUrl($popularPost) }}"><i class="ti-eye"></i> {{ $popularPost->hits }} Views</a></li>
 														</ul>
 														<p>{{ \Str::limit(strip_tags($popularPost->content), 250) }}</p>
 													</div>
@@ -100,7 +100,7 @@
 												@foreach(popularPost(4, 1) as $popularPost2)
 													<div class="news-list-item">
 														<div class="img-wrapper">
-															<a href="{{ url('detailpost/'.$popularPost2->seotitle) }}" class="thumb">
+															<a href="{{ prettyUrl($popularPost2) }}" class="thumb">
 																<img src="{{ getPicture($popularPost2->picture, 'medium', $popularPost2->updated_by) }}" alt="" class="img-responsive">
 																@if($popularPost2->type == 'picture')
 																	<div class="link-icon">
@@ -114,10 +114,10 @@
 															</a>
 														</div>
 														<div class="post-info-2">
-															<h5><a href="{{ url('detailpost/'.$popularPost2->seotitle) }}" class="title">{{ $popularPost2->title }}</a></h5>
+															<h5><a href="{{ prettyUrl($popularPost2) }}" class="title">{{ $popularPost2->title }}</a></h5>
 															<ul class="authar-info">
 																<li><i class="ti-timer"></i> {{ date('d F Y' , strtotime($popularPost2->created_at)) }}</li>
-																<li class="like hidden-xs hidden-sm"><a href="{{ url('detailpost/'.$popularPost2->seotitle) }}"><i class="ti-eye"></i> {{ $popularPost2->hits }} Views</a></li>
+																<li class="like hidden-xs hidden-sm"><a href="{{ prettyUrl($popularPost2) }}"><i class="ti-eye"></i> {{ $popularPost2->hits }} Views</a></li>
 															</ul>
 														</div>
 													</div>
@@ -143,13 +143,13 @@
 							@foreach(latestPostWithPaging(5) as $latestPost)
 								<div class="news-list-item articles-list">
 									<div class="img-wrapper">
-										<a href="{{ url('detailpost/'.$latestPost->seotitle) }}" class="thumb"><img src="{{ getPicture($latestPost->picture, 'medium', $latestPost->updated_by) }}" alt="" class="img-responsive"></a>
+										<a href="{{ prettyUrl($latestPost) }}" class="thumb"><img src="{{ getPicture($latestPost->picture, 'medium', $latestPost->updated_by) }}" alt="" class="img-responsive"></a>
 									</div>
 									<div class="post-info-2">
-										<h4><a href="{{ url('detailpost/'.$latestPost->seotitle) }}" class="title">{{ $latestPost->title }}</a></h4>
+										<h4><a href="{{ prettyUrl($latestPost) }}" class="title">{{ $latestPost->title }}</a></h4>
 										<ul class="authar-info">
 											<li><i class="ti-timer"></i> {{ date('d F Y' , strtotime($latestPost->created_at)) }}</li>
-											<li class="like"><a href="{{ url('detailpost/'.$latestPost->seotitle) }}"><i class="ti-eye"></i> {{ $latestPost->hits }} Views</a></li>
+											<li class="like"><a href="{{ prettyUrl($latestPost) }}"><i class="ti-eye"></i> {{ $latestPost->hits }} Views</a></li>
 										</ul>
 										<p class="hidden-sm">{{ \Str::limit(strip_tags($popularPost->content), 250) }}</p>
 									</div>
