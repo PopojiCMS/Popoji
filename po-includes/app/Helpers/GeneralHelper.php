@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 use App\Setting;
 use App\Theme;
 use App\Menu;
@@ -163,33 +165,75 @@ if (!function_exists('headlinePost')) {
 }
 
 if (!function_exists('popularPost')) {
-	function popularPost($limit, $offset = '0')
+	function popularPost($limit, $offset = '0', $date = 'all')
 	{
-		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
-			->leftJoin('categories', 'categories.id', 'posts.category_id')
-			->where([['posts.active', '=', 'Y']])
-			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
-			->orderBy('posts.hits', 'desc')
-			->limit($limit)
-			->offset($offset)
-			->get();
+		if($date == 'all') {
+			$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+				->leftJoin('categories', 'categories.id', 'posts.category_id')
+				->where([['posts.active', '=', 'Y']])
+				->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+				->orderBy('posts.hits', 'desc')
+				->limit($limit)
+				->offset($offset)
+				->get();
+		} else {
+			$isdate = [];
+			if($date == 'monthly') {
+				$isdate = [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()];
+			} else if($date == 'yearly') {
+				$isdate = [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()];
+			} else {
+				$isdate = [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()];
+			}
+			$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+				->leftJoin('categories', 'categories.id', 'posts.category_id')
+				->where([['posts.active', '=', 'Y']])
+				->whereBetween('posts.created_at', $isdate)
+				->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+				->orderBy('posts.hits', 'desc')
+				->limit($limit)
+				->offset($offset)
+				->get();
+		}
 		return $result;
 	}
 }
 
 if (!function_exists('trendingPost')) {
-	function trendingPost($limit, $offset = '0')
+	function trendingPost($limit, $offset = '0', $date = 'all')
 	{
-		$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
-			->leftJoin('categories', 'categories.id', 'posts.category_id')
-			->where([['posts.active', '=', 'Y']])
-			->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
-			->selectRaw('(select count(id) as total from comments where post_id = posts.id) as ctotal')
-			->orderBy('posts.hits', 'desc')
-			->orderBy('ctotal', 'desc')
-			->limit($limit)
-			->offset($offset)
-			->get();
+		if($date == 'all') {
+			$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+				->leftJoin('categories', 'categories.id', 'posts.category_id')
+				->where([['posts.active', '=', 'Y']])
+				->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+				->selectRaw('(select count(id) as total from comments where post_id = posts.id) as ctotal')
+				->orderBy('posts.hits', 'desc')
+				->orderBy('ctotal', 'desc')
+				->limit($limit)
+				->offset($offset)
+				->get();
+		} else {
+			$isdate = [];
+			if($date == 'monthly') {
+				$isdate = [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()];
+			} else if($date == 'yearly') {
+				$isdate = [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()];
+			} else {
+				$isdate = [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()];
+			}
+			$result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+				->leftJoin('categories', 'categories.id', 'posts.category_id')
+				->where([['posts.active', '=', 'Y']])
+				->whereBetween('posts.created_at', $isdate)
+				->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+				->selectRaw('(select count(id) as total from comments where post_id = posts.id) as ctotal')
+				->orderBy('posts.hits', 'desc')
+				->orderBy('ctotal', 'desc')
+				->limit($limit)
+				->offset($offset)
+				->get();
+		}
 		return $result;
 	}
 }
