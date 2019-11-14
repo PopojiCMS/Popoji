@@ -24,6 +24,11 @@ class PostController extends Controller
      */
     public function __construct()
     {
+		config([
+			'captcha.secret' => getSetting('recaptcha_secret'),
+			'captcha.sitekey' => getSetting('recaptcha_key'),
+		]);
+		
         // $this->middleware('auth');
     }
 

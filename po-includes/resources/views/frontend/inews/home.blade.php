@@ -81,7 +81,7 @@
 												<article>
 													<figure>
 														<a href="{{ prettyUrl($popularPost) }}"><img src="{{ getPicture($popularPost->picture, 'medium', $popularPost->updated_by) }}" height="242" width="345" alt="" class="img-responsive"></a>
-														<span class="post-category">Business</span>
+														<span class="post-category">{{ $popularPost->ctitle }}</span>
 													</figure>
 													<div class="post-info">
 														<h3><a href="{{ prettyUrl($popularPost) }}">{{ $popularPost->title }}</a></h3>
