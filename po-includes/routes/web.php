@@ -28,7 +28,11 @@ Route::get('contact', 'ContactController@index');
 Route::post('contact/send', 'ContactController@send');
 Route::post('subscribe', 'HomeController@subscribe');
 
-Auth::routes(['verify' => true]);
+if(getSetting('member_registration') == 'Y') {
+	Auth::routes(['verify' => true]);
+} else {
+	Auth::routes(['register' => false]);
+}
 
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard', 'Backend\BackendController@index');
