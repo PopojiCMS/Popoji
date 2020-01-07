@@ -368,6 +368,7 @@ function StartInstall() {
 		}
 	}
 	$ifshorttag = (ini_get('short_open_tag') == '1' ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
+	$ifexif = (extension_loaded('exif') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$ifbcmath = (extension_loaded('bcmath') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$ifctype = (extension_loaded('ctype') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$ifjson = (extension_loaded('json') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
@@ -454,6 +455,11 @@ EOF;
 						<tr>
 							<td class="text-center">XML</td>
 							<td class="text-center">{$ifxml}</td>
+							<td class="text-center"><span class="text-success">ON</span></td>
+						</tr>
+						<tr>
+							<td class="text-center">Exif</td>
+							<td class="text-center">{$ifexif}</td>
 							<td class="text-center"><span class="text-success">ON</span></td>
 						</tr>
 						<tr>
