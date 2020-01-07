@@ -211,7 +211,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-5 col-md-5">
-					<div class="copy">Copyright &copy; 2019 {{ getSetting('web_author') }}. All Rights Reserved.</div>
+					<div class="copy">Copyright &copy; {{ date('Y') }} {{ getSetting('web_author') }}. All Rights Reserved.</div>
 				</div>
 
 				<div class="col-xs-12 col-sm-7 col-md-7">
