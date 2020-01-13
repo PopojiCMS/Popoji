@@ -2,6 +2,20 @@
 Free Engine Management System - Indonesia
 Contact : info@popojicms.org
 
+## Kebutuhan Server
+- PHP >= 7.2
+- BCMath PHP Extension
+- Ctype PHP Extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+- Curl PHP Extension
+- Mysql PHP Extension
+- Exif PHP Extension
+
 ## Cara Instalasi POPOJI lewat zip file
 
 1. Extract file popoji.v.x.x.x.zip di directory web Anda.
