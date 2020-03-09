@@ -330,7 +330,7 @@ class ComponentController extends Controller
 			}
 		}
 		
-		Artisan::call('migrate', ['--force' => true]);
+		Artisan::call('migrate', array('--path' => 'app/migrations', '--force' => true));
 	}
 	
 	protected function importRoutes($kebabname, $camelname)

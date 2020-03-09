@@ -7,6 +7,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 
 use App\Post;
 use App\Gallery;
+use App\Subscribe;
 
 class HomeController extends Controller
 {

@@ -1,0 +1,3 @@
+Options -Indexes
+ErrorDocument 403 "Unauthorized"
+Deny from all
