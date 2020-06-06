@@ -1,4 +1,4 @@
-@if((count($menu->children) > 0) && ($menu->parent == 0))
+@if(count($menu->children) > 0)
 	<li class="dropdown">
 		<a href="{{ url($menu->url) }}" class="dropdown-toggle" data-toggle="dropdown">{!! $menu->title !!}</a>
 @else
