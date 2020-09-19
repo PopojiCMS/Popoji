@@ -29,7 +29,7 @@ class SettingsController extends Controller
     public function index(Request $request)
     {
 		if(Auth::user()->can('read-settings')) {
-			$groups = Setting::selectRaw("min(id), groups")->groupBy('groups')->orderBy('min(id)', 'asc')->get();
+			$groups = Setting::selectRaw("min(id), `groups`")->groupBy('groups')->orderBy('min(id)', 'asc')->get();
 			
 			return view('backend.settings.index', compact('groups'));
 		} else {
