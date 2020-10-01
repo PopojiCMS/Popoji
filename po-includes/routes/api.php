@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function() {
     Route::get('/', 'Api\ApiController@index');
     Route::get('post', 'Api\PostController@get');
+    Route::get('post/related/{id}', 'Api\PostController@related');
     Route::get('post/{id}', 'Api\PostController@show');
     Route::get('category', 'Api\CategoryController@get');
     Route::get('category/{id}', 'Api\CategoryController@show');

@@ -70,4 +70,29 @@ class PostController extends Controller
         $post->makeHidden(['created_by', 'updated_by', 'category_id', 'active']);
         return response()->json($post);
     }
+    public function related(Request $request, $id)
+    {
+        $per_page = $request->per_page ?: 10;
+        $orderBy = $request->orderBy == 'ASC' ? 'ASC' : 'DESC';
+        $post = Post::where('id',  $id)->where('active', 'Y')->first();
+        if(!$post){
+            return response()->json([
+                'message' => 'Post not found'
+            ], 404);
+        }
+
+        $query = Post::with(['category:id,parent,title,seotitle,picture', 'createdBy:id,name,username,bio,picture', 'updatedBy:id,name,username,bio,picture'])
+            ->withCount('comments')
+            ->where('active', 'Y')
+            ->where('category_id', $post->category_id)
+            ->where('id', '!=', $post->id);
+
+        // OrderBy post
+        if($orderBy != null) {
+            $query->orderBy('created_at', $orderBy);
+        }
+
+        $related = $query->paginate($per_page);
+        return response()->json($related);
+    }
 }

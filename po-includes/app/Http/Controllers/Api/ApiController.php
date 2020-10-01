@@ -62,6 +62,27 @@ class ApiController extends Controller
                         'GET'
                     ],
                 ],
+                '/api/v1/post/related/{id}' => [
+                    'description' => 'Menampilkan list post terkait dengan id',
+                    'methods' => [
+                        'GET'
+                    ],
+                    'args' => [
+                        'orderBy' => [
+                            'required' => false,
+                            'description' => 'Mengurutkan post',
+                            'type' => 'string',
+                            'enum' => [
+                                'ASC', 'DESC'
+                            ]
+                        ],
+                        'per_page' => [
+                            'required' => false,
+                            'description' => 'Jumlah post perhalaman',
+                            'type' => 'integer'
+                        ]
+                    ]
+                ],
                 '/api/v1/category' => [
                     'description' => 'Menampilkan list category',
                     'methods' => [
