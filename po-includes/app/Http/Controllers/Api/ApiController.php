@@ -38,7 +38,7 @@ class ApiController extends Controller
                         ],
                         'per_page' => [
                             'required' => false,
-                            'description' => 'Jumlah page perhalaman',
+                            'description' => 'Jumlah post perhalaman',
                             'type' => 'integer'
                         ],
                         'search' => [
@@ -83,7 +83,7 @@ class ApiController extends Controller
                         ],
                         'per_page' => [
                             'required' => false,
-                            'description' => 'Jumlah page perhalaman',
+                            'description' => 'Jumlah category perhalaman',
                             'type' => 'integer'
                         ],
                         'search' => [
@@ -98,6 +98,37 @@ class ApiController extends Controller
                     'methods' => [
                         'GET'
                     ],
+                ],
+                '/api/v1/comment/{id}' => [
+                    'description' => 'Menampilkan daftar comment post',
+                    'methods' => [
+                        'GET'
+                    ],
+                    'args' => [
+                        'page' => [
+                            'required' => false,
+                            'description' => 'Menampilkan page comment',
+                            'type' => 'integer'
+                        ],
+                        'orderBy' => [
+                            'required' => false,
+                            'description' => 'Mengurutkan comment',
+                            'type' => 'string',
+                            'enum' => [
+                                'ASC', 'DESC'
+                            ]
+                        ],
+                        'per_page' => [
+                            'required' => false,
+                            'description' => 'Jumlah comment perhalaman',
+                            'type' => 'integer'
+                        ],
+                        'parent' => [
+                            'required' => false,
+                            'description' => 'Menampilkan children comment, berdasarkan id parent',
+                            'type' => 'integer'
+                        ],
+                    ]
                 ],
             ]
         ];

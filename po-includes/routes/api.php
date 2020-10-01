@@ -23,4 +23,5 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('post/{id}', 'Api\PostController@show');
     Route::get('category', 'Api\CategoryController@get');
     Route::get('category/{id}', 'Api\CategoryController@show');
+    Route::get('comment/{id}', 'Api\CommentController@index');
 });
