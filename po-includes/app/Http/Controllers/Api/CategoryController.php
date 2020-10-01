@@ -29,8 +29,10 @@ class CategoryController extends Controller
                 $category->picture = url('/po-content/uploads/' . $category->picture);
             }
         }
-        // Hidden key
-        $categories->makeHidden(['created_by', 'updated_by', 'active']);
+        if($categories) {
+            // Hidden key
+            $categories->makeHidden(['created_by', 'updated_by', 'active']);
+        }
         return response()->json($categories);
     }
     public function show($id)

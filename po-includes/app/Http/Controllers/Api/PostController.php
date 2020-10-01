@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\PostGallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -39,8 +41,10 @@ class PostController extends Controller
                 $post->picture = url('/po-content/uploads/' . $post->picture);
             }
         }
-        // Hidden key
-        $posts->makeHidden(['created_by', 'updated_by', 'category_id', 'active']);
+        if($posts) {
+            // Hidden key
+            $posts->makeHidden(['created_by', 'updated_by', 'category_id', 'active']);
+        }
         return response()->json($posts);
     }
     public function show($id)
@@ -54,6 +58,12 @@ class PostController extends Controller
         if($post->picture != null) {
             $post->picture = url('/po-content/uploads/' . $post->picture);
         }
+//        if($post->type == 'picture') {
+//            $post->galleries = PostGallery::where('post_id', $post->id)->get();
+//            foreach ($post->galleries as $gallery) {
+//                $gallery->picture = url('/po-content/uploads/' . $gallery->picture );
+//            }
+//        }
         // Update hits
         $post->increment('hits');
         // Hidden key
