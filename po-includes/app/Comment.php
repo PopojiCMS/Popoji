@@ -8,7 +8,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Comment extends Model
 {
 	use LogsActivity;
-	
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -38,33 +38,35 @@ class Comment extends Model
     protected $fillable = [
 		'parent', 'post_id', 'name', 'email', 'content', 'active', 'status', 'created_by', 'updated_by'
 	];
-	
+
 	public function createdBy()
 	{
 		return $this->belongsTo('App\User', 'created_by');
 	}
-	
+
 	public function updatedBy()
 	{
 		return $this->belongsTo('App\User', 'updated_by');
 	}
-	
+
 	public function mainParent() {
 		return $this->hasOne('App\Comment', 'id', 'parent');
 	}
-	
+
 	public function children() {
 		return $this->hasMany('App\Comment', 'parent', 'id');
 	}
-	
+
 	public static function tree($id, $limit) {
 		return static::with(implode('.', array_fill(0, 100, 'children')))->where([['post_id', '=', $id],['parent', '=', '0']])->paginate($limit);
 	}
-	
+
 	public function post()
 	{
 		return $this->belongsTo('App\Post', 'post_id');
 	}
-	
+
+
+
 	protected static $logAttributes = ['*'];
 }

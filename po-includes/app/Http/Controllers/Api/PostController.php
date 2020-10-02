@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\PostGallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -39,8 +41,10 @@ class PostController extends Controller
                 $post->picture = url('/po-content/uploads/' . $post->picture);
             }
         }
-        // Hidden key
-        $posts->makeHidden(['created_by', 'updated_by', 'category_id', 'active']);
+        if($posts) {
+            // Hidden key
+            $posts->makeHidden(['created_by', 'updated_by', 'category_id', 'active']);
+        }
         return response()->json($posts);
     }
     public function show($id)
@@ -54,10 +58,41 @@ class PostController extends Controller
         if($post->picture != null) {
             $post->picture = url('/po-content/uploads/' . $post->picture);
         }
+//        if($post->type == 'picture') {
+//            $post->galleries = PostGallery::where('post_id', $post->id)->get();
+//            foreach ($post->galleries as $gallery) {
+//                $gallery->picture = url('/po-content/uploads/' . $gallery->picture );
+//            }
+//        }
         // Update hits
         $post->increment('hits');
         // Hidden key
         $post->makeHidden(['created_by', 'updated_by', 'category_id', 'active']);
         return response()->json($post);
+    }
+    public function related(Request $request, $id)
+    {
+        $per_page = $request->per_page ?: 10;
+        $orderBy = $request->orderBy == 'ASC' ? 'ASC' : 'DESC';
+        $post = Post::where('id',  $id)->where('active', 'Y')->first();
+        if(!$post){
+            return response()->json([
+                'message' => 'Post not found'
+            ], 404);
+        }
+
+        $query = Post::with(['category:id,parent,title,seotitle,picture', 'createdBy:id,name,username,bio,picture', 'updatedBy:id,name,username,bio,picture'])
+            ->withCount('comments')
+            ->where('active', 'Y')
+            ->where('category_id', $post->category_id)
+            ->where('id', '!=', $post->id);
+
+        // OrderBy post
+        if($orderBy != null) {
+            $query->orderBy('created_at', $orderBy);
+        }
+
+        $related = $query->paginate($per_page);
+        return response()->json($related);
     }
 }
