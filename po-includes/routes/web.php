@@ -112,6 +112,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('dashboard/themes/index','Backend\ThemeController@index');
 	Route::get('dashboard/themes/table','Backend\ThemeController@getIndex');
 	Route::get('dashboard/themes/data','Backend\ThemeController@anyData');
+	Route::get('dashboard/themes/active/{id}','Backend\ThemeController@active');
 	Route::get('dashboard/themes/install','Backend\ThemeController@install');
 	Route::post('dashboard/themes/process-install','Backend\ThemeController@processInstall');
 	Route::post('dashboard/themes/deleteall', 'Backend\ThemeController@deleteAll');

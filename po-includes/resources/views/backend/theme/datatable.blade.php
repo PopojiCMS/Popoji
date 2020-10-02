@@ -27,6 +27,9 @@
 							<img src="{{ asset('po-content/frontend/'.$theme->folder.'/preview.jpg') }}" class="img-fit-cover" alt="" />
 							<figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
 								<div class="btn-group">
+									@if($theme->active == 'N')
+										<a href="{{ url('dashboard/themes/active/'.Hashids::encode($theme->id)) }}" class="btn btn-dark btn-icon" title="{{ __('theme.active') }}" data-toggle="tooltip" data-placement="top"><i data-feather="check"></i></a>
+									@endif
 									<a href="{{ url('dashboard/themes/'.Hashids::encode($theme->id)) }}" class="btn btn-dark btn-icon" title="{{ __('general.view') }}" data-toggle="tooltip" data-placement="top"><i data-feather="eye"></i></a>
 									<a href="{{ url('dashboard/themes/'.Hashids::encode($theme->id)) }}" class="btn btn-dark btn-icon" data-delete="" title="{{ __('general.delete') }}" data-toggle="tooltip" data-placement="top"><i data-feather="trash-2"></i></a>
 								</div>
