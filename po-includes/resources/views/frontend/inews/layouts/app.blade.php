@@ -8,9 +8,9 @@
     <meta name="generator" content="{{ config('app.version') }}" />
     <meta name="author" content="{{ getSetting('web_author') }}" />
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
-	
+
 	{!! SEO::generate() !!}
-	
+
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('po-content/uploads/'.getSetting('favicon')) }}" />
 	<link href="{{ asset('po-content/frontend/inews/css/jquery-ui.min.css') }}" rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('po-content/frontend/inews/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -25,17 +25,17 @@
 	<link href="{{ asset('po-content/frontend/inews/owl-carousel/owl.theme.css') }}" rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('po-content/frontend/inews/owl-carousel/owl.transitions.css') }}" rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('po-content/frontend/inews/css/style.css') }}" rel="stylesheet" type="text/css"/>
-	
+
 	@stack('styles')
-	
+
 	<script>
 		window.Laravel = <?php echo json_encode([
 			'csrfToken' => csrf_token(),
 		]); ?>
 	</script>
-	
+
 	{!! NoCaptcha::renderJs() !!}
-	
+
 	@if(getSetting('google_analytics_id') != '')
 		<script type="text/javascript">
 			var _gaq = _gaq || [];
@@ -69,18 +69,22 @@
 							</ul>
 						</div>
 					</div>
-					
+
 					<div class="hidden-xs col-md-6 col-sm-6 col-lg-6">
 						<div class="header-right-menu">
 							<ul>
-								<li><a href="{{ url('register') }}"><i class="fa fa-lock"></i> Sign Up</a> or <a href="{{ url('login') }}"> Login</a></li>
+								<li>
+                                    @if(getSetting('member_registration') == 'Y')
+                                    <a href="{{ url('register') }}"><i class="fa fa-lock"></i> Sign Up</a> or
+                                    @endif
+                                    <a href="{{ url('login') }}"> Login</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="header-mid hidden-xs">
 			<div class="container">
 				<div class="row">
@@ -89,14 +93,14 @@
 							<a href="{{ url('/') }}"><img src="{{ asset('po-content/uploads/'.getSetting('logo')) }}" class="img-responsive" alt=""></a>
 						</div>
 					</div>
-					
+
 					<div class="col-sm-8">
 						<a href="{{ url('/') }}"><img src="{{ asset('po-content/frontend/inews/images/add728x90-1.jpg') }}" class="img-responsive" alt=""></a>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<nav class="navbar navbar-default navbar-sticky navbar-mobile bootsnav">
 			<div class="top-search">
 				<div class="container">
@@ -109,7 +113,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 			<div class="container">
 				<div class="attr-nav">
 					<ul>
@@ -130,11 +134,11 @@
 			</div>
 		</nav>
 	</header>
-	
+
 	<main class="page_main_wrapper">
 		@yield('content')
 	</main>
-	
+
 	<footer>
 		<div class="container">
 			<div class="row">
@@ -149,7 +153,7 @@
 						</ul>
 					</div>
 				</div>
-				
+
 				<div class="col-sm-2 footer-box">
 					<h3 class="wiget-title">Sitemap</h3>
 					<ul class="menu-services">
@@ -160,7 +164,7 @@
 						<li><a href="{{ url('contact') }}">Contact</a></li>
 					</ul>
 				</div>
-				
+
 				<div class="col-sm-2 footer-box">
 					<h3 class="wiget-title">Category</h3>
 					<ul class="menu-services">
@@ -169,7 +173,7 @@
 						@endforeach
 					</ul>
 				</div>
-				
+
 				<div class="col-sm-4 footer-box">
 					<h3 class="wiget-title">Recent Post</h3>
 					<div class="footer-news-grid">
@@ -202,14 +206,14 @@
 			</div>
 		</div>
 	</footer>
-	
+
 	<div class="sub-footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-5 col-md-5">
-					<div class="copy">Copyright &copy; 2019 {{ getSetting('web_author') }}. All Rights Reserved.</div>
+					<div class="copy">Copyright &copy; {{ date('Y') }} {{ getSetting('web_author') }}. All Rights Reserved.</div>
 				</div>
-				
+
 				<div class="col-xs-12 col-sm-7 col-md-7">
 					<ul class="footer-nav">
 						<li><a href="{{ url('pages/about-us') }}">About Us</a></li>
@@ -220,7 +224,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="{{ asset('po-content/frontend/inews/js/jquery.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('po-content/frontend/inews/js/jquery-ui.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('po-content/frontend/inews/js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -229,7 +233,7 @@
 	<script src="{{ asset('po-content/frontend/inews/js/RYPP.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('po-content/frontend/inews/owl-carousel/owl.carousel.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('po-content/frontend/inews/js/custom.js') }}" type="text/javascript"></script>
-	
+
 	@stack('scripts')
 </body>
 </html>
