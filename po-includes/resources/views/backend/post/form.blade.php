@@ -145,7 +145,7 @@
 				<div class="input-group">
 					<input type="text" class="form-control" id="picture-url" />
 					<span class="input-group-append">
-						<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=input-filemanager&relative_url=1&akey='.env('FM_KEY')) }}" id="filemanager-multi" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
+						<a href="{{ url('po-content/filemanager/dialog.php?type=1&field_id=picture-url&relative_url=1&akey='.env('FM_KEY')) }}" id="filemanager-multi" class="btn btn-secondary"><i class="fa fa-file"></i> {{ __('general.browse') }}</a>
 					</span>
 				</div>
 			</div>

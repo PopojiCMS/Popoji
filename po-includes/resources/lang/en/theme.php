@@ -24,6 +24,8 @@ return [
 	'destroy_notif' => 'Theme deleted!',
 	'destroy_error_notif' => 'Theme error deleted!',
 	'install_error_notif' => 'Theme error installed!',
+	'active_notif' => 'Theme sucess activated!',
+	'active_error_notif' => 'Theme error activated!',
 	'title' => 'Title',
 	'author' => 'Author',
 	'folder' => 'Folder',

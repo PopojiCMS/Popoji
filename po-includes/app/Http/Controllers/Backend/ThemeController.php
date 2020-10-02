@@ -243,6 +243,28 @@ class ThemeController extends Controller
 		}
     }
 	
+    public function active($id)
+    {
+		if(Auth::user()->can('update-themes')) {
+			$ids = Hashids::decode($id);
+			$theme = Theme::findOrFail($ids[0]);
+			
+			Theme::where('active', '=', 'Y')->update([
+				'active' => 'N',
+				'updated_by' => Auth::User()->id
+			]);
+			
+			$theme->update([
+				'active' => 'Y',
+				'updated_by' => Auth::User()->id
+			]);
+
+			return redirect('dashboard/themes')->with('flash_message', __('theme.active_notif'));
+		} else {
+			return redirect('forbidden');
+		}
+    }
+	
 	public function install(Request $request)
     {
 		if(Auth::user()->can('read-themes')) {
