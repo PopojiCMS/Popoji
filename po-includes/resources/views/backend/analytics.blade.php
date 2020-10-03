@@ -43,21 +43,21 @@
 								<span class="d-block wd-8 ht-8 rounded-circle bg-primary"></span>
 								<span class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">{{ __('dashboard.desktop') }}</span>
 							</div>
-							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ $fetchTopDevice[0][1] }}</h4>
+							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ count($fetchTopDevice) > 0 ? $fetchTopDevice[0][1] : 0 }}</h4>
 						</div>
 						<div class="col-4 col-lg">
 							<div class="d-flex align-items-baseline">
 								<span class="d-block wd-8 ht-8 rounded-circle bg-teal"></span>
 								<span class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">{{ __('dashboard.mobile') }}</span>
 							</div>
-							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ $fetchTopDevice[1][1] }}</h4>
+							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ count($fetchTopDevice) > 1 ? $fetchTopDevice[1][1] : 0 }}</h4>
 						</div>
 						<div class="col-4 col-lg">
 							<div class="d-flex align-items-baseline">
 								<span class="d-block wd-8 ht-8 rounded-circle bg-gray-300"></span>
 								<span class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">{{ __('dashboard.tablet') }}</span>
 							</div>
-							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ $fetchTopDevice[2][1] }}</h4>
+							<h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">{{ count($fetchTopDevice) > 2 ? $fetchTopDevice[2][1] : 0 }}</h4>
 						</div>
 					</div>
 				</div>
