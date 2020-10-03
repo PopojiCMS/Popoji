@@ -15,6 +15,7 @@ Contact : info@popojicms.org
 - Curl PHP Extension
 - Mysql PHP Extension
 - Exif PHP Extension
+- Fileinfo PHP Extension
 
 ## Cara Instalasi POPOJI lewat zip file
 
