@@ -377,6 +377,7 @@ function StartInstall() {
 	$ifpdo = (extension_loaded('pdo') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$iftokenizer = (extension_loaded('tokenizer') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$ifxml = (extension_loaded('xml') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
+	$fileinfo = (extension_loaded('fileinfo') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$iffoldercorewrite = (is_writable('po-includes/storage') ? '<span class="text-success">YES</span>' : '<span class="text-danger">NO</span>');
 
 	$startinstallc = <<<EOF
@@ -460,6 +461,16 @@ EOF;
 						<tr>
 							<td class="text-center">Exif</td>
 							<td class="text-center">{$ifexif}</td>
+							<td class="text-center"><span class="text-success">ON</span></td>
+						</tr>
+						<tr>
+							<td class="text-center">Fileinfo</td>
+							<td class="text-center">{$fileinfo}</td>
+							<td class="text-center"><span class="text-success">ON</span></td>
+						</tr>
+						<tr>
+							<td class="text-center">Short Open Tag</td>
+							<td class="text-center">{$ifshorttag}</td>
 							<td class="text-center"><span class="text-success">ON</span></td>
 						</tr>
 						<tr>
