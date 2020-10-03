@@ -15,6 +15,7 @@ Contact : info@popojicms.org
 - Curl PHP Extension
 - Mysql PHP Extension
 - Exif PHP Extension
+- Fileinfo PHP Extension
 
 ## Cara Instalasi POPOJI lewat zip file
 
@@ -68,6 +69,8 @@ Untuk di hosting, lakukan perubahan user permission untuk folder-folder berikut 
 	* Username : seperti yg telah diinputkan pada saat proses instalasi.
 	* Password : seperti yg telah diinputkan pada saat proses instalasi.
 
+## API Popoji
+http://nama.web.anda/api/v1
 
 # Terima Kasih Kepada
 1. Tuhan Yang Maha Esa
