@@ -81,25 +81,32 @@ class PostController extends Controller
 				$content = $post->content;
 			}
 			
+			$seturl = '';
+			if(getSetting('slug') == 'post/slug-id') {
+				$seturl = '/detailpost/' . $post->seotitle . '-' . $post->id;
+			} else {
+				$seturl = '/detailpost/' . $post->seotitle;
+			}
+			
 			$twitterid = explode('/', getSetting('twitter'));
 			SEOTools::setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::setDescription($post->meta_description);
 			SEOTools::metatags()->setKeywords(explode(',', getSetting('web_keyword')));
-			SEOTools::setCanonical(getSetting('web_url'));
+			SEOTools::setCanonical(getSetting('web_url') . $seturl);
 			SEOTools::opengraph()->setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::opengraph()->setDescription($post->meta_description);
-			SEOTools::opengraph()->setUrl(getSetting('web_url'));
+			SEOTools::opengraph()->setUrl(getSetting('web_url') . $seturl);
 			SEOTools::opengraph()->setSiteName(getSetting('web_author'));
 			SEOTools::opengraph()->addImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			SEOTools::twitter()->setSite('@'.$twitterid[count($twitterid)-1]);
 			SEOTools::twitter()->setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::twitter()->setDescription($post->meta_description);
-			SEOTools::twitter()->setUrl(getSetting('web_url'));
+			SEOTools::twitter()->setUrl(getSetting('web_url') . $seturl);
 			SEOTools::twitter()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			SEOTools::jsonLd()->setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::jsonLd()->setDescription($post->meta_description);
 			SEOTools::jsonLd()->setType('WebPage');
-			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
+			SEOTools::jsonLd()->setUrl(getSetting('web_url') . $seturl);
 			SEOTools::jsonLd()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			
 			return view(getTheme('detailpost'), compact('post', 'content', 'paginator', 'gallery'));
@@ -113,7 +120,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function article($year, $month, $dat, $seotitle, Request $request)
+    public function article($year, $month, $day, $seotitle, Request $request)
     {
 		$checkpost = Post::where([['seotitle', '=', $seotitle],['active', '=', 'Y']])->first();
 		
@@ -149,25 +156,27 @@ class PostController extends Controller
 				$content = $post->content;
 			}
 			
+			$seturl = '/article/' . $year . '/' . $month . '/' . $day . '/' . $post->seotitle;
+			
 			$twitterid = explode('/', getSetting('twitter'));
 			SEOTools::setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::setDescription($post->meta_description);
 			SEOTools::metatags()->setKeywords(explode(',', getSetting('web_keyword')));
-			SEOTools::setCanonical(getSetting('web_url'));
+			SEOTools::setCanonical(getSetting('web_url') . $seturl);
 			SEOTools::opengraph()->setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::opengraph()->setDescription($post->meta_description);
-			SEOTools::opengraph()->setUrl(getSetting('web_url'));
+			SEOTools::opengraph()->setUrl(getSetting('web_url') . $seturl);
 			SEOTools::opengraph()->setSiteName(getSetting('web_author'));
 			SEOTools::opengraph()->addImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			SEOTools::twitter()->setSite('@'.$twitterid[count($twitterid)-1]);
 			SEOTools::twitter()->setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::twitter()->setDescription($post->meta_description);
-			SEOTools::twitter()->setUrl(getSetting('web_url'));
+			SEOTools::twitter()->setUrl(getSetting('web_url') . $seturl);
 			SEOTools::twitter()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			SEOTools::jsonLd()->setTitle($post->title.' - '.getSetting('web_name'));
 			SEOTools::jsonLd()->setDescription($post->meta_description);
 			SEOTools::jsonLd()->setType('WebPage');
-			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
+			SEOTools::jsonLd()->setUrl(getSetting('web_url') . $seturl);
 			SEOTools::jsonLd()->setImage($post->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($post->picture, null, $post->updated_by));
 			
 			return view(getTheme('detailpost'), compact('post', 'content', 'paginator', 'gallery'));
@@ -193,21 +202,21 @@ class PostController extends Controller
 		SEOTools::setTitle($terms.' - '.getSetting('web_name'));
 		SEOTools::setDescription($terms.' - '.getSetting('web_description'));
 		SEOTools::metatags()->setKeywords(explode(',', getSetting('web_keyword')));
-		SEOTools::setCanonical(getSetting('web_url'));
+		SEOTools::setCanonical(getSetting('web_url') . '/search');
 		SEOTools::opengraph()->setTitle($terms.' - '.getSetting('web_name'));
 		SEOTools::opengraph()->setDescription($terms.' - '.getSetting('web_description'));
-		SEOTools::opengraph()->setUrl(getSetting('web_url'));
+		SEOTools::opengraph()->setUrl(getSetting('web_url') . '/search');
 		SEOTools::opengraph()->setSiteName(getSetting('web_author'));
 		SEOTools::opengraph()->addImage(asset('po-content/uploads/'.getSetting('logo')));
 		SEOTools::twitter()->setSite('@'.$twitterid[count($twitterid)-1]);
 		SEOTools::twitter()->setTitle($terms.' - '.getSetting('web_name'));
 		SEOTools::twitter()->setDescription($terms.' - '.getSetting('web_description'));
-		SEOTools::twitter()->setUrl(getSetting('web_url'));
+		SEOTools::twitter()->setUrl(getSetting('web_url') . '/search');
 		SEOTools::twitter()->setImage(asset('po-content/uploads/'.getSetting('logo')));
 		SEOTools::jsonLd()->setTitle($terms.' - '.getSetting('web_name'));
 		SEOTools::jsonLd()->setDescription($terms.' - '.getSetting('web_description'));
 		SEOTools::jsonLd()->setType('WebPage');
-		SEOTools::jsonLd()->setUrl(getSetting('web_url'));
+		SEOTools::jsonLd()->setUrl(getSetting('web_url') . '/search');
 		SEOTools::jsonLd()->setImage(asset('po-content/uploads/'.getSetting('logo')));
 		
 		$posts = Post::leftJoin('users', 'users.id', 'posts.created_by')
