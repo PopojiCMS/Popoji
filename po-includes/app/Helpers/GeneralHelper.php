@@ -136,6 +136,22 @@ if (!function_exists('latestPost')) {
 	}
 }
 
+if (!function_exists('postByCategory')) {
+    function postByCategory($category_id, $limit, $offset = '0')
+    {
+        $result = Post::leftJoin('users', 'users.id', 'posts.created_by')
+            ->leftJoin('categories', 'categories.id', 'posts.category_id')
+            ->where([['posts.active', '=', 'Y']])
+            ->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
+            ->orderBy('posts.id', 'desc')
+            ->where('category_id', $category_id)
+            ->limit($limit)
+            ->offset($offset)
+            ->get();
+        return $result;
+    }
+}
+
 if (!function_exists('latestPostWithPaging')) {
 	function latestPostWithPaging($limit)
 	{
@@ -312,7 +328,7 @@ if (!function_exists('postWithPagination')) {
 		} else {
 			$result .= '<li><a href="'.$paginator['next_page_url'].'">'.$next.'</a></li>';
 		}
-		
+
 		return $result;
 	}
 }

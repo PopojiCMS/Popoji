@@ -58,12 +58,15 @@ class PostController extends Controller
         if($post->picture != null) {
             $post->picture = url('/po-content/uploads/' . $post->picture);
         }
-//        if($post->type == 'picture') {
-//            $post->galleries = PostGallery::where('post_id', $post->id)->get();
-//            foreach ($post->galleries as $gallery) {
-//                $gallery->picture = url('/po-content/uploads/' . $gallery->picture );
-//            }
-//        }
+        if($post->type == 'picture') {
+            $post->galleries = PostGallery::where('post_id', $post->id)->get();
+            if($post->galleries) {
+                $post->galleries->makeHidden(['post_id', 'created_by', 'updated_by', 'created_at', 'updated_at']);
+            }
+            foreach ($post->galleries as $gallery) {
+                $gallery->picture = url('/po-content/uploads/' . $gallery->picture );
+            }
+        }
         // Update hits
         $post->increment('hits');
         // Hidden key
