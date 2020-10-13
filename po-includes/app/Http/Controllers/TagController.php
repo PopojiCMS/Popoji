@@ -34,21 +34,21 @@ class TagController extends Controller
 			SEOTools::setTitle($tag->title.' - '.getSetting('web_name'));
 			SEOTools::setDescription($tag->title.' - '.getSetting('web_description'));
 			SEOTools::metatags()->setKeywords(explode(',', getSetting('web_keyword')));
-			SEOTools::setCanonical(getSetting('web_url'));
+			SEOTools::setCanonical(getSetting('web_url') . '/tag/' . $tag->seotitle);
 			SEOTools::opengraph()->setTitle($tag->title.' - '.getSetting('web_name'));
 			SEOTools::opengraph()->setDescription($tag->title.' - '.getSetting('web_description'));
-			SEOTools::opengraph()->setUrl(getSetting('web_url'));
+			SEOTools::opengraph()->setUrl(getSetting('web_url') . '/tag/' . $tag->seotitle);
 			SEOTools::opengraph()->setSiteName(getSetting('web_author'));
 			SEOTools::opengraph()->addImage(asset('po-content/uploads/'.getSetting('logo')));
 			SEOTools::twitter()->setSite('@'.$twitterid[count($twitterid)-1]);
 			SEOTools::twitter()->setTitle($tag->title.' - '.getSetting('web_name'));
 			SEOTools::twitter()->setDescription($tag->title.' - '.getSetting('web_description'));
-			SEOTools::twitter()->setUrl(getSetting('web_url'));
+			SEOTools::twitter()->setUrl(getSetting('web_url') . '/tag/' . $tag->seotitle);
 			SEOTools::twitter()->setImage(asset('po-content/uploads/'.getSetting('logo')));
 			SEOTools::jsonLd()->setTitle($tag->title.' - '.getSetting('web_name'));
 			SEOTools::jsonLd()->setDescription($tag->title.' - '.getSetting('web_description'));
 			SEOTools::jsonLd()->setType('WebPage');
-			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
+			SEOTools::jsonLd()->setUrl(getSetting('web_url') . '/tag/' . $tag->seotitle);
 			SEOTools::jsonLd()->setImage(asset('po-content/uploads/'.getSetting('logo')));
 			
 			$posts = Post::leftJoin('users', 'users.id', 'posts.created_by')

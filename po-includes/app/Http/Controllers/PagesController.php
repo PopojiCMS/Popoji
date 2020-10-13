@@ -33,21 +33,21 @@ class PagesController extends Controller
 			SEOTools::setTitle($pages->title.' - '.getSetting('web_name'));
 			SEOTools::setDescription(\Str::limit(strip_tags($pages->content), 200));
 			SEOTools::metatags()->setKeywords(explode(',', getSetting('web_keyword')));
-			SEOTools::setCanonical(getSetting('web_url'));
+			SEOTools::setCanonical(getSetting('web_url') . '/pages/' . $pages->seotitle);
 			SEOTools::opengraph()->setTitle($pages->title.' - '.getSetting('web_name'));
 			SEOTools::opengraph()->setDescription(\Str::limit(strip_tags($pages->content), 200));
-			SEOTools::opengraph()->setUrl(getSetting('web_url'));
+			SEOTools::opengraph()->setUrl(getSetting('web_url') . '/pages/' . $pages->seotitle);
 			SEOTools::opengraph()->setSiteName(getSetting('web_author'));
 			SEOTools::opengraph()->addImage($pages->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($pages->picture, null, $pages->updated_by));
 			SEOTools::twitter()->setSite('@'.$twitterid[count($twitterid)-1]);
 			SEOTools::twitter()->setTitle($pages->title.' - '.getSetting('web_name'));
 			SEOTools::twitter()->setDescription(\Str::limit(strip_tags($pages->content), 200));
-			SEOTools::twitter()->setUrl(getSetting('web_url'));
+			SEOTools::twitter()->setUrl(getSetting('web_url') . '/pages/' . $pages->seotitle);
 			SEOTools::twitter()->setImage($pages->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($pages->picture, null, $pages->updated_by));
 			SEOTools::jsonLd()->setTitle($pages->title.' - '.getSetting('web_name'));
 			SEOTools::jsonLd()->setDescription(\Str::limit(strip_tags($pages->content), 200));
 			SEOTools::jsonLd()->setType('WebPage');
-			SEOTools::jsonLd()->setUrl(getSetting('web_url'));
+			SEOTools::jsonLd()->setUrl(getSetting('web_url') . '/pages/' . $pages->seotitle);
 			SEOTools::jsonLd()->setImage($pages->picture == '' ? asset('po-content/uploads/'.getSetting('logo')) : getPicture($pages->picture, null, $pages->updated_by));
 			
 			return view(getTheme('pages'), compact('pages'));
