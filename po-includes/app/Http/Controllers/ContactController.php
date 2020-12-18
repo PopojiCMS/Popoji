@@ -35,21 +35,21 @@ class ContactController extends Controller
 		SEOTools::setTitle('Contact - '.getSetting('web_name'));
 		SEOTools::setDescription('Contact - '.getSetting('web_description'));
 		SEOTools::metatags()->setKeywords(explode(',', getSetting('web_keyword')));
-		SEOTools::setCanonical(getSetting('web_url'));
+		SEOTools::setCanonical(getSetting('web_url') . '/contact');
 		SEOTools::opengraph()->setTitle('Contact - '.getSetting('web_name'));
 		SEOTools::opengraph()->setDescription('Contact - '.getSetting('web_description'));
-		SEOTools::opengraph()->setUrl(getSetting('web_url'));
+		SEOTools::opengraph()->setUrl(getSetting('web_url') . '/contact');
 		SEOTools::opengraph()->setSiteName(getSetting('web_author'));
 		SEOTools::opengraph()->addImage(asset('po-content/uploads/'.getSetting('logo')));
 		SEOTools::twitter()->setSite('@'.$twitterid[count($twitterid)-1]);
 		SEOTools::twitter()->setTitle('Contact - '.getSetting('web_name'));
 		SEOTools::twitter()->setDescription('Contact - '.getSetting('web_description'));
-		SEOTools::twitter()->setUrl(getSetting('web_url'));
+		SEOTools::twitter()->setUrl(getSetting('web_url') . '/contact');
 		SEOTools::twitter()->setImage(asset('po-content/uploads/'.getSetting('logo')));
 		SEOTools::jsonLd()->setTitle('Contact - '.getSetting('web_name'));
 		SEOTools::jsonLd()->setDescription('Contact - '.getSetting('web_description'));
 		SEOTools::jsonLd()->setType('WebPage');
-		SEOTools::jsonLd()->setUrl(getSetting('web_url'));
+		SEOTools::jsonLd()->setUrl(getSetting('web_url') . '/contact');
 		SEOTools::jsonLd()->setImage(asset('po-content/uploads/'.getSetting('logo')));
 		
         return view(getTheme('contact'));
