@@ -137,17 +137,20 @@ if (!function_exists('latestPost')) {
 }
 
 if (!function_exists('postByCategory')) {
-    function postByCategory($category_id, $limit, $offset = '0')
+    function postByCategory($category, $limit, $offset = '0')
     {
-        $result = Post::leftJoin('users', 'users.id', 'posts.created_by')
-            ->leftJoin('categories', 'categories.id', 'posts.category_id')
-            ->where([['posts.active', '=', 'Y']])
-            ->select('posts.*', 'categories.title as ctitle', 'categories.seotitle as cseotitle', 'users.name')
-            ->orderBy('posts.id', 'desc')
-            ->where('category_id', $category_id)
-            ->limit($limit)
-            ->offset($offset)
-            ->get();
+        $query = Category::query();
+        if (filter_var($category, FILTER_VALIDATE_INT)) {
+            $query->where('id', $category);
+        } else {
+            $query->where('seotitle', $category);
+        }
+        $cat = $query->first();
+        if($cat) {
+            $result = $cat->posts()->where('active', 'Y')->limit($limit)->offset($offset)->get();
+        } else {
+            $result = [];
+        }
         return $result;
     }
 }
