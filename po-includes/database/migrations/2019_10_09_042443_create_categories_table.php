@@ -14,14 +14,14 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-			$table->increments('id');
-			$table->integer('parent')->default('0');
+			$table->bigIncrements('id');
+			$table->bigInteger('parent')->default('0');
 			$table->string('title')->nullable();
 			$table->string('seotitle')->nullable();
 			$table->string('picture')->nullable();
 			$table->enum('active', ['Y', 'N'])->default('Y');
-			$table->integer('created_by')->default('1');
-			$table->integer('updated_by')->default('1');
+			$table->bigInteger('created_by')->default('1');
+			$table->bigInteger('updated_by')->default('1');
             $table->timestamps();
         });
     }

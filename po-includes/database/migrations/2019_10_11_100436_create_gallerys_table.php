@@ -14,13 +14,13 @@ class CreateGallerysTable extends Migration
     public function up()
     {
         Schema::create('gallerys', function (Blueprint $table) {
-            $table->increments('id');
-			$table->integer('album_id')->nullable();
+            $table->bigIncrements('id');
+			$table->bigInteger('album_id')->nullable();
 			$table->string('title')->nullable();
 			$table->text('content')->nullable();
 			$table->string('picture')->nullable();
-			$table->integer('created_by')->default('1');
-			$table->integer('updated_by')->default('1');
+			$table->bigInteger('created_by')->default('1');
+			$table->bigInteger('updated_by')->default('1');
             $table->timestamps();
         });
     }
