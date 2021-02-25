@@ -137,9 +137,9 @@ if (!function_exists('latestPost')) {
 }
 
 if (!function_exists('postByCategory')) {
-    function postByCategory($category, $limit, $offset = '0')
+    function postByCategory($category, $limit, $orderBy = 'desc', $offset = '0')
     {
-        $query = Category::query();
+        $query = Category::query()->orderBy('created_at', $orderBy);
         if (filter_var($category, FILTER_VALIDATE_INT)) {
             $query->where('id', $category);
         } else {
