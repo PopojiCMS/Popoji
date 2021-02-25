@@ -6,6 +6,9 @@ use App\PostGallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -47,7 +50,7 @@ class PostController extends Controller
         }
         return response()->json($posts);
     }
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $post = Post::where('id',  $id)->with(['category:id,parent,title,seotitle,picture', 'createdBy:id,name,username,bio,picture', 'updatedBy:id,name,username,bio,picture'])->withCount('comments')->where('active', 'Y')->first();
         if(!$post){
@@ -67,7 +70,25 @@ class PostController extends Controller
                 $gallery->picture = url('/po-content/uploads/' . $gallery->picture );
             }
         }
-        // Update hits
+        $segment = isset($request->segment) ? $request->segment : 1;
+        $expcontent = explode('<hr />', $post->content);
+        $paginator = $this->customPaginate($expcontent, 1, $segment, [
+            'path' => Paginator::resolveCurrentPath(),
+            'pageName' => 'segment'
+        ]);
+        $content = '';
+        if($post->type == 'pagination') {
+            if(count($expcontent) > 0) {
+                $content = $expcontent[$segment-1];
+            } else {
+                $content = $post->content;
+            }
+        } else {
+            $content = $post->content;
+        }
+        $post->content = $content;
+        $post->pagination = $paginator;
+            // Update hits
         $post->increment('hits');
         // Hidden key
         $post->makeHidden(['created_by', 'updated_by', 'category_id', 'active']);
@@ -97,5 +118,28 @@ class PostController extends Controller
 
         $related = $query->paginate($per_page);
         return response()->json($related);
+    }
+    public static function customPaginate($items, $perPage = 1, $page = null, $options = [])
+    {
+
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        $lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+
+        return [
+            'current_page' => $lap->currentPage(),
+            'data' => $lap ->values(),
+            'first_page_url' => $lap ->url(1),
+            'from' => $lap->firstItem(),
+            'last_page' => $lap->lastPage(),
+            'last_page_url' => $lap->url($lap->lastPage()),
+            'next_page_url' => $lap->nextPageUrl(),
+            'per_page' => $lap->perPage(),
+            'prev_page_url' => $lap->previousPageUrl(),
+            'to' => $lap->lastItem(),
+            'total' => $lap->total(),
+        ];
     }
 }
