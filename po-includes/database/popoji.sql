@@ -30,18 +30,18 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `activity_log`;
 CREATE TABLE IF NOT EXISTS `activity_log` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `log_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `subject_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `causer_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `causer_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `properties` longtext COLLATE utf8mb4_unicode_ci,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `log_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+    `subject_id` bigint(20) UNSIGNED DEFAULT NULL,
+    `subject_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `causer_id` bigint(20) UNSIGNED DEFAULT NULL,
+    `causer_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `properties` longtext COLLATE utf8mb4_unicode_ci,
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -51,16 +51,16 @@ CREATE TABLE IF NOT EXISTS `activity_log` (
 
 DROP TABLE IF EXISTS `albums`;
 CREATE TABLE IF NOT EXISTS `albums` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `albums`
@@ -78,18 +78,18 @@ INSERT INTO `albums` (`id`, `title`, `seotitle`, `active`, `created_by`, `update
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent` int(11) NOT NULL DEFAULT '0',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `parent` bigint(20) NOT NULL DEFAULT '0',
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
@@ -110,20 +110,20 @@ INSERT INTO `categories` (`id`, `parent`, `title`, `seotitle`, `picture`, `activ
 
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent` int(11) NOT NULL DEFAULT '0',
-  `post_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
-  `status` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `parent` bigint(20) NOT NULL DEFAULT '0',
+    `post_id` bigint(20) DEFAULT NULL,
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `content` text COLLATE utf8mb4_unicode_ci,
+    `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+    `status` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
@@ -142,18 +142,18 @@ INSERT INTO `comments` (`id`, `parent`, `post_id`, `name`, `email`, `content`, `
 
 DROP TABLE IF EXISTS `components`;
 CREATE TABLE IF NOT EXISTS `components` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `folder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'component',
-  `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `folder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'component',
+    `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `components`
@@ -171,18 +171,18 @@ INSERT INTO `components` (`id`, `title`, `author`, `folder`, `type`, `active`, `
 
 DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE IF NOT EXISTS `contacts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `status` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `contacts`
@@ -199,14 +199,14 @@ INSERT INTO `contacts` (`id`, `name`, `email`, `subject`, `message`, `status`, `
 
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+    `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+    `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+    `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+    `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -216,17 +216,17 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 
 DROP TABLE IF EXISTS `gallerys`;
 CREATE TABLE IF NOT EXISTS `gallerys` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `album_id` int(11) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `album_id` bigint(20) DEFAULT NULL,
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `content` text COLLATE utf8mb4_unicode_ci,
+    `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `gallerys`
@@ -250,20 +250,20 @@ INSERT INTO `gallerys` (`id`, `album_id`, `title`, `content`, `picture`, `create
 
 DROP TABLE IF EXISTS `menus`;
 CREATE TABLE IF NOT EXISTS `menus` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent` int(11) NOT NULL DEFAULT '0',
-  `group` int(11) NOT NULL DEFAULT '1',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `target` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `position` int(11) NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `parent` bigint(20) NOT NULL DEFAULT '0',
+    `group` bigint(20) NOT NULL DEFAULT '1',
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `target` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `position` bigint(20) NOT NULL DEFAULT '1',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `menus`
@@ -289,11 +289,11 @@ INSERT INTO `menus` (`id`, `parent`, `group`, `title`, `url`, `class`, `target`,
 
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `batch` int(11) NOT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -328,11 +328,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 DROP TABLE IF EXISTS `model_has_permissions`;
 CREATE TABLE IF NOT EXISTS `model_has_permissions` (
-  `permission_id` int(10) UNSIGNED NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `permission_id` int(10) UNSIGNED NOT NULL,
+    `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `model_id` bigint(20) UNSIGNED NOT NULL,
+    PRIMARY KEY (`permission_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -342,11 +342,11 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
 
 DROP TABLE IF EXISTS `model_has_roles`;
 CREATE TABLE IF NOT EXISTS `model_has_roles` (
-  `role_id` int(10) UNSIGNED NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `role_id` int(10) UNSIGNED NOT NULL,
+    `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `model_id` bigint(20) UNSIGNED NOT NULL,
+    PRIMARY KEY (`role_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `model_has_roles`
@@ -366,18 +366,18 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 
 DROP TABLE IF EXISTS `pages`;
 CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `content` longtext COLLATE utf8mb4_unicode_ci,
+    `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pages`
@@ -395,11 +395,11 @@ INSERT INTO `pages` (`id`, `title`, `seotitle`, `content`, `picture`, `active`, 
 
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    KEY (`email`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -409,13 +409,13 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -495,26 +495,26 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `category_id` int(11) NOT NULL DEFAULT '1',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `picture_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tag` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` enum('general','pagination','picture','video') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'general',
-  `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
-  `headline` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
-  `comment` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
-  `hits` int(11) NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `category_id` bigint(20) NOT NULL DEFAULT '1',
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `content` text COLLATE utf8mb4_unicode_ci,
+    `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `picture_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `tag` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `type` enum('general','pagination','picture','video') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'general',
+    `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
+    `headline` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
+    `comment` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
+    `hits` bigint(20) NOT NULL DEFAULT '1',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `posts`
@@ -540,16 +540,16 @@ INSERT INTO `posts` (`id`, `category_id`, `title`, `seotitle`, `content`, `meta_
 
 DROP TABLE IF EXISTS `post_gallerys`;
 CREATE TABLE IF NOT EXISTS `post_gallerys` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) NOT NULL DEFAULT '1',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `post_id` bigint(20) NOT NULL DEFAULT '1',
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -559,13 +559,13 @@ CREATE TABLE IF NOT EXISTS `post_gallerys` (
 
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -585,9 +585,9 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 
 DROP TABLE IF EXISTS `role_has_permissions`;
 CREATE TABLE IF NOT EXISTS `role_has_permissions` (
-  `permission_id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `permission_id` int(10) UNSIGNED NOT NULL,
+    `role_id` int(10) UNSIGNED NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `role_has_permissions`
@@ -755,16 +755,16 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `groups` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `options` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci,
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `groups` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `options` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `value` text COLLATE utf8mb4_unicode_ci,
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `settings`
@@ -815,16 +815,16 @@ INSERT INTO `settings` (`id`, `groups`, `options`, `value`, `created_by`, `updat
 
 DROP TABLE IF EXISTS `subscribes`;
 CREATE TABLE IF NOT EXISTS `subscribes` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `follow` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `follow` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Y',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `subscribes`
@@ -841,16 +841,16 @@ INSERT INTO `subscribes` (`id`, `name`, `email`, `follow`, `created_by`, `update
 
 DROP TABLE IF EXISTS `tags`;
 CREATE TABLE IF NOT EXISTS `tags` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `count` int(11) NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `seotitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `count` bigint(20) NOT NULL DEFAULT '1',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tags`
@@ -869,17 +869,17 @@ INSERT INTO `tags` (`id`, `title`, `seotitle`, `count`, `created_by`, `updated_b
 
 DROP TABLE IF EXISTS `themes`;
 CREATE TABLE IF NOT EXISTS `themes` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `folder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `folder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `active` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `themes`
@@ -896,23 +896,23 @@ INSERT INTO `themes` (`id`, `title`, `author`, `folder`, `active`, `created_by`,
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bio` text COLLATE utf8mb4_unicode_ci,
-  `block` enum('Y','N') COLLATE utf8mb4_unicode_ci DEFAULT 'Y',
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` int(11) NOT NULL DEFAULT '1',
-  `updated_by` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `email_verified_at` timestamp NULL DEFAULT NULL,
+    `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `telp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `bio` text COLLATE utf8mb4_unicode_ci,
+    `block` enum('Y','N') COLLATE utf8mb4_unicode_ci DEFAULT 'Y',
+    `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `created_by` bigint(20) NOT NULL DEFAULT '1',
+    `updated_by` bigint(20) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -932,19 +932,19 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `pa
 -- Constraints for table `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
-  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
+    ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
-  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+    ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 COMMIT;
 
