@@ -62,6 +62,8 @@ CREATE TABLE IF NOT EXISTS `albums` (
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE INDEX albums_index ON albums (seotitle, title);
+
 --
 -- Dumping data for table `albums`
 --
@@ -90,6 +92,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
     `updated_at` timestamp NULL DEFAULT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE INDEX categories_index ON categories (seotitle, title);
 
 --
 -- Dumping data for table `categories`
@@ -124,6 +128,8 @@ CREATE TABLE IF NOT EXISTS `comments` (
     `updated_at` timestamp NULL DEFAULT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE INDEX post_id_index ON comments (post_id);
 
 --
 -- Dumping data for table `comments`
@@ -227,6 +233,8 @@ CREATE TABLE IF NOT EXISTS `gallerys` (
     `updated_at` timestamp NULL DEFAULT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE INDEX album_id_index ON gallerys (album_id);
 
 --
 -- Dumping data for table `gallerys`
@@ -379,6 +387,8 @@ CREATE TABLE IF NOT EXISTS `pages` (
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE INDEX pages_index ON pages (seotitle, title);
+
 --
 -- Dumping data for table `pages`
 --
@@ -516,6 +526,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE INDEX posts_index ON posts (seotitle, title);
+
 --
 -- Dumping data for table `posts`
 --
@@ -552,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `post_gallerys` (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
-
+CREATE INDEX post_id_index ON post_gallerys (post_id);
 --
 -- Table structure for table `roles`
 --
@@ -851,6 +863,9 @@ CREATE TABLE IF NOT EXISTS `tags` (
     `updated_at` timestamp NULL DEFAULT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE INDEX tags_index ON tags (seotitle, title);
+
 
 --
 -- Dumping data for table `tags`

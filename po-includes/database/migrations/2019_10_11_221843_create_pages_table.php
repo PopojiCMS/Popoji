@@ -22,6 +22,7 @@ class CreatePagesTable extends Migration
 			$table->enum('active', ['Y', 'N'])->default('Y');
 			$table->bigInteger('created_by')->default('1');
 			$table->bigInteger('updated_by')->default('1');
+            $table->index(['title', 'seotitle']);
             $table->timestamps();
         });
     }

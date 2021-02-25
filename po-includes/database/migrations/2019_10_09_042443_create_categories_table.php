@@ -23,6 +23,7 @@ class CreateCategoriesTable extends Migration
 			$table->bigInteger('created_by')->default('1');
 			$table->bigInteger('updated_by')->default('1');
             $table->timestamps();
+            $table->index(['title', 'seotitle']);
         });
     }
 
