@@ -14,8 +14,8 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
-			$table->integer('category_id')->default('1');
+            $table->bigIncrements('id');
+			$table->bigInteger('category_id')->default('1');
 			$table->string('title')->nullable();
 			$table->string('seotitle')->nullable();
 			$table->text('content')->nullable();
@@ -27,10 +27,11 @@ class CreatePostsTable extends Migration
 			$table->enum('active', ['Y', 'N'])->default('Y');
 			$table->enum('headline', ['Y', 'N'])->default('Y');
 			$table->enum('comment', ['Y', 'N'])->default('Y');
-			$table->integer('hits')->default('1');
-			$table->integer('created_by')->default('1');
-			$table->integer('updated_by')->default('1');
+			$table->bigInteger('hits')->default('1');
+			$table->bigInteger('created_by')->default('1');
+			$table->bigInteger('updated_by')->default('1');
             $table->timestamps();
+            $table->index(['title', 'seotitle']);
         });
     }
 

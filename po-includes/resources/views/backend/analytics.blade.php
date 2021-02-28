@@ -12,13 +12,13 @@
 			</nav>
 			<h4 class="mg-b-0 tx-spacing--1">{{ __('dashboard.analytics_title') }}</h4>
 		</div>
-		
+
 		<div class="d-none d-md-block">
 			<a href="{{ url('dashboard') }}" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10"><i data-feather="arrow-left" class="wd-10 mg-r-5"></i> {{ __('general.back') }}</a>
 			<a href="https://github.com/spatie/laravel-analytics#how-to-obtain-the-credentials-to-communicate-with-google-analytics" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-t-10" target="_blank"><i data-feather="help-circle" class="wd-10 mg-r-5"></i> {{ __('dashboard.help') }}</a>
 		</div>
 	</div>
-	
+
 	<div class="row row-xs">
 		<div class="col-lg-4 mg-t-10">
 			<div class="card">
@@ -31,7 +31,7 @@
 					<p class="tx-12 tx-color-03 mg-b-0">{{ __('dashboard.please_refresh') }}</p>
 				</div>
 			</div>
-			
+
 			<div class="card mg-t-10">
 				<div class="card-header">
 					<h6 class="mg-b-0">{{ __('dashboard.device_users') }}</h6>
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-8 mg-t-10">
 			<div class="card">
 				<div class="card-header d-flex align-items-start justify-content-between">
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-6 mg-t-10">
 			<div class="card">
 				<div class="card-header d-flex align-items-start justify-content-between">
@@ -106,7 +106,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-6 mg-t-10">
 			<div class="card">
 				<div class="card-header d-sm-flex align-items-start justify-content-between">
@@ -135,7 +135,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-6 mg-t-10">
 			<div class="card">
 				<div class="card-header d-sm-flex align-items-start justify-content-between">
@@ -166,7 +166,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="col-lg-6 mg-t-10">
 			<div class="card">
 				<div class="card-header d-sm-flex align-items-start justify-content-between">
@@ -208,10 +208,16 @@
 <script type="text/javascript">
 	$(function() {
 		'use strict'
-		
-		var ctxLabel = ['{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[0]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[1]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[2]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[3]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[4]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[5]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[6]['date'])) }}'];
-		var ctxData1 = [{{ $fetchTotalVisitorsAndPageViews[0]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['visitors'] }}];
-		var ctxData2 = [{{ $fetchTotalVisitorsAndPageViews[0]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['pageViews'] }}];
+
+        @if(count($fetchTotalVisitorsAndPageViews) > 0)
+        var ctxLabel = ['{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[0]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[1]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[2]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[3]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[4]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[5]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[6]['date'])) }}'];
+        var ctxData1 = [{{ $fetchTotalVisitorsAndPageViews[0]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['visitors'] }}];
+        var ctxData2 = [{{ $fetchTotalVisitorsAndPageViews[0]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['pageViews'] }}];
+        @else
+        var ctxLabel = [];
+        var ctxData1 = [];
+        var ctxData2 = [];
+        @endif
 		var ctxColor1 = '#001737';
 		var ctxColor2 = '#1ce1ac';
 		var ctx = document.getElementById('chartBar').getContext('2d');

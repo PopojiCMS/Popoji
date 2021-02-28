@@ -379,7 +379,7 @@ function StartInstall() {
 	$ifxml = (extension_loaded('xml') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$fileinfo = (extension_loaded('fileinfo') ? '<span class="text-success">ON</span>' : '<span class="text-danger">OFF</span>');
 	$iffoldercorewrite = (is_writable('po-includes/storage') ? '<span class="text-success">YES</span>' : '<span class="text-danger">NO</span>');
-
+	$current_year = date("Y");
 	$startinstallc = <<<EOF
 <div class="tab-content">
 	<div class="tab-pane fade in active" id="Getting Started">
@@ -489,7 +489,7 @@ EOF;
 			<textarea class="form-control" readonly>
 The MIT License (MIT)
 
-Copyright (c) 2013-2020 POPOJI
+Copyright (c) 2013-{$current_year} POPOJI
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

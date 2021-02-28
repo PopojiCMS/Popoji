@@ -14,14 +14,14 @@ class CreateComponentsTable extends Migration
     public function up()
     {
         Schema::create('components', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
 			$table->string('title')->nullable();
 			$table->string('author')->nullable();
 			$table->string('folder')->nullable();
 			$table->string('type')->default('component');
 			$table->enum('active', ['Y', 'N'])->default('N');
-			$table->integer('created_by')->default('1');
-			$table->integer('updated_by')->default('1');
+			$table->bigInteger('created_by')->default('1');
+			$table->bigInteger('updated_by')->default('1');
             $table->timestamps();
         });
     }
