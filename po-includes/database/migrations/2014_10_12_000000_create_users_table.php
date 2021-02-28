@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
 			$table->enum('block', ['Y', 'N'])->default('Y');
 			$table->string('picture')->nullable();
             $table->rememberToken();
-			$table->integer('created_by')->default('1');
-			$table->integer('updated_by')->default('1');
+			$table->bigInteger('created_by')->default('1');
+			$table->bigInteger('updated_by')->default('1');
             $table->timestamps();
         });
     }

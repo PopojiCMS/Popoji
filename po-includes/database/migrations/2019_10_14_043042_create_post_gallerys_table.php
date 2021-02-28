@@ -14,13 +14,14 @@ class CreatePostGallerysTable extends Migration
     public function up()
     {
         Schema::create('post_gallerys', function (Blueprint $table) {
-            $table->increments('id');
-			$table->integer('post_id')->default('1');
+            $table->bigIncrements('id');
+			$table->bigInteger('post_id')->default('1');
 			$table->string('title')->nullable();
 			$table->string('picture')->nullable();
-			$table->integer('created_by')->default('1');
-			$table->integer('updated_by')->default('1');
+			$table->bigInteger('created_by')->default('1');
+			$table->bigInteger('updated_by')->default('1');
             $table->timestamps();
+            $table->index(['post_id']);
         });
     }
 
