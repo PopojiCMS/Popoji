@@ -213,6 +213,10 @@
         var ctxLabel = ['{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[0]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[1]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[2]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[3]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[4]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[5]['date'])) }}', '{{ date('d M', strtotime($fetchTotalVisitorsAndPageViews[6]['date'])) }}'];
         var ctxData1 = [{{ $fetchTotalVisitorsAndPageViews[0]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['visitors'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['visitors'] }}];
         var ctxData2 = [{{ $fetchTotalVisitorsAndPageViews[0]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[1]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[2]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[3]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[4]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[5]['pageViews'] }}, {{ $fetchTotalVisitorsAndPageViews[6]['pageViews'] }}];
+        @else
+        var ctxLabel = [];
+        var ctxData1 = [];
+        var ctxData2 = [];
         @endif
 		var ctxColor1 = '#001737';
 		var ctxColor2 = '#1ce1ac';
