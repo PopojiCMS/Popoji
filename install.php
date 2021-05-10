@@ -37,7 +37,7 @@ DB_HOST=%db_host%
 DB_PORT=%db_port%
 DB_DATABASE=%db_name%
 DB_USERNAME=%db_user%
-DB_PASSWORD=%db_password%
+DB_PASSWORD="%db_password%"
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
