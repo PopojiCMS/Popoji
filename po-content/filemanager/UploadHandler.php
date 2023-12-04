@@ -493,8 +493,7 @@ class UploadHandler
             $name = $this->upcount_name($name);
         }
         // Keep an existing filename if this is part of a chunked upload:
-        $range = is_null($content_range) ? 0 : $content_range[1];
-        $uploaded_bytes = $this->fix_integer_overflow((int)$range);
+        $uploaded_bytes = $this->fix_integer_overflow((int)@$content_range[1]);
         while (is_file($this->get_upload_path($name))) {
             if ($uploaded_bytes === $this->get_file_size(
                     $this->get_upload_path($name))) {
@@ -1424,7 +1423,7 @@ class UploadHandler
             }
         }
         $response = array($this->options['param_name'] => $files);
-        $name = $file_name ? $file_name : $upload['name'][0];
+        $name = $file_name ?: $upload['name'][0];
         $res = $this->generate_response($response, $print_response);
         if(is_file($this->get_upload_path($name))){
             $range = is_null($content_range) ? 0 : $content_range[1];
@@ -1494,7 +1493,7 @@ class UploadHandler
             }
             else
             {
-                if( !$this->options['ftp'] && ! new_thumbnails_creation($targetPath,$targetFile,$_FILES['files']['name'][0],$this->options['config']['current_path'],$this->options['config']))
+                if( !$this->options['ftp'] && ! new_thumbnails_creation($targetPath, $targetFile, $res['files'][0]->name, $this->options['config']['current_path'], $this->options['config']))
                 {
                     $res['files'][0]->error = trans("Not enough Memory");
                 }
